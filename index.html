@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="MCP-Universe: Benchmarking LLMs with real-world Model Context Protocol servers across 6 domains and 231 tasks.">
+    <meta property="og:title" content="MCP-Universe: Benchmarking LLMs with Real-World MCP Servers">
+    <meta property="og:description" content="Comprehensive benchmark evaluating LLMs with real-world MCP servers across 6 domains with execution-based evaluation.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="intro-mcp-universe.png">
+    <meta property="og:url" content="https://your-github-io-site/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP-Universe Benchmark">
+    <meta name="twitter:description" content="Benchmarking LLMs with real-world MCP servers across 6 domains.">
+    <meta name="twitter:image" content="intro-mcp-universe.png">
+    <title>MCP-Universe: Benchmarking Large Language Models with Real-World Model Context Protocol Servers</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Salesforce Official Brand Colors */
+            --sf-blue: #0d9dda;              /* Salesforce Blue - Primary brand color */
+            --sf-blue-dark: #0176a3;         /* Darker blue for hover states */
+            --sf-blue-light: #87ceeb;        /* Light blue for accents */
+            --sf-cloud-blue: #1f77b4;        /* Cloud blue */
+            
+            /* Salesforce Lightning Design System Colors */
+            --sf-brand-dark: #0b5cab;        /* Brand dark */
+            --sf-brand: #1589ee;             /* Brand primary */
+            --sf-brand-light: #5eb4ff;       /* Brand light */
+            
+            /* Neutral Colors from SLDS */
+            --sf-gray-1: #fafaf9;            /* Background light */
+            --sf-gray-2: #f3f2f2;            /* Background */
+            --sf-gray-3: #ecebea;            /* Background alt */
+            --sf-gray-4: #e5e5e5;            /* Border */
+            --sf-gray-5: #c9c7c5;            /* Border strong */
+            --sf-gray-6: #aeaca9;            /* Text weak */
+            --sf-gray-7: #918f8d;            /* Text */
+            --sf-gray-8: #706e6b;            /* Text strong */
+            --sf-gray-9: #514f4d;            /* Text strongest */
+            --sf-gray-10: #3e3e3c;           /* Text inverse */
+            
+            /* Semantic Colors */
+            --sf-success: #45c65a;           /* Success green */
+            --sf-warning: #ffb75d;           /* Warning orange */
+            --sf-error: #ea001e;             /* Error red */
+            --sf-info: --sf-blue;            /* Info blue */
+            
+            /* Functional Colors */
+            --background: #ffffff;
+            --surface: var(--sf-gray-1);
+            --surface-alt: var(--sf-gray-2);
+            --text-primary: var(--sf-gray-10);
+            --text-secondary: var(--sf-gray-8);
+            --text-weak: var(--sf-gray-6);
+            --border: var(--sf-gray-4);
+            --border-strong: var(--sf-gray-5);
+            --shadow: rgba(0, 0, 0, 0.1);
+            
+            /* Spacing following 8pt grid */
+            --spacing-1: 0.25rem;   /* 4px */
+            --spacing-2: 0.5rem;    /* 8px */
+            --spacing-3: 0.75rem;   /* 12px */
+            --spacing-4: 1rem;      /* 16px */
+            --spacing-5: 1.25rem;   /* 20px */
+            --spacing-6: 1.5rem;    /* 24px */
+            --spacing-8: 2rem;      /* 32px */
+            --spacing-10: 2.5rem;   /* 40px */
+            --spacing-12: 3rem;     /* 48px */
+            --spacing-16: 4rem;     /* 64px */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-6);
+        }
+
+        /* Header */
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-4) 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--sf-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-8);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--spacing-16) 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23e5e5e5" opacity="0.3"/></svg>') repeat;
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-6);
+            line-height: 1.2;
+        }
+
+        .hero .brand-name {
+            background: linear-gradient(135deg, var(--sf-blue), var(--sf-brand));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-8);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-12);
+        }
+
+        .btn {
+            padding: var(--spacing-3) var(--spacing-6);
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--sf-blue);
+            color: white;
+            box-shadow: 0 2px 4px rgba(13, 157, 218, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--sf-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(13, 157, 218, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+            border-color: var(--border-strong);
+        }
+
+        /* Authors */
+        .authors {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .authors h3 {
+            margin-bottom: var(--spacing-3);
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .author-list {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-3);
+        }
+        .author-list a { color: var(--text-primary); text-decoration: none; border-bottom: 1px dashed var(--border); }
+        .author-list a:hover { color: var(--sf-blue); border-bottom-color: var(--sf-blue); }
+
+        .equal-contrib {
+            font-size: 0.95rem;
+            color: var(--text-weak);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .contact {
+            font-size: 1rem;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .contact a {
+            color: var(--sf-blue);
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        .institution {
+            font-size: 1.1rem;
+            margin-top: var(--spacing-1);
+            color: var(--sf-blue);
+            font-weight: 500;
+        }
+
+        /* Abstract */
+        .abstract {
+            padding: var(--spacing-16) 0;
+            background: var(--surface);
+        }
+
+        .abstract-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-8);
+            color: var(--sf-blue);
+            text-align: center;
+            font-weight: 700;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 64px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sf-blue), var(--sf-brand));
+            border-radius: 2px;
+            margin: 12px auto 0;
+        }
+
+        /* Back to top */
+        #backToTop {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: var(--sf-blue);
+            color: #fff;
+            box-shadow: 0 8px 16px var(--shadow);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        #backToTop:hover { background: var(--sf-blue-dark); }
+
+        /* Active nav link */
+        .nav-links a.active {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        /* Anchor offset for sticky header */
+        section { scroll-margin-top: 80px; }
+
+        /* Dark theme */
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --surface: #0b1220;
+            --surface-alt: #0f1a2a;
+            --text-primary: #e5e7eb;
+            --text-secondary: #cbd5e1;
+            --text-weak: #94a3b8;
+            --border: #1f2937;
+            --border-strong: #334155;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            margin-left: var(--spacing-6);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover { background: var(--border); }
+
+        /* Outline button for hero */
+        .btn-outline {
+            background: transparent;
+            color: var(--sf-blue);
+            border: 1.5px solid var(--sf-blue);
+        }
+        .btn-outline:hover {
+            background: var(--sf-blue);
+            color: #fff;
+        }
+
+        /* Table layout + sticky first column */
+        .results-table table { table-layout: auto; }
+        .results-table table th, .results-table table td { min-width: 110px; }
+        .results-table table th:first-child, .results-table table td:first-child { min-width: 200px; text-align: left; }
+        .results-table table thead th:first-child { position: sticky; left: 0; z-index: 5; }
+        .results-table table tbody td:first-child { position: sticky; left: 0; z-index: 2; background: inherit; box-shadow: 2px 0 0 0 var(--border); }
+
+        .abstract p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-6);
+            text-align: justify;
+        }
+
+        .abstract .highlight {
+            color: var(--sf-blue);
+            font-weight: 600;
+        }
+
+        /* Figure */
+        .figure-section {
+            padding: var(--spacing-16) 0;
+        }
+
+        .figure-container {
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .figure-image {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .figure-caption {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: var(--spacing-4);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Key Statistics */
+        .stats {
+            padding: var(--spacing-16) 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-6);
+            margin-top: var(--spacing-8);
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: var(--spacing-8);
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sf-blue), var(--sf-brand));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+            border-color: var(--sf-blue);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-2);
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 1.125rem;
+        }
+
+        /* Domains */
+        .domains {
+            padding: var(--spacing-16) 0;
+            background: var(--surface);
+        }
+
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-6);
+            margin-top: var(--spacing-8);
+        }
+
+        .domain-card {
+            background: var(--background);
+            padding: var(--spacing-8);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .domain-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+            border-color: var(--sf-blue);
+        }
+
+        .domain-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .domain-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: var(--sf-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .domain-card h3 {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .domain-card p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-4);
+            line-height: 1.6;
+        }
+
+        .domain-stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: var(--spacing-4);
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-weak);
+        }
+
+        .domain-stats .stat-highlight {
+            color: var(--sf-blue);
+            font-weight: 600;
+        }
+
+        /* Results Table */
+        .results {
+            padding: var(--spacing-16) 0;
+        }
+
+        .results-intro {
+            text-align: center;
+            margin-bottom: var(--spacing-8);
+        }
+
+        .results-intro p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .results-table {
+            overflow-x: auto;
+            margin-top: var(--spacing-8);
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: var(--spacing-4) var(--spacing-3);
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--sf-blue);
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+            position: relative;
+        }
+
+        th:hover {
+            background: var(--sf-blue-dark);
+        }
+
+        th.sortable::after {
+            content: ' ↕️';
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        th.sort-asc::after {
+            content: ' ↑';
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        th.sort-desc::after {
+            content: ' ↓';
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(13, 157, 218, 0.03);
+        }
+
+        tr:hover {
+            background: rgba(13, 157, 218, 0.06);
+        }
+
+        .model-name {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .best-score {
+            font-weight: 700;
+            color: var(--sf-success);
+            background: rgba(69, 198, 90, 0.1);
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+
+        .model-tier {
+            background: var(--surface-alt);
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: left;
+            padding: var(--spacing-3) var(--spacing-4);
+        }
+
+        /* Comparison */
+        .comparison {
+            padding: var(--spacing-16) 0;
+            background: var(--surface);
+        }
+
+        .comparison-table {
+            margin-top: var(--spacing-8);
+            background: var(--background);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .checkmark {
+            color: var(--sf-success);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .cross {
+            color: var(--sf-error);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .our-row {
+            background: rgba(13, 157, 218, 0.1);
+            border-left: 4px solid var(--sf-blue);
+        }
+
+        /* Key Findings */
+        .findings {
+            padding: var(--spacing-16) 0;
+        }
+
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-6);
+            margin-top: var(--spacing-8);
+        }
+
+        .finding-card {
+            background: var(--surface);
+            padding: var(--spacing-8);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .finding-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+            border-color: var(--sf-blue);
+        }
+
+        .finding-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            background: var(--sf-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+            margin: 0 auto var(--spacing-4);
+        }
+
+        .finding-card h3 {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-4);
+            font-weight: 600;
+        }
+
+        .finding-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Notice */
+        .notice {
+            background: linear-gradient(135deg, #fff9e6, #fff3cd);
+            border: 1px solid var(--sf-warning);
+            border-radius: 8px;
+            padding: var(--spacing-6);
+            margin: var(--spacing-8) 0;
+        }
+
+        .notice-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: var(--spacing-2);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .notice-content {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        /* Contact Notice */
+        .contact-notice {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border: 1px solid var(--sf-success);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            margin: var(--spacing-6) 0;
+            text-align: center;
+        }
+
+        .contact-notice-content {
+            color: #155724;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-2);
+        }
+
+        .contact-notice-content i {
+            color: var(--sf-success);
+            font-size: 1.1rem;
+        }
+
+        .contact-notice a {
+            color: var(--sf-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-notice a:hover {
+            text-decoration: underline;
+        }
+
+        /* Track tabs */
+        .track-tabs {
+            display: flex;
+            gap: var(--spacing-2);
+            justify-content: center;
+            margin: var(--spacing-4) 0 var(--spacing-6);
+        }
+        .track-tab {
+            padding: var(--spacing-2) var(--spacing-4);
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .track-tab:hover { background: var(--border); }
+        .track-tab.active { background: var(--sf-blue); color: #fff; border-color: var(--sf-blue); }
+        .hidden { display: none; }
+
+        /* Model Legend */
+        .model-legend {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-8);
+            margin-top: var(--spacing-4);
+            padding: var(--spacing-4);
+            background: var(--surface-alt);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .model-legend {
+                flex-direction: column;
+                gap: var(--spacing-3);
+                align-items: center;
+            }
+        }
+
+        /* Citation Section */
+        .citation {
+            padding: var(--spacing-16) 0;
+            background: var(--surface);
+        }
+
+        .citation-content {
+            text-align: center;
+        }
+        .citation-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: left;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+        .citation-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-4) var(--spacing-6);
+            border-bottom: 1px solid var(--border);
+        }
+        .citation-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .citation-actions {
+            display: flex;
+            gap: var(--spacing-2);
+        }
+        .btn-copy {
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--background);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-copy:hover { background: var(--surface-alt); }
+        .citation-code {
+            padding: var(--spacing-6);
+            overflow-x: auto;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        .citation-footer {
+            margin-top: var(--spacing-6);
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        /* Task Examples */
+        .task-examples {
+            padding: var(--spacing-16) 0;
+            background: var(--surface);
+        }
+
+        .example-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-6);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .example-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--spacing-4);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.125rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .domains-grid {
+                grid-template-columns: 1fr;
+            }
+
+                         .section-title {
+                 font-size: 1.75rem;
+             }
+
+             .hero h1 {
+                 font-size: 1.75rem;
+             }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: var(--spacing-2);
+            }
+        }
+
+        /* Animation utilities */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                MCP-Universe
+            </a>
+            <ul class="nav-links">
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#benchmark">Benchmark</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#analysis">Analysis</a></li>
+                <li><a href="#examples">Examples</a></li>
+            </ul>
+            <div class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1><span class="brand-name">MCP-Universe</span>: Benchmarking Large Language Models with<br>Real-World Model Context Protocol Servers</h1>
+                    <p class="subtitle">
+                        The first comprehensive benchmark specifically designed to evaluate LLMs in realistic and challenging tasks through interaction with real-world MCP servers across 6 core domains and 231 tasks.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-file-alt"></i>
+                            Paper
+                        </a>
+                        <a href="https://github.com/SalesforceAIResearch/MCP-Universe" class="btn btn-outline">
+                            <i class="fab fa-github"></i>
+                            Code
+                        </a>
+                        <a href="#results" class="btn btn-outline">
+                            <i class="fas fa-chart-bar"></i>
+                            Leaderboard
+                        </a>
+                    </div>
+                    
+                    <div class="authors">
+                        <!-- <h3>Authors</h3> -->
+                        <p class="author-list">
+                            <a href="https://scholar.google.com/citations?user=VI8NeJEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Ziyang Luo</a><sup>*</sup>,
+                            <a href="https://scholar.google.com/citations?user=FYUEZ3wAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Zhiqi Shen</a><sup>*</sup>,
+                            <a href="https://scholar.google.com.sg/citations?user=Ce8uS5IAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Wenzhou Yang</a><sup>*</sup>,
+                            <a href="https://scholar.google.com/citations?user=sKs2OLUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Zirui Zhao</a>,
+                            <a href="https://scholar.google.com/citations?user=HH1Daf4AAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Prathyusha Jwalapuram</a><br>
+                            <a href="https://scholar.google.com/citations?user=3Zb5Y2YAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Amrita Saha</a>,
+                            <a href="https://scholar.google.com/citations?user=A61jJD4AAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Doyen Sahoo</a>,
+                            <a href="https://scholar.google.com/citations?user=ImpbxLsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Silvio Savarese</a>,
+                            <a href="https://scholar.google.com/citations?user=vaSdahkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Caiming Xiong</a>,
+                            <a href="https://scholar.google.com/citations?user=MuUhwi0AAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Junnan Li</a>
+                        </p>
+                        <p class="equal-contrib"><sup>*</sup> Equal contribution</p>
+                        <p class="institution">Salesforce AI Research</p>
+                        <p class="contact">Contact: <a href="mailto:zluo@salesforce.com">zluo@salesforce.com</a>, <a href="mailto:cxiong@salesforce.com">cxiong@salesforce.com</a>, <a href="mailto:junnan.li@salesforce.com">junnan.li@salesforce.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="abstract" id="abstract">
+            <div class="container">
+                <div class="abstract-content">
+                    <h2 class="section-title">Abstract</h2>
+                    <p>
+                        The Model Context Protocol (MCP) has emerged as a transformative standard for connecting large language models (LLMs) to external data sources and tools, rapidly gaining adoption across major AI providers and development platforms. However, existing benchmarks are overly simplistic and fail to capture real application challenges such as long-horizon reasoning and large, unfamiliar tool spaces.
+                    </p>
+                    <p>
+                        To address this critical gap, we introduce <span class="highlight">MCP-Universe</span>, the first comprehensive benchmark specifically designed to evaluate LLMs in realistic and hard tasks through interaction with real-world MCP servers. Our benchmark encompasses 6 core domains spanning 11 different MCP servers: <em>Location Navigation</em>, <em>Repository Management</em>, <em>Financial Analysis</em>, <em>3D Design</em>, <em>Browser Automation</em>, and <em>Web Searching</em>. To ensure rigorous evaluation, we implement execution-based evaluators, including format evaluators for agent format compliance, static evaluators for time-invariant content matching, and dynamic evaluators that automatically retrieve real-time ground truth for temporally sensitive tasks.
+                    </p>
+                    <p>
+                        Through extensive evaluation of leading LLMs, we find that even top-performing models such as <span class="highlight">GPT-5 (43.72% success rate)</span>, <span class="highlight">Grok-4 (33.33% success rate)</span> and <span class="highlight">Claude-4.0-Sonnet (29.44% success rate)</span> exhibit significant performance limitations. Beyond evaluation, we open-source our extensible evaluation framework with UI support, enabling researchers and practitioners to seamlessly integrate new agents and MCP servers while fostering innovation in the rapidly evolving MCP ecosystem.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="figure-section">
+            <div class="container">
+                <div class="figure-container">
+                    <img src="intro-mcp-universe.png" alt="MCP-Universe Overview" class="figure-image" loading="lazy">
+                    <p class="figure-caption">
+                        <strong>Figure 1:</strong> Example from MCP-Universe illustrating realistic challenges, including real-world tool usage, long-horizon multi-turn tool calls, long context windows, scattered evidence, and large tool spaces. Unlike prior work, MCP-Universe is grounded in real-world MCP servers connected to actual data sources and environments.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <h2 class="section-title">Key Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card fade-in">
+                        <div class="stat-number">231</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Core Domains</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-number">11</div>
+                        <div class="stat-label">MCP Servers</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-number">84</div>
+                        <div class="stat-label">Unique Evaluators</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="domains" id="benchmark">
+            <div class="container">
+                <h2 class="section-title">Benchmark Domains</h2>
+                <div class="domains-grid">
+                    <div class="domain-card fade-in">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <h3>Location Navigation</h3>
+                        </div>
+                        <p>Real-world geospatial navigation tasks involving complex location queries, route planning, and geographic point calculations with actual map data.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">45</span> tasks</span>
+                            <span><span class="stat-highlight">19.5%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card fade-in">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-search"></i></div>
+                            <h3>Web Searching</h3>
+                        </div>
+                        <p>Advanced web search tasks requiring multi-step information retrieval, synthesis, and real-time data processing from various sources.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">55</span> tasks</span>
+                            <span><span class="stat-highlight">23.8%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card fade-in">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-robot"></i></div>
+                            <h3>Browser Automation</h3>
+                        </div>
+                        <p>Complex browser automation tasks involving real-time web interactions, request submissions, and dynamic content extraction.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">39</span> tasks</span>
+                            <span><span class="stat-highlight">16.9%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card fade-in">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-cube"></i></div>
+                            <h3>3D Design</h3>
+                        </div>
+                        <p>Three-dimensional modeling and design tasks using real Blender software tools with geometric constraints and design specifications.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">19</span> tasks</span>
+                            <span><span class="stat-highlight">8.2%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card fade-in">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>Financial Analysis</h3>
+                        </div>
+                        <p>Real-time financial data analysis, quantitative investing, market research, and investment calculations involving temporal dynamics and live market data.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">40</span> tasks</span>
+                            <span><span class="stat-highlight">17.3%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card fade-in">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-code-branch"></i></div>
+                            <h3>Repository Management</h3>
+                        </div>
+                        <p>Version control workflows, code repository management, and collaborative development tasks across different platforms like GitHub.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">33</span> tasks</span>
+                            <span><span class="stat-highlight">14.3%</span> of total</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results" id="results">
+            <div class="container">
+                <h2 class="section-title">Benchmark Results</h2>
+                <div class="track-tabs" role="tablist" aria-label="Leaderboard tracks">
+                    <button class="track-tab active" id="tab-llm" role="tab" aria-selected="true" aria-controls="panel-llm">LLM Track</button>
+                    <button class="track-tab" id="tab-agent" role="tab" aria-selected="false" aria-controls="panel-agent">Agent Track</button>
+                </div>
+                <div class="contact-notice">
+                    <div class="contact-notice-content">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Want to add your model/agent to the leaderboard? <a href="mailto:zluo@salesforce.com">Contact us</a> to submit new results!</span>
+                    </div>
+                </div>
+                <div class="results-intro">
+                    <p>
+                        Performance comparison across different LLMs and Agents on MCP-Universe benchmark. Success Rate (SR), Average Evaluator Score (AE), and Average Steps (AS) reported.
+                    </p>
+                    <div class="model-legend">
+                        <div class="legend-item">
+                            <i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;"></i>
+                            <span>Proprietary Model</span>
+                        </div>
+                        <div class="legend-item">
+                            <i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;"></i>
+                            <span>Open-Source Model</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="panel-llm" class="results-table" role="tabpanel" aria-labelledby="tab-llm">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;" data-column="model">Model</th>
+                                <th class="sortable" data-column="location" data-type="number">Location<br>Navigation</th>
+                                <th class="sortable" data-column="repository" data-type="number">Repository<br>Management</th>
+                                <th class="sortable" data-column="financial" data-type="number">Financial<br>Analysis</th>
+                                <th class="sortable" data-column="3d" data-type="number">3D<br>Designing</th>
+                                <th class="sortable" data-column="browser" data-type="number">Browser<br>Automation</th>
+                                <th class="sortable" data-column="web" data-type="number">Web<br>Searching</th>
+                                <th class="sortable" data-column="overall" data-type="number">Overall<br>SR</th>
+                                <th class="sortable" data-column="ae" data-type="number">AE</th>
+                                <th class="sortable" data-column="as" data-type="number">AS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>GPT-5</td>
+                                 <td class="best-score">33.33</td>
+                                 <td class="best-score">30.30</td>
+                                 <td class="best-score">67.50</td>
+                                 <td class="best-score">52.63</td>
+                                 <td>35.90</td>
+                                 <td class="best-score">45.45</td>
+                                 <td class="best-score">43.72</td>
+                                 <td class="best-score">60.23</td>
+                                 <td class="best-score">8.22</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>Grok-4</td>
+                                 <td>28.89</td>
+                                 <td>12.12</td>
+                                 <td>40.00</td>
+                                 <td>26.32</td>
+                                 <td class="best-score">41.03</td>
+                                 <td>41.82</td>
+                                 <td>33.33</td>
+                                 <td>49.01</td>
+                                 <td>7.75</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>Claude-4.0-Sonnet</td>
+                                 <td>22.22</td>
+                                 <td>12.12</td>
+                                 <td>55.00</td>
+                                 <td>26.32</td>
+                                 <td>38.46</td>
+                                 <td>21.82</td>
+                                 <td>29.44</td>
+                                 <td>50.61</td>
+                                 <td>7.46</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>o3</td>
+                                 <td>26.67</td>
+                                 <td>6.06</td>
+                                 <td>40.00</td>
+                                 <td>26.32</td>
+                                 <td>25.64</td>
+                                 <td>29.09</td>
+                                 <td>26.41</td>
+                                 <td>38.95</td>
+                                 <td>4.82</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>o4-mini</td>
+                                 <td>26.67</td>
+                                 <td>18.18</td>
+                                 <td>40.00</td>
+                                 <td>36.84</td>
+                                 <td>23.08</td>
+                                 <td>18.18</td>
+                                 <td>25.97</td>
+                                 <td>40.38</td>
+                                 <td>7.90</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>Claude-3.7-Sonnet</td>
+                                 <td>13.33</td>
+                                 <td>18.18</td>
+                                 <td>40.00</td>
+                                 <td>36.84</td>
+                                 <td>23.08</td>
+                                 <td>21.82</td>
+                                 <td>24.24</td>
+                                 <td>40.36</td>
+                                 <td>7.16</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>Gemini-2.5-Pro</td>
+                                 <td>13.33</td>
+                                 <td>12.12</td>
+                                 <td>50.00</td>
+                                 <td>21.05</td>
+                                 <td>25.64</td>
+                                 <td>12.73</td>
+                                 <td>22.08</td>
+                                 <td>36.93</td>
+                                 <td>6.98</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>Gemini-2.5-Flash</td>
+                                 <td>15.56</td>
+                                 <td>12.12</td>
+                                 <td>37.50</td>
+                                 <td>21.05</td>
+                                 <td>30.77</td>
+                                 <td>14.55</td>
+                                 <td>21.65</td>
+                                 <td>33.99</td>
+                                 <td>8.26</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>GPT-4.1</td>
+                                 <td>8.89</td>
+                                 <td>6.06</td>
+                                 <td>40.00</td>
+                                 <td>26.32</td>
+                                 <td>23.08</td>
+                                 <td>10.91</td>
+                                 <td>18.18</td>
+                                 <td>41.32</td>
+                                 <td>5.24</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i>GPT-4o</td>
+                                 <td>8.89</td>
+                                 <td>9.09</td>
+                                 <td>35.00</td>
+                                 <td>26.32</td>
+                                 <td>12.82</td>
+                                 <td>9.09</td>
+                                 <td>15.58</td>
+                                 <td>37.03</td>
+                                 <td>6.03</td>
+                             </tr>
+                                                        <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i>GLM-4.5</td>
+                                 <td>17.78</td>
+                                 <td>9.09</td>
+                                 <td>50.00</td>
+                                 <td>26.32</td>
+                                 <td>15.38</td>
+                                 <td>27.27</td>
+                                 <td>24.68</td>
+                                 <td>41.16</td>
+                                 <td>7.33</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i>Kimi-K2</td>
+                                 <td>11.11</td>
+                                 <td>9.09</td>
+                                 <td>47.50</td>
+                                 <td>15.79</td>
+                                 <td>15.38</td>
+                                 <td>14.55</td>
+                                 <td>19.05</td>
+                                 <td>35.10</td>
+                                 <td>6.07</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i>Qwen3-Coder</td>
+                                 <td>8.89</td>
+                                 <td>3.03</td>
+                                 <td>50.00</td>
+                                 <td>26.32</td>
+                                 <td>25.64</td>
+                                 <td>10.91</td>
+                                 <td>19.91</td>
+                                 <td>37.78</td>
+                                 <td>7.78</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i>Qwen3-235B</td>
+                                 <td>11.11</td>
+                                 <td>9.09</td>
+                                 <td>50.00</td>
+                                 <td>15.79</td>
+                                 <td>15.38</td>
+                                 <td>9.09</td>
+                                 <td>18.18</td>
+                                 <td>38.53</td>
+                                 <td>5.74</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i>DeepSeek-V3</td>
+                                 <td>11.11</td>
+                                 <td>6.06</td>
+                                 <td>30.00</td>
+                                 <td>26.32</td>
+                                 <td>12.82</td>
+                                 <td>7.27</td>
+                                 <td>14.29</td>
+                                 <td>35.82</td>
+                                 <td>5.06</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i>GPT-OSS-120B</td>
+                                <td>6.67</td>
+                                <td>6.06</td>
+                                <td>35.00</td>
+                                <td>10.53</td>
+                                <td>5.13</td>
+                                <td>5.45</td>
+                                <td>11.26</td>
+                                <td>26.34</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="panel-agent" class="results-table hidden" role="tabpanel" aria-labelledby="tab-agent">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;" data-column="agent">Agent</th>
+                                <th class="sortable" data-column="location" data-type="number">Location<br>Navigation</th>
+                                <th class="sortable" data-column="repository" data-type="number">Repository<br>Management</th>
+                                <th class="sortable" data-column="financial" data-type="number">Financial<br>Analysis</th>
+                                <th class="sortable" data-column="3d" data-type="number">3D<br>Designing</th>
+                                <th class="sortable" data-column="browser" data-type="number">Browser<br>Automation</th>
+                                <th class="sortable" data-column="web" data-type="number">Web<br>Searching</th>
+                                <th class="sortable" data-column="overall" data-type="number">Overall<br>SR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="model-name">ReAct (GPT-5)</td>
+                                <td class="best-score">33.33</td>
+                                <td class="best-score">30.30</td>
+                                <td class="best-score">67.50</td>
+                                <td class="best-score">52.63</td>
+                                <td>35.90</td>
+                                <td class="best-score">45.45</td>
+                                <td class="best-score">43.72</td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">OpenAI Agent SDK (o3)</td>
+                                <td>28.89</td>
+                                <td>6.06</td>
+                                <td>60.00</td>
+                                <td>36.84</td>
+                                <td>28.89</td>
+                                <td>29.09</td>
+                                <td>31.60</td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">ReAct (Claude-4.0-Sonnet)</td>
+                                <td>22.22</td>
+                                <td>12.12</td>
+                                <td>55.00</td>
+                                <td>26.32</td>
+                                <td class="best-score">38.46</td>
+                                <td>21.82</td>
+                                <td>29.44</td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">Cursor Agent 1.4.5 (Claude-4.0-Sonnet)</td>
+                                <td>22.22</td>
+                                <td>12.12</td>
+                                <td>55.00</td>
+                                <td>26.32</td>
+                                <td class="best-score">38.46</td>
+                                <td>21.82</td>
+                                <td>29.44</td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">ReAct (o3)</td>
+                                <td>26.67</td>
+                                <td>6.06</td>
+                                <td>40.00</td>
+                                <td>26.32</td>
+                                <td>25.64</td>
+                                <td>29.09</td>
+                                <td>26.41</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="notice">
+                    <div class="notice-title">
+                        <i class="fas fa-lightbulb"></i>
+                        Performance Insights
+                    </div>
+                    <div class="notice-content">
+                        Even SOTA models show significant limitations, with the best model (GPT-5) achieving only 43.72% overall success rate. This highlights the challenging nature of real-world MCP server interactions and the substantial room for improvement in current LLM agents. The gap between proprietary and open-source models remains substantial.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="findings" id="analysis">
+            <div class="container">
+                <h2 class="section-title">Key Findings</h2>
+                <div class="findings-grid">
+                    <div class="finding-card fade-in">
+                        <div class="finding-icon"><i class="fas fa-clock"></i></div>
+                        <h3>Long-Context Challenge</h3>
+                        <p>Token count increases rapidly with interaction steps, often leading to context overflow and degraded performance in multi-step tasks requiring extensive reasoning.</p>
+                    </div>
+                    <div class="finding-card fade-in">
+                        <div class="finding-icon"><i class="fas fa-tools"></i></div>
+                        <h3>Unknown-Tools Challenge</h3>
+                        <p>LLM agents often lack familiarity with precise usage patterns, parameter specifications, and expected behaviors of diverse MCP servers.</p>
+                    </div>
+                    <div class="finding-card fade-in">
+                        <div class="finding-icon"><i class="fas fa-chart-area"></i></div>
+                        <h3>Cross-Domain Variations</h3>
+                        <p>Models show markedly different success rates across application domains, suggesting domain-specific optimization needs and knowledge gaps.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="task-examples" id="examples">
+            <div class="container">
+                <h2 class="section-title">Task Examples</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--spacing-6);">
+                    <div>
+                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Location Navigation</h3>
+                        <div class="example-card">
+                            <div class="example-text">
+                                Hi! My partner and I are planning a special pre-wedding road trip from Los Angeles to San Francisco as one last adventure before we tie the knot! We want to make this journey memorable before we start our married life together. Our plan is to drive through exactly 3 interesting cities between the starting and ending points to really enjoy this time together. Could you please map out exactly 2 distinct driving route options for this pre-wedding celebration? Oh, we must visit friends in Coalinga during our trip to share our exciting news with them!
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Repository Management</h3>
+                        <div class="example-card">
+                            <div class="example-text">
+                                Hi! I'm learning how to use GitHub and I want to practice exploring repositories and working with issues. Can you help me with a research project? I'd like to search for repositories owned by `google' that have `generative-ai' in their name. Once I find them, I want to count how many open issues each repository has that are labeled `type:bug'. This will help me understand how developers track bugs in real projects! After gathering this information, I need to practice creating my own repository called `google-generative-ai-issues' and uploading a CSV file named `google_generative_ai_bug_report.csv' to it.
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Web Searching</h3>
+                        <div class="example-card">
+                            <div class="example-text">
+                                I'm looking for a city based on the clues below: - The city has a football club that was formed in 1895. - One university in this city has a master's program that teaches Natural Language Processing with 7.5 credits. - One graduated PhD student of this university has published one paper at EACL 2021 and one at EACL 2023 as the first author. - One of the professors in this university is a Fellow of the ACL. You need to find the English name of the city.
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Browser Automation</h3>
+                        <div class="example-card">
+                            <div class="example-text">
+                                Help me find a one-way flight from Singapore to Beijing, 5 days from now (If now is 2025-07-07, then 5 days later is 2025-07-12). Find the flight on www.booking.com. I want to find the cheapest flight, direct flight, Economy, and I don't want to go to the Daxing airport. I only want to see the price, so as to determine whether I should fly to Beijing or not. Remember to close the browser after you finish the task.
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Financial Analysis</h3>
+                        <div class="example-card">
+                            <div class="example-text">
+                                Hi there! I'm completely new to investing and finance, and honestly, I'm feeling pretty overwhelmed by all the jargon and concepts. I've been trying to learn about something called 'fundamental analysis'. I think it has to do with looking at company finances? Anyway, I heard somewhere that you should look for companies where their net income (I think that's like profit?) has been going up for a few quarters in a row. I'm not really sure what that means exactly, but apparently 2 consecutive quarters of rising net income is a good sign? I'm still figuring out what makes a company worth investing in. Could you help a total beginner like me find 3 company tickers that have this pattern? I'm trying to learn by doing some basic research, even though I barely understand what I'm looking for. Any help would be amazing! I'm just trying to get my feet wet in this whole investing world!
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">3D Design</h3>
+                        <div class="example-card">
+                            <div class="example-text">
+                                Create a Plane named 'Floor' scaled uniformly by 5. Create a Cylinder named 'Pillar' (default caps) with 16 vertices (sides), a radius of 0.5, and a depth of 4; position it at (X=-2, Y=-2, Z=2). Create a UV Sphere named 'Ball' with 32 segments and 16 rings; position it at (X=2, Y=2, Z=5). Create an Empty (Arrows type) named 'ControlTarget' at (X=0, Y=0, Z=3). Add a 'Track To' constraint to the 'Ball' object, making it track the 'ControlTarget'. Finally, create a Camera object, position it at (X=0, Y=-8, Z=3), and set its rotation so it looks directly at the 'Pillar' object's origin.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="backToTop" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <section class="citation">
+        <div class="container">
+                        <div class="citation-content">
+                <h2 class="section-title">Citation</h2>
+                <div class="citation-card">
+                    <div class="citation-header">
+                        <div class="citation-title">BibTeX</div>
+                        <div class="citation-actions">
+                            <button class="btn-copy" id="copyBibtex"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                    </div>
+                    <pre class="citation-code" id="bibtexBlock">@misc{mcpuniverse,
+  title={MCP-Universe: Benchmarking Large Language Models with Real-World Model Context Protocol Servers},
+  author={Ziyang Luo and Zhiqi Shen and Wenzhou Yang and Zirui Zhao and Prathyusha Jwalapuram and Amrita Saha and Doyen Sahoo and Silvio Savarese and Caiming Xiong and Junnan Li},
+  year={2025},
+  eprint={2508.XXXXX},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI}
+}</pre>
+                </div>
+                <p class="citation-footer">Made with ❤️ by Salesforce AI Research</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle (basic implementation)
+        const mobileMenuBtn = document.createElement('button');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        mobileMenuBtn.className = 'mobile-menu-btn';
+        mobileMenuBtn.style.cssText = `
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--sf-blue);
+            cursor: pointer;
+            @media (max-width: 768px) { display: block; }
+        `;
+
+        // Add mobile menu styles
+        const mobileStyles = document.createElement('style');
+        mobileStyles.textContent = `
+            @media (max-width: 768px) {
+                .mobile-menu-btn { display: block !important; }
+                .nav-links { display: none; }
+            }
+        `;
+        document.head.appendChild(mobileStyles);
+
+        // Insert mobile menu button
+        const nav = document.querySelector('nav');
+        nav.appendChild(mobileMenuBtn);
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Theme toggle handler
+        (function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const icon = toggle.querySelector('i');
+            const key = 'mcp-theme';
+            const apply = (mode) => {
+                if (mode === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    root.removeAttribute('data-theme');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            };
+            const preferred = localStorage.getItem(key) || 'light';
+            apply(preferred);
+            toggle.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                localStorage.setItem(key, next);
+                apply(next);
+            });
+        })();
+
+        // Copy BibTeX
+        (function(){
+            const btn = document.getElementById('copyBibtex');
+            const block = document.getElementById('bibtexBlock');
+            if (btn && block) {
+                btn.addEventListener('click', async () => {
+                    try {
+                        await navigator.clipboard.writeText(block.innerText.trim());
+                        btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+                        setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
+                    } catch (e) {
+                        btn.innerHTML = '<i class="fas fa-times"></i> Failed';
+                        setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
+                    }
+                });
+            }
+        })();
+
+        // Table sorting functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll spy for nav highlighting
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const sectionMap = Array.from(sections).map(sec => ({ id: sec.id, top: 0 }));
+            
+            function onScroll() {
+                const scrollPos = window.scrollY + 100;
+                sectionMap.forEach(s => {
+                    const el = document.getElementById(s.id);
+                    if (!el) return;
+                    const rect = el.getBoundingClientRect();
+                    s.top = el.offsetTop;
+                });
+                const current = sectionMap
+                    .filter(s => s.id)
+                    .filter(s => scrollPos >= s.top)
+                    .sort((a,b) => b.top - a.top)[0];
+                navLinks.forEach(a => a.classList.remove('active'));
+                if (current) {
+                    const active = document.querySelector(`.nav-links a[href='#${current.id}']`);
+                    if (active) active.classList.add('active');
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // Back to top button
+            const backBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                backBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+            }, { passive: true });
+            backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            // Track tabs switching
+            const tabLLM = document.getElementById('tab-llm');
+            const tabAgent = document.getElementById('tab-agent');
+            const panelLLM = document.getElementById('panel-llm');
+            const panelAgent = document.getElementById('panel-agent');
+            function activate(tab) {
+                if (tab === 'llm') {
+                    tabLLM.classList.add('active');
+                    tabAgent.classList.remove('active');
+                    panelLLM.classList.remove('hidden');
+                    panelAgent.classList.add('hidden');
+                    tabLLM.setAttribute('aria-selected', 'true');
+                    tabAgent.setAttribute('aria-selected', 'false');
+                } else {
+                    tabAgent.classList.add('active');
+                    tabLLM.classList.remove('active');
+                    panelAgent.classList.remove('hidden');
+                    panelLLM.classList.add('hidden');
+                    tabAgent.setAttribute('aria-selected', 'true');
+                    tabLLM.setAttribute('aria-selected', 'false');
+                }
+            }
+            tabLLM.addEventListener('click', () => activate('llm'));
+            tabAgent.addEventListener('click', () => activate('agent'));
+
+            // Initialize sorting for both tables
+            function initTableSorting(tableSelector) {
+                const table = document.querySelector(tableSelector);
+                const headers = table.querySelectorAll('th.sortable');
+                let sortDirection = {};
+
+                headers.forEach(header => {
+                    header.addEventListener('click', () => {
+                        const column = header.dataset.column;
+                        const dataType = header.dataset.type;
+                        
+                        // Reset all other headers
+                        headers.forEach(h => {
+                            if (h !== header) {
+                                h.classList.remove('sort-asc', 'sort-desc');
+                            }
+                        });
+
+                        // Toggle sort direction
+                        if (!sortDirection[column] || sortDirection[column] === 'desc') {
+                            sortDirection[column] = 'asc';
+                            header.classList.remove('sort-desc');
+                            header.classList.add('sort-asc');
+                        } else {
+                            sortDirection[column] = 'desc';
+                            header.classList.remove('sort-asc');
+                            header.classList.add('sort-desc');
+                        }
+
+                        sortTable(table, column, sortDirection[column], dataType);
+                    });
+                });
+            }
+
+            // Initialize sorting for both LLM and Agent tables
+            initTableSorting('#panel-llm table');
+            initTableSorting('#panel-agent table');
+        });
+
+        function sortTable(table, column, direction, dataType) {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            // Get column index
+            const columnIndex = getColumnIndex(column, table);
+            
+            rows.sort((a, b) => {
+                let aVal, bVal;
+                
+                if (columnIndex === 0) {
+                    // For model names, extract text without icon
+                    aVal = a.cells[columnIndex].textContent.trim();
+                    bVal = b.cells[columnIndex].textContent.trim();
+                } else {
+                    aVal = a.cells[columnIndex].textContent.trim();
+                    bVal = b.cells[columnIndex].textContent.trim();
+                }
+                
+                if (dataType === 'number') {
+                    aVal = parseFloat(aVal) || 0;
+                    bVal = parseFloat(bVal) || 0;
+                    return direction === 'asc' ? aVal - bVal : bVal - aVal;
+                } else {
+                    return direction === 'asc' ? 
+                        aVal.localeCompare(bVal) : 
+                        bVal.localeCompare(aVal);
+                }
+            });
+
+            // Clear tbody and re-add all rows
+            tbody.innerHTML = '';
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function getColumnIndex(column, table) {
+            // Check which table we're working with
+            const isAgentTable = table.closest('#panel-agent') !== null;
+            
+            if (isAgentTable) {
+                const agentColumnMap = {
+                    'agent': 0,
+                    'location': 1,
+                    'repository': 2,
+                    'financial': 3,
+                    '3d': 4,
+                    'browser': 5,
+                    'web': 6,
+                    'overall': 7
+                };
+                return agentColumnMap[column];
+            } else {
+                const llmColumnMap = {
+                    'model': 0,
+                    'location': 1,
+                    'repository': 2,
+                    'financial': 3,
+                    '3d': 4,
+                    'browser': 5,
+                    'web': 6,
+                    'overall': 7,
+                    'ae': 8,
+                    'as': 9
+                };
+                return llmColumnMap[column];
+            }
+        }
+
+
+    </script>
+</body>
+</html> 
