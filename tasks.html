@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logos/mcp-universe-icon.png">
+    <link rel="apple-touch-icon" href="logos/mcp-universe-icon.png">
+    <title>Tasks</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="tasks-data.js"></script>
+    <style>
+        :root {
+            /* Salesforce Official Brand Colors */
+            --sf-blue: #0d9dda;
+            --sf-blue-dark: #0176a3;
+            --sf-blue-light: #87ceeb;
+            --sf-brand-dark: #0b5cab;
+            --sf-brand: #1589ee;
+            --sf-brand-light: #5eb4ff;
+            
+            /* Neutral Colors */
+            --sf-gray-1: #fafaf9;
+            --sf-gray-2: #f3f2f2;
+            --sf-gray-3: #ecebea;
+            --sf-gray-4: #e5e5e5;
+            --sf-gray-5: #c9c7c5;
+            --sf-gray-6: #aeaca9;
+            --sf-gray-7: #918f8d;
+            --sf-gray-8: #706e6b;
+            --sf-gray-9: #514f4d;
+            --sf-gray-10: #3e3e3c;
+            
+            /* Functional Colors */
+            --background: #ffffff;
+            --surface: var(--sf-gray-1);
+            --surface-alt: var(--sf-gray-2);
+            --text-primary: var(--sf-gray-10);
+            --text-secondary: var(--sf-gray-8);
+            --text-weak: var(--sf-gray-6);
+            --border: var(--sf-gray-4);
+            --border-strong: var(--sf-gray-5);
+            --shadow: rgba(0, 0, 0, 0.1);
+            
+            /* Spacing */
+            --spacing-1: 0.25rem;
+            --spacing-2: 0.5rem;
+            --spacing-3: 0.75rem;
+            --spacing-4: 1rem;
+            --spacing-5: 1.25rem;
+            --spacing-6: 1.5rem;
+            --spacing-8: 2rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --spacing-16: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-6);
+        }
+
+        /* Header */
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-4) 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-image: url('logos/mcp-universe-icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-8);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            margin-left: var(--spacing-6);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover { background: var(--border); }
+
+        /* Main layout */
+        .main-container {
+            display: flex;
+            max-width: 1280px;
+            margin: 0 auto;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: var(--spacing-6);
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: var(--spacing-6);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--spacing-3) var(--spacing-10) var(--spacing-3) var(--spacing-4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--background);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: var(--spacing-3);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-weak);
+        }
+
+        .domain-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+
+        .domain-nav-item {
+            margin-bottom: var(--spacing-3);
+            width: 100%;
+        }
+
+        .domain-nav-item a {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            padding: var(--spacing-3);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .domain-nav-item a:hover, .domain-nav-item a.active {
+            background: var(--sf-blue);
+            color: white;
+        }
+
+        .domain-nav-item .icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* Content area */
+        .content {
+            flex: 1;
+            padding: var(--spacing-8) var(--spacing-6);
+            overflow-y: auto;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .overview-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-8);
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-6);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sf-blue), var(--sf-brand));
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Domain sections */
+        .domain-section {
+            margin-bottom: var(--spacing-12);
+        }
+
+        .domain-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+            padding: var(--spacing-4) 0;
+            border-bottom: 2px solid var(--sf-blue);
+        }
+
+        .domain-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--sf-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .domain-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .domain-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-6);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: var(--spacing-4);
+        }
+
+        .task-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-6);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow);
+            border-color: var(--sf-blue);
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .task-id {
+            font-weight: 600;
+            color: var(--sf-blue);
+            font-size: 0.9rem;
+        }
+
+        .task-category {
+            background: var(--surface);
+            padding: var(--spacing-1) var(--spacing-3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-weak);
+        }
+
+        .task-question {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-4);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .task-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-servers {
+            display: flex;
+            gap: var(--spacing-2);
+        }
+
+        .server-tag {
+            background: var(--sf-blue);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .view-details-btn {
+            background: none;
+            border: 1px solid var(--sf-blue);
+            color: var(--sf-blue);
+            padding: var(--spacing-2) var(--spacing-4);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .view-details-btn:hover {
+            background: var(--sf-blue);
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--background);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px var(--shadow);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--sf-blue);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-weak);
+            cursor: pointer;
+            padding: var(--spacing-2);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: var(--spacing-6);
+        }
+
+        .json-viewer {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        /* Dark theme - Salesforce inspired */
+        [data-theme="dark"] {
+            --background: #081219;
+            --surface: #0c1821;
+            --surface-alt: #16252d;
+            --text-primary: #ecf0f1;
+            --text-secondary: #b0bdc8;
+            --text-weak: #7c8b94;
+            --border: #1b2a33;
+            --border-strong: #243642;
+            --shadow: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Responsive Design - Multiple Breakpoints */
+        
+        /* Large Desktop (1400px+) */
+        @media (min-width: 1400px) {
+            .main-container {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+            
+            .content-area {
+                padding: var(--spacing-8);
+            }
+            
+            .tasks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+                gap: var(--spacing-6);
+            }
+            
+            .overview-stats {
+                grid-template-columns: repeat(6, 1fr);
+                gap: var(--spacing-6);
+            }
+        }
+
+        /* Desktop (1200px - 1399px) */
+        @media (min-width: 1200px) and (max-width: 1399px) {
+            .main-container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .tasks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+            
+            .overview-stats {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        /* Tablet Landscape (992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .main-container {
+                max-width: 100%;
+                padding: 0 var(--spacing-4);
+            }
+            
+            .sidebar {
+                width: 240px;
+            }
+            
+            .content-area {
+                padding: var(--spacing-5);
+            }
+            
+            .tasks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: var(--spacing-4);
+            }
+            
+            .overview-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--spacing-4);
+            }
+            
+            .domain-nav-item a {
+                font-size: 0.9rem;
+                padding: var(--spacing-2) var(--spacing-3);
+            }
+        }
+
+        /* Tablet Portrait (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .main-container {
+                flex-direction: row;
+                padding: 0 var(--spacing-3);
+            }
+            
+            .sidebar {
+                width: 200px;
+                min-width: 200px;
+            }
+            
+            .content-area {
+                padding: var(--spacing-4);
+            }
+            
+            .tasks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: var(--spacing-3);
+            }
+            
+            .overview-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--spacing-3);
+            }
+            
+            .nav-links a {
+                font-size: 0.85rem;
+                padding: var(--spacing-1) var(--spacing-2);
+            }
+            
+            .domain-nav-item a {
+                font-size: 0.85rem;
+                padding: var(--spacing-2);
+            }
+        }
+
+        /* Mobile Large (576px - 767px) */
+        @media (min-width: 576px) and (max-width: 767px) {
+            .main-container {
+                flex-direction: column;
+                padding: 0 var(--spacing-3);
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: var(--spacing-3);
+            }
+            
+            .domain-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: var(--spacing-2);
+                justify-content: center;
+            }
+            
+            .domain-nav-item {
+                flex: 0 0 auto;
+            }
+            
+            .domain-nav-item a {
+                font-size: 0.8rem;
+                padding: var(--spacing-2) var(--spacing-3);
+                border-radius: 20px;
+            }
+            
+            .content-area {
+                padding: var(--spacing-4);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .tasks-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-3);
+            }
+
+            .overview-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-3);
+            }
+            
+            .task-card {
+                padding: var(--spacing-3);
+            }
+        }
+
+        /* Mobile Small (up to 575px) */
+        @media (max-width: 575px) {
+            .main-container {
+                flex-direction: column;
+                padding: 0 var(--spacing-2);
+            }
+            
+            .header {
+                padding: var(--spacing-3) var(--spacing-2);
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: var(--spacing-2);
+            }
+            
+            .domain-nav {
+                flex-direction: column;
+                gap: var(--spacing-1);
+            }
+            
+            .domain-nav-item a {
+                font-size: 0.9rem;
+                padding: var(--spacing-2);
+                text-align: center;
+            }
+            
+            .content-area {
+                padding: var(--spacing-3);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .tasks-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-2);
+            }
+
+            .overview-stats {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-2);
+            }
+            
+            .stat-card {
+                padding: var(--spacing-3);
+                text-align: center;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .task-card {
+                padding: var(--spacing-3);
+            }
+            
+            .task-card h3 {
+                font-size: 1rem;
+            }
+            
+            .task-meta {
+                flex-direction: column;
+                gap: var(--spacing-1);
+            }
+            
+            .task-servers, .task-evaluators {
+                font-size: 0.75rem;
+            }
+            
+            .search-container {
+                margin-bottom: var(--spacing-3);
+            }
+            
+            .search-input {
+                font-size: 1rem;
+                padding: var(--spacing-3);
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: var(--spacing-8);
+            color: var(--text-weak);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-top: 2px solid var(--sf-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"></div>
+                MCP-Universe
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#results">Leaderboard</a></li>
+                <li><a href="usage.html">Docs</a></li>
+                <li><a href="tasks.html" class="active">Tasks</a></li>
+                <li><a href="contributions.html">Contributions</a></li>
+            </ul>
+            <div class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search tasks..." id="searchInput">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <nav class="domain-nav">
+                <div class="domain-nav-item">
+                    <a href="#overview" data-domain="overview">
+                        <div class="icon"><i class="fas fa-chart-pie"></i></div>
+                        Overview
+                    </a>
+                </div>
+                <div class="domain-nav-item">
+                    <a href="#location-navigation" data-domain="location-navigation">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        Location Navigation
+                    </a>
+                </div>
+                <div class="domain-nav-item">
+                    <a href="#web-search" data-domain="web-search">
+                        <div class="icon"><i class="fas fa-search"></i></div>
+                        Web Search
+                    </a>
+                </div>
+                <div class="domain-nav-item">
+                    <a href="#browser-automation" data-domain="browser-automation">
+                        <div class="icon"><i class="fas fa-robot"></i></div>
+                        Browser Automation
+                    </a>
+                </div>
+                <div class="domain-nav-item">
+                    <a href="#financial-analysis" data-domain="financial-analysis">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        Financial Analysis
+                    </a>
+                </div>
+                <div class="domain-nav-item">
+                    <a href="#repository-management" data-domain="repository-management">
+                        <div class="icon"><i class="fas fa-code-branch"></i></div>
+                        Repository Management
+                    </a>
+                </div>
+                <div class="domain-nav-item">
+                    <a href="#3d-design" data-domain="3d-design">
+                        <div class="icon"><i class="fas fa-cube"></i></div>
+                        3D Design
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content" id="content">
+            <section id="overview">
+                <h1>MCP-Universe Tasks</h1>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: var(--spacing-8); line-height: 1.6;">
+                    Explore our comprehensive collection of benchmark tasks across 6 domains. Each task is designed to evaluate AI agents in real-world scenarios using actual MCP servers.
+                </p>
+
+                <div class="overview-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-tasks">Loading...</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Domains</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">11</div>
+                        <div class="stat-label">MCP Servers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-evaluators">Loading...</div>
+                        <div class="stat-label">Evaluators</div>
+                    </div>
+                </div>
+                
+                <div id="loading-status" style="background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 1rem; margin: 1rem 0; color: #0c4a6e;">
+                    <strong>Loading Status:</strong> <span id="status-text">Initializing...</span>
+                </div>
+            </section>
+
+            <section id="location-navigation" class="domain-section">
+                <div class="domain-header">
+                    <div class="domain-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <h2 class="domain-title">Location Navigation</h2>
+                        <div class="domain-description">
+                            Real-world geospatial navigation tasks involving complex location queries, route planning, and geographic point calculations with actual map data.
+                        </div>
+                    </div>
+                </div>
+                <div class="loading" id="location-navigation-loading">
+                    <div class="spinner"></div>
+                    Loading tasks...
+                </div>
+                <div class="tasks-grid" id="location-navigation-tasks" style="display: none;"></div>
+            </section>
+
+            <section id="web-search" class="domain-section">
+                <div class="domain-header">
+                    <div class="domain-icon"><i class="fas fa-search"></i></div>
+                    <div>
+                        <h2 class="domain-title">Web Search</h2>
+                        <div class="domain-description">
+                            Advanced web search tasks requiring multi-step information retrieval, synthesis, and real-time data processing from various sources.
+                        </div>
+                    </div>
+                </div>
+                <div class="loading" id="web-search-loading">
+                    <div class="spinner"></div>
+                    Loading tasks...
+                </div>
+                <div class="tasks-grid" id="web-search-tasks" style="display: none;"></div>
+            </section>
+
+            <section id="browser-automation" class="domain-section">
+                <div class="domain-header">
+                    <div class="domain-icon"><i class="fas fa-robot"></i></div>
+                    <div>
+                        <h2 class="domain-title">Browser Automation</h2>
+                        <div class="domain-description">
+                            Complex browser automation tasks involving real-time web interactions, request submissions, and dynamic content extraction.
+                        </div>
+                    </div>
+                </div>
+                <div class="loading" id="browser-automation-loading">
+                    <div class="spinner"></div>
+                    Loading tasks...
+                </div>
+                <div class="tasks-grid" id="browser-automation-tasks" style="display: none;"></div>
+            </section>
+
+            <section id="financial-analysis" class="domain-section">
+                <div class="domain-header">
+                    <div class="domain-icon"><i class="fas fa-chart-line"></i></div>
+                    <div>
+                        <h2 class="domain-title">Financial Analysis</h2>
+                        <div class="domain-description">
+                            Real-time financial data analysis, quantitative investing, market research, and investment calculations involving temporal dynamics and live market data.
+                        </div>
+                    </div>
+                </div>
+                <div class="loading" id="financial-analysis-loading">
+                    <div class="spinner"></div>
+                    Loading tasks...
+                </div>
+                <div class="tasks-grid" id="financial-analysis-tasks" style="display: none;"></div>
+            </section>
+
+            <section id="repository-management" class="domain-section">
+                <div class="domain-header">
+                    <div class="domain-icon"><i class="fas fa-code-branch"></i></div>
+                    <div>
+                        <h2 class="domain-title">Repository Management</h2>
+                        <div class="domain-description">
+                            Version control workflows, code repository management, and collaborative development tasks across different platforms like GitHub.
+                        </div>
+                    </div>
+                </div>
+                <div class="loading" id="repository-management-loading">
+                    <div class="spinner"></div>
+                    Loading tasks...
+                </div>
+                <div class="tasks-grid" id="repository-management-tasks" style="display: none;"></div>
+            </section>
+
+            <section id="3d-design" class="domain-section">
+                <div class="domain-header">
+                    <div class="domain-icon"><i class="fas fa-cube"></i></div>
+                    <div>
+                        <h2 class="domain-title">3D Design</h2>
+                        <div class="domain-description">
+                            Three-dimensional modeling and design tasks using real Blender software tools with geometric constraints and design specifications.
+                        </div>
+                    </div>
+                </div>
+                <div class="loading" id="3d-design-loading">
+                    <div class="spinner"></div>
+                    Loading tasks...
+                </div>
+                <div class="tasks-grid" id="3d-design-tasks" style="display: none;"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for task details -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Task Details</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="json-viewer" id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Task data storage
+        let taskData = {
+            'location-navigation': [],
+            'web-search': [],
+            'browser-automation': [],
+            'financial-analysis': [],
+            'repository-management': [],
+            '3d-design': []
+        };
+        
+        // Hardcoded task file paths for reliable loading
+        const taskFiles = {
+            'location-navigation': [
+                'tasks/location_navigation/google_maps_task_0001.json',
+                'tasks/location_navigation/google_maps_task_0002.json',
+                'tasks/location_navigation/google_maps_task_0003.json',
+                'tasks/location_navigation/google_maps_task_0004.json',
+                'tasks/location_navigation/google_maps_task_0005.json',
+                'tasks/location_navigation/google_maps_task_0006.json',
+                'tasks/location_navigation/google_maps_task_0007.json',
+                'tasks/location_navigation/google_maps_task_0008.json',
+                'tasks/location_navigation/google_maps_task_0009.json',
+                'tasks/location_navigation/google_maps_task_0010.json',
+                'tasks/location_navigation/google_maps_task_0011.json',
+                'tasks/location_navigation/google_maps_task_0012.json',
+                'tasks/location_navigation/google_maps_task_0013.json',
+                'tasks/location_navigation/google_maps_task_0014.json',
+                'tasks/location_navigation/google_maps_task_0015.json',
+                'tasks/location_navigation/google_maps_task_0016.json',
+                'tasks/location_navigation/google_maps_task_0017.json',
+                'tasks/location_navigation/google_maps_task_0018.json',
+                'tasks/location_navigation/google_maps_task_0019.json',
+                'tasks/location_navigation/google_maps_task_0020.json',
+                'tasks/location_navigation/google_maps_task_0021.json',
+                'tasks/location_navigation/google_maps_task_0022.json',
+                'tasks/location_navigation/google_maps_task_0023.json',
+                'tasks/location_navigation/google_maps_task_0024.json',
+                'tasks/location_navigation/google_maps_task_0025.json',
+                'tasks/location_navigation/google_maps_task_0026.json',
+                'tasks/location_navigation/google_maps_task_0027.json',
+                'tasks/location_navigation/google_maps_task_0028.json',
+                'tasks/location_navigation/google_maps_task_0029.json',
+                'tasks/location_navigation/google_maps_task_0030.json',
+                'tasks/location_navigation/google_maps_task_0031.json',
+                'tasks/location_navigation/google_maps_task_0032.json',
+                'tasks/location_navigation/google_maps_task_0033.json',
+                'tasks/location_navigation/google_maps_task_0034.json',
+                'tasks/location_navigation/google_maps_task_0035.json',
+                'tasks/location_navigation/multi-server_task_weather_google_map_0001.json',
+                'tasks/location_navigation/multi-server_task_weather_google_map_0002.json',
+                'tasks/location_navigation/multi-server_task_weather_google_map_0003.json',
+                'tasks/location_navigation/multi-server_task_weather_google_map_0004.json',
+                'tasks/location_navigation/multi-server_task_weather_google_map_0005.json',
+                'tasks/location_navigation/multi-server_task_playwright_google_map_0001.json',
+                'tasks/location_navigation/multi-server_task_playwright_google_map_0002.json',
+                'tasks/location_navigation/multi-server_task_playwright_google_map_0003.json',
+                'tasks/location_navigation/multi-server_task_playwright_google_map_0004.json',
+                'tasks/location_navigation/multi-server_task_playwright_google_map_0005.json'
+            ],
+            'web-search': [
+                'tasks/web_search/info_search_task_0001.json',
+                'tasks/web_search/info_search_task_0002.json',
+                'tasks/web_search/info_search_task_0003.json',
+                'tasks/web_search/info_search_task_0004.json',
+                'tasks/web_search/info_search_task_0005.json',
+                'tasks/web_search/info_search_task_0006.json',
+                'tasks/web_search/info_search_task_0007.json',
+                'tasks/web_search/info_search_task_0008.json',
+                'tasks/web_search/info_search_task_0009.json',
+                'tasks/web_search/info_search_task_0010.json',
+                'tasks/web_search/info_search_task_0011.json',
+                'tasks/web_search/info_search_task_0012.json',
+                'tasks/web_search/info_search_task_0013.json',
+                'tasks/web_search/info_search_task_0014.json',
+                'tasks/web_search/info_search_task_0015.json',
+                'tasks/web_search/info_search_task_0016.json',
+                'tasks/web_search/info_search_task_0017.json',
+                'tasks/web_search/info_search_task_0018.json',
+                'tasks/web_search/info_search_task_0019.json',
+                'tasks/web_search/info_search_task_0020.json',
+                'tasks/web_search/info_search_task_0021.json',
+                'tasks/web_search/info_search_task_0022.json',
+                'tasks/web_search/info_search_task_0023.json',
+                'tasks/web_search/info_search_task_0024.json',
+                'tasks/web_search/info_search_task_0025.json',
+                'tasks/web_search/info_search_task_0026.json',
+                'tasks/web_search/info_search_task_0027.json',
+                'tasks/web_search/info_search_task_0028.json',
+                'tasks/web_search/info_search_task_0029.json',
+                'tasks/web_search/info_search_task_0030.json',
+                'tasks/web_search/info_search_task_0031.json',
+                'tasks/web_search/info_search_task_0032.json',
+                'tasks/web_search/info_search_task_0033.json',
+                'tasks/web_search/info_search_task_0034.json',
+                'tasks/web_search/info_search_task_0035.json',
+                'tasks/web_search/info_search_task_0036.json',
+                'tasks/web_search/info_search_task_0037.json',
+                'tasks/web_search/info_search_task_0038.json',
+                'tasks/web_search/info_search_task_0039.json',
+                'tasks/web_search/info_search_task_0040.json',
+                'tasks/web_search/info_search_task_0041.json',
+                'tasks/web_search/info_search_task_0042.json',
+                'tasks/web_search/info_search_task_0043.json',
+                'tasks/web_search/info_search_task_0044.json',
+                'tasks/web_search/info_search_task_0045.json',
+                'tasks/web_search/info_search_task_0046.json',
+                'tasks/web_search/info_search_task_0047.json',
+                'tasks/web_search/info_search_task_0048.json',
+                'tasks/web_search/info_search_task_0049.json',
+                'tasks/web_search/info_search_task_0050.json',
+                'tasks/web_search/multi-server_task_google_search_notion_0001.json',
+                'tasks/web_search/multi-server_task_google_search_notion_0002.json',
+                'tasks/web_search/multi-server_task_google_search_notion_0003.json',
+                'tasks/web_search/multi-server_task_google_search_notion_0004.json',
+                'tasks/web_search/multi-server_task_google_search_notion_0005.json'
+            ],
+            'browser-automation': [
+                'tasks/browser_automation/playwright_booking_task_0001.json',
+                'tasks/browser_automation/playwright_booking_task_0002.json',
+                'tasks/browser_automation/playwright_booking_task_0003.json',
+                'tasks/browser_automation/playwright_booking_task_0004.json',
+                'tasks/browser_automation/playwright_google_map_task_0001.json',
+                'tasks/browser_automation/playwright_google_map_task_0002.json',
+                'tasks/browser_automation/playwright_google_map_task_0003.json',
+                'tasks/browser_automation/playwright_google_map_task_0004.json',
+                'tasks/browser_automation/playwright_google_map_task_0005.json',
+                'tasks/browser_automation/playwright_google_map_task_0006.json',
+                'tasks/browser_automation/playwright_google_map_task_0007.json',
+                'tasks/browser_automation/playwright_huggingface_task_0001.json',
+                'tasks/browser_automation/playwright_huggingface_task_0002.json',
+                'tasks/browser_automation/playwright_huggingface_task_0003.json',
+                'tasks/browser_automation/playwright_huggingface_task_0004.json',
+                'tasks/browser_automation/playwright_huggingface_task_0005.json',
+                'tasks/browser_automation/playwright_huggingface_task_0006.json',
+                'tasks/browser_automation/playwright_huggingface_task_0007.json',
+                'tasks/browser_automation/playwright_huggingface_task_0008.json',
+                'tasks/browser_automation/playwright_paper_task_0001.json',
+                'tasks/browser_automation/playwright_paper_task_0002.json',
+                'tasks/browser_automation/playwright_paper_task_0003.json',
+                'tasks/browser_automation/playwright_paper_task_0004.json',
+                'tasks/browser_automation/playwright_paper_task_0005.json',
+                'tasks/browser_automation/playwright_paper_task_0006.json',
+                'tasks/browser_automation/playwright_paper_task_0007.json',
+                'tasks/browser_automation/playwright_paper_task_0008.json',
+                'tasks/browser_automation/playwright_sports_task_0001.json',
+                'tasks/browser_automation/playwright_sports_task_0002.json',
+                'tasks/browser_automation/playwright_sports_task_0003.json',
+                'tasks/browser_automation/playwright_sports_task_0004.json',
+                'tasks/browser_automation/playwright_sports_task_0005.json',
+                'tasks/browser_automation/playwright_sports_task_0006.json',
+                'tasks/browser_automation/playwright_sports_task_0007.json',
+                'tasks/browser_automation/playwright_sports_task_0008.json',
+                'tasks/browser_automation/multi-server_task_playwright_notion_0001.json',
+                'tasks/browser_automation/multi-server_task_playwright_notion_0002.json',
+                'tasks/browser_automation/multi-server_task_playwright_notion_0003.json',
+                'tasks/browser_automation/multi-server_task_playwright_notion_0004.json',
+                'tasks/browser_automation/multi-server_task_playwright_notion_0005.json'
+            ],
+            'financial-analysis': [
+                'tasks/financial_analysis/yfinance_task_0001.json',
+                'tasks/financial_analysis/yfinance_task_0002.json',
+                'tasks/financial_analysis/yfinance_task_0003.json',
+                'tasks/financial_analysis/yfinance_task_0004.json',
+                'tasks/financial_analysis/yfinance_task_0005.json',
+                'tasks/financial_analysis/yfinance_task_0006.json',
+                'tasks/financial_analysis/yfinance_task_0007.json',
+                'tasks/financial_analysis/yfinance_task_0008.json',
+                'tasks/financial_analysis/yfinance_task_0009.json',
+                'tasks/financial_analysis/yfinance_task_0010.json',
+                'tasks/financial_analysis/yfinance_task_0011.json',
+                'tasks/financial_analysis/yfinance_task_0012.json',
+                'tasks/financial_analysis/yfinance_task_0013.json',
+                'tasks/financial_analysis/yfinance_task_0014.json',
+                'tasks/financial_analysis/yfinance_task_0015.json',
+                'tasks/financial_analysis/yfinance_task_0016.json',
+                'tasks/financial_analysis/yfinance_task_0017.json',
+                'tasks/financial_analysis/yfinance_task_0018.json',
+                'tasks/financial_analysis/yfinance_task_0019.json',
+                'tasks/financial_analysis/yfinance_task_0020.json',
+                'tasks/financial_analysis/yfinance_task_0021.json',
+                'tasks/financial_analysis/yfinance_task_0022.json',
+                'tasks/financial_analysis/yfinance_task_0023.json',
+                'tasks/financial_analysis/yfinance_task_0024.json',
+                'tasks/financial_analysis/yfinance_task_0025.json',
+                'tasks/financial_analysis/yfinance_task_0026.json',
+                'tasks/financial_analysis/yfinance_task_0027.json',
+                'tasks/financial_analysis/yfinance_task_0028.json',
+                'tasks/financial_analysis/yfinance_task_0029.json',
+                'tasks/financial_analysis/yfinance_task_0030.json',
+                'tasks/financial_analysis/yfinance_task_0031.json',
+                'tasks/financial_analysis/yfinance_task_0032.json',
+                'tasks/financial_analysis/yfinance_task_0033.json',
+                'tasks/financial_analysis/yfinance_task_0034.json',
+                'tasks/financial_analysis/yfinance_task_0035.json',
+                'tasks/financial_analysis/yfinance_task_0036.json',
+                'tasks/financial_analysis/yfinance_task_0037.json',
+                'tasks/financial_analysis/yfinance_task_0038.json',
+                'tasks/financial_analysis/yfinance_task_0039.json',
+                'tasks/financial_analysis/yfinance_task_0040.json'
+            ],
+            'repository-management': [
+                'tasks/repository_management/github_task_0001.json',
+                'tasks/repository_management/github_task_0002.json',
+                'tasks/repository_management/github_task_0003.json',
+                'tasks/repository_management/github_task_0004.json',
+                'tasks/repository_management/github_task_0005.json',
+                'tasks/repository_management/github_task_0006.json',
+                'tasks/repository_management/github_task_0007.json',
+                'tasks/repository_management/github_task_0008.json',
+                'tasks/repository_management/github_task_0009.json',
+                'tasks/repository_management/github_task_0010.json',
+                'tasks/repository_management/github_task_0011.json',
+                'tasks/repository_management/github_task_0012.json',
+                'tasks/repository_management/github_task_0013.json',
+                'tasks/repository_management/github_task_0014.json',
+                'tasks/repository_management/github_task_0015.json',
+                'tasks/repository_management/github_task_0016.json',
+                'tasks/repository_management/github_task_0017.json',
+                'tasks/repository_management/github_task_0018.json',
+                'tasks/repository_management/github_task_0019.json',
+                'tasks/repository_management/github_task_0020.json',
+                'tasks/repository_management/github_task_0021.json',
+                'tasks/repository_management/github_task_0022.json',
+                'tasks/repository_management/github_task_0023.json',
+                'tasks/repository_management/github_task_0024.json',
+                'tasks/repository_management/github_task_0025.json',
+                'tasks/repository_management/github_task_0026.json',
+                'tasks/repository_management/github_task_0027.json',
+                'tasks/repository_management/github_task_0028.json',
+                'tasks/repository_management/github_task_0029.json',
+                'tasks/repository_management/github_task_0030.json',
+                'tasks/repository_management/github_task_0031.json',
+                'tasks/repository_management/github_task_0032.json',
+                'tasks/repository_management/github_task_0033.json'
+            ],
+            '3d-design': [
+                'tasks/3d_design/blender_task_0001.json',
+                'tasks/3d_design/blender_task_0002.json',
+                'tasks/3d_design/blender_task_0003.json',
+                'tasks/3d_design/blender_task_0004.json',
+                'tasks/3d_design/blender_task_0005.json',
+                'tasks/3d_design/blender_task_0006.json',
+                'tasks/3d_design/blender_task_0007.json',
+                'tasks/3d_design/blender_task_0008.json',
+                'tasks/3d_design/blender_task_0009.json',
+                'tasks/3d_design/blender_task_0010.json',
+                'tasks/3d_design/blender_task_0011.json',
+                'tasks/3d_design/blender_task_0012.json',
+                'tasks/3d_design/blender_task_0013.json',
+                'tasks/3d_design/blender_task_0014.json',
+                'tasks/3d_design/blender_task_0015.json',
+                'tasks/3d_design/blender_task_0016.json',
+                'tasks/3d_design/blender_task_0017.json',
+                'tasks/3d_design/blender_task_0019.json',
+                'tasks/3d_design/blender_task_0020.json'
+            ]
+        };
+        
+        // Load all tasks from JavaScript data (GitHub Pages compatible)
+        async function loadAllTasks() {
+            updateStatus('Loading task data...');
+            
+            // Check if tasks data is available
+            if (window.TASKS_DATA) {
+                console.log('Using embedded task data for GitHub Pages compatibility');
+                
+                // Load data from JavaScript file
+                Object.assign(taskData, window.TASKS_DATA);
+                
+                const totalLoaded = Object.values(taskData).reduce((sum, tasks) => sum + tasks.length, 0);
+                
+                // Update task counts
+                updateTaskCounts();
+                updateStatus(`Loaded ${totalLoaded} tasks successfully!`);
+                console.log('Final task data:', taskData);
+                
+                // Log each domain's task count
+                Object.entries(taskData).forEach(([domain, tasks]) => {
+                    console.log(`${domain}: ${tasks.length} tasks`);
+                });
+                
+                return Promise.resolve();
+            } else {
+                // Fallback to JSON loading for local development
+                return loadTasksFromJSON();
+            }
+        }
+        
+        // Fallback function for local development
+        async function loadTasksFromJSON() {
+            updateStatus('Loading from JSON files...');
+            let totalLoaded = 0;
+            
+            for (const [domain, files] of Object.entries(taskFiles)) {
+                updateStatus(`Loading ${domain} tasks...`);
+                let domainCount = 0;
+                
+                for (const filePath of files) {
+                    try {
+                        const response = await fetch(filePath);
+                        if (response.ok) {
+                            const taskJson = await response.json();
+                            
+                            const task = {
+                                id: filePath.split('/').pop().replace('.json', ''),
+                                category: taskJson.category || 'general',
+                                question: taskJson.question || 'No description available',
+                                servers: extractServers(taskJson),
+                                evaluators: taskJson.evaluators ? taskJson.evaluators.length : 0,
+                                fullData: taskJson
+                            };
+                            
+                            taskData[domain].push(task);
+                            totalLoaded++;
+                            domainCount++;
+                        } else {
+                            console.warn(`Failed to load ${filePath}: ${response.status}`);
+                        }
+                    } catch (error) {
+                        console.warn(`Error loading ${filePath}:`, error);
+                    }
+                }
+                
+                console.log(`Loaded ${domainCount} tasks for ${domain}`);
+            }
+            
+            // Update task counts
+            updateTaskCounts();
+            updateStatus(`Completed! Loaded ${totalLoaded} tasks total.`);
+            console.log('Final task data:', taskData);
+        }
+
+        
+
+        
+        function extractServers(taskJson) {
+            const servers = [];
+            
+            if (taskJson.mcp_servers) {
+                taskJson.mcp_servers.forEach(server => {
+                    if (typeof server === 'string') {
+                        servers.push(server);
+                    } else if (server.name) {
+                        servers.push(server.name);
+                    }
+                });
+            }
+            
+            // Also check category for server hints
+            if (taskJson.category) {
+                const category = taskJson.category.toLowerCase();
+                if (category.includes('blender')) servers.push('blender');
+                if (category.includes('github')) servers.push('github');
+                if (category.includes('google') || category.includes('maps')) servers.push('google-maps');
+                if (category.includes('playwright')) servers.push('playwright');
+                if (category.includes('yfinance') || category.includes('yahoo')) servers.push('yahoo-finance');
+                if (category.includes('search') || category.includes('serp')) servers.push('google-search');
+            }
+            
+            return [...new Set(servers)]; // Remove duplicates
+        }
+        
+        function updateTaskCounts() {
+            // Update total task count
+            const totalTasks = Object.values(taskData).reduce((sum, domainTasks) => sum + domainTasks.length, 0);
+            const totalTasksEl = document.getElementById('total-tasks');
+            if (totalTasksEl) {
+                totalTasksEl.textContent = totalTasks;
+            }
+            
+            // Update total evaluators count
+            const totalEvaluators = Object.values(taskData).reduce((sum, domainTasks) => {
+                return sum + domainTasks.reduce((domainSum, task) => domainSum + task.evaluators, 0);
+            }, 0);
+            const totalEvaluatorsEl = document.getElementById('total-evaluators');
+            if (totalEvaluatorsEl) {
+                totalEvaluatorsEl.textContent = totalEvaluators;
+            }
+        }
+        
+        function updateStatus(message) {
+            const statusEl = document.getElementById('status-text');
+            if (statusEl) {
+                statusEl.textContent = message;
+            }
+            console.log('Status:', message);
+        }
+        
+        // Fallback data for GitHub Pages
+        function loadFallbackData() {
+            console.log('Loading fallback data for GitHub Pages...');
+            
+            // Sample tasks for demonstration
+            const fallbackTasks = {
+                'location-navigation': [
+                    {
+                        id: 'google_maps_task_0001',
+                        category: 'location',
+                        question: 'Find the distance between New York and Los Angeles using Google Maps API.',
+                        servers: ['google-maps'],
+                        evaluators: 1,
+                        fullData: { category: 'location', question: 'Sample location task' }
+                    },
+                    {
+                        id: 'google_maps_task_0002',
+                        category: 'navigation',
+                        question: 'Get directions from San Francisco to Seattle with traffic information.',
+                        servers: ['google-maps'],
+                        evaluators: 2,
+                        fullData: { category: 'navigation', question: 'Sample navigation task' }
+                    }
+                ],
+                'web-search': [
+                    {
+                        id: 'info_search_task_0001',
+                        category: 'search',
+                        question: 'Search for recent developments in artificial intelligence.',
+                        servers: ['web-search'],
+                        evaluators: 1,
+                        fullData: { category: 'search', question: 'Sample search task' }
+                    }
+                ],
+                'browser-automation': [
+                    {
+                        id: 'playwright_task_0001',
+                        category: 'automation',
+                        question: 'Automate login process on a web application.',
+                        servers: ['playwright'],
+                        evaluators: 3,
+                        fullData: { category: 'automation', question: 'Sample automation task' }
+                    }
+                ],
+                'financial-analysis': [
+                    {
+                        id: 'yfinance_task_0001',
+                        category: 'finance',
+                        question: 'Calculate portfolio performance for Microsoft stock investment.',
+                        servers: ['yfinance'],
+                        evaluators: 2,
+                        fullData: { category: 'finance', question: 'Sample financial task' }
+                    }
+                ],
+                'repository-management': [
+                    {
+                        id: 'github_task_0001',
+                        category: 'github',
+                        question: 'Create and manage GitHub repository with automated workflows.',
+                        servers: ['github'],
+                        evaluators: 2,
+                        fullData: { category: 'github', question: 'Sample GitHub task' }
+                    }
+                ],
+                '3d-design': [
+                    {
+                        id: 'blender_task_0001',
+                        category: 'blender',
+                        question: 'Create 3D models and animations using Blender API.',
+                        servers: ['blender'],
+                        evaluators: 4,
+                        fullData: { category: 'blender', question: 'Sample 3D design task' }
+                    }
+                ]
+            };
+            
+            // Load fallback data
+            Object.assign(taskData, fallbackTasks);
+            updateTaskCounts();
+            updateStatus('Loaded fallback demonstration data');
+        }
+
+        // Theme toggle handler
+        (function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const icon = toggle.querySelector('i');
+            const key = 'mcp-theme';
+            const apply = (mode) => {
+                if (mode === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    root.removeAttribute('data-theme');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            };
+            const preferred = localStorage.getItem(key) || 'light';
+            apply(preferred);
+            toggle.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                localStorage.setItem(key, next);
+                apply(next);
+            });
+        })();
+
+        // Navigation and task loading
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const navItems = document.querySelectorAll('.domain-nav-item a');
+            const modal = document.getElementById('taskModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            // Load tasks for each domain UI
+            function loadDomainTasks(domain) {
+                const loadingEl = document.getElementById(`${domain}-loading`);
+                const tasksEl = document.getElementById(`${domain}-tasks`);
+                
+                console.log(`Loading UI for domain: ${domain}`);
+                console.log(`Available tasks for ${domain}:`, taskData[domain]);
+                
+                if (loadingEl) {
+                    loadingEl.style.display = 'none';
+                }
+                if (tasksEl) {
+                    tasksEl.style.display = 'grid';
+                    
+                    const tasks = taskData[domain] || [];
+                    if (tasks.length > 0) {
+                        tasksEl.innerHTML = tasks.map(task => createTaskCard(task)).join('');
+                        
+                        // Add click handlers to task cards
+                        tasksEl.querySelectorAll('.task-card').forEach(card => {
+                            card.addEventListener('click', () => {
+                                const taskId = card.dataset.taskId;
+                                const task = tasks.find(t => t.id === taskId);
+                                showTaskDetails(task);
+                            });
+                        });
+                    } else {
+                        tasksEl.innerHTML = '<div style="text-align: center; color: #666; padding: 2rem;">No tasks found for this domain.</div>';
+                    }
+                }
+            }
+
+            function createTaskCard(task) {
+                const serverTags = task.servers.map(server => 
+                    `<span class="server-tag">${server}</span>`
+                ).join('');
+
+                return `
+                    <div class="task-card" data-task-id="${task.id}">
+                        <div class="task-header">
+                            <div class="task-id">${task.id}</div>
+                            <div class="task-category">${task.category}</div>
+                        </div>
+                        <div class="task-question">${task.question}</div>
+                        <div class="task-footer">
+                            <div class="task-servers">${serverTags}</div>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function showTaskDetails(task) {
+                modalTitle.textContent = `Task: ${task.id}`;
+                
+                // Create a formatted display of the task
+                const taskDisplay = {
+                    id: task.id,
+                    category: task.category,
+                    question: task.question,
+                    servers: task.servers,
+                    evaluators: task.evaluators,
+                    ...task.fullData
+                };
+                
+                modalContent.innerHTML = `<pre><code>${JSON.stringify(taskDisplay, null, 2)}</code></pre>`;
+                modal.style.display = 'block';
+            }
+
+            // Modal handlers
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Navigation click handlers
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const domain = this.getAttribute('data-domain');
+                    
+                    if (domain === 'overview') {
+                        document.getElementById('overview').scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    } else {
+                        const targetSection = document.getElementById(domain);
+                        if (targetSection) {
+                            targetSection.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            
+                            // Load tasks if not already loaded
+                            const tasksEl = document.getElementById(`${domain}-tasks`);
+                            if (tasksEl.children.length === 0) {
+                                loadDomainTasks(domain);
+                            }
+                        }
+                    }
+                    
+                    // Update active state
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                document.querySelectorAll('.task-card').forEach(card => {
+                    const question = card.querySelector('.task-question').textContent.toLowerCase();
+                    const taskId = card.querySelector('.task-id').textContent.toLowerCase();
+                    const category = card.querySelector('.task-category').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || taskId.includes(searchTerm) || category.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // Scroll spy
+            window.addEventListener('scroll', function() {
+                let current = 'overview';
+                const sections = document.querySelectorAll('.domain-section, #overview');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    if (scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('data-domain') === current) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            // GitHub Pages compatible loading
+            console.log('Starting task loading...');
+            
+            loadAllTasks().then(() => {
+                console.log('All tasks loaded successfully');
+                console.log('Task data:', taskData);
+                
+                // Load all domain UIs
+                setTimeout(() => {
+                    ['location-navigation', 'web-search', 'browser-automation', 'financial-analysis', 'repository-management', '3d-design'].forEach(domain => {
+                        console.log(`Loading domain UI for: ${domain}`);
+                        loadDomainTasks(domain);
+                    });
+                }, 100); // Reduced delay since data is now embedded
+            }).catch(error => {
+                console.error('Failed to load tasks:', error);
+                updateStatus(`Error loading tasks: ${error.message}`);
+            });
+        });
+    </script>
+</body>
+</html>

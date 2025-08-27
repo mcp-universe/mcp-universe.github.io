@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logos/mcp-universe-icon.png">
+    <link rel="apple-touch-icon" href="logos/mcp-universe-icon.png">
+    <title>Contributions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Salesforce Official Brand Colors */
+            --sf-blue: #0d9dda;
+            --sf-blue-dark: #0176a3;
+            --sf-blue-light: #87ceeb;
+            --sf-brand-dark: #0b5cab;
+            --sf-brand: #1589ee;
+            --sf-brand-light: #5eb4ff;
+            
+            /* Neutral Colors */
+            --sf-gray-1: #fafaf9;
+            --sf-gray-2: #f3f2f2;
+            --sf-gray-3: #ecebea;
+            --sf-gray-4: #e5e5e5;
+            --sf-gray-5: #c9c7c5;
+            --sf-gray-6: #aeaca9;
+            --sf-gray-7: #918f8d;
+            --sf-gray-8: #706e6b;
+            --sf-gray-9: #514f4d;
+            --sf-gray-10: #3e3e3c;
+            
+            /* Semantic Colors */
+            --sf-success: #45c65a;
+            --sf-warning: #ffb75d;
+            --sf-error: #ea001e;
+            
+            /* Functional Colors */
+            --background: #ffffff;
+            --surface: var(--sf-gray-1);
+            --surface-alt: var(--sf-gray-2);
+            --text-primary: var(--sf-gray-10);
+            --text-secondary: var(--sf-gray-8);
+            --text-weak: var(--sf-gray-6);
+            --border: var(--sf-gray-4);
+            --border-strong: var(--sf-gray-5);
+            --shadow: rgba(0, 0, 0, 0.1);
+            
+            /* Spacing */
+            --spacing-1: 0.25rem;
+            --spacing-2: 0.5rem;
+            --spacing-3: 0.75rem;
+            --spacing-4: 1rem;
+            --spacing-5: 1.25rem;
+            --spacing-6: 1.5rem;
+            --spacing-8: 2rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --spacing-16: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-6);
+        }
+
+        /* Header */
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-4) 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-image: url('logos/mcp-universe-icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-8);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            margin-left: var(--spacing-6);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover { background: var(--border); }
+
+        /* Main layout */
+        .main-container {
+            display: flex;
+            max-width: 1280px;
+            margin: 0 auto;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: var(--spacing-6);
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-section {
+            margin-bottom: var(--spacing-6);
+            width: 100%;
+        }
+
+        .nav-section-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-3);
+            padding: var(--spacing-2) var(--spacing-3);
+            border-bottom: 1px solid var(--border);
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .nav-item {
+            margin-bottom: var(--spacing-1);
+            width: 100%;
+        }
+
+        .nav-item a {
+            display: block;
+            padding: var(--spacing-2) var(--spacing-3);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .nav-item a:hover, .nav-item a.active {
+            background: var(--sf-blue);
+            color: white;
+        }
+
+        /* Content area */
+        .content {
+            flex: 1;
+            padding: var(--spacing-8) var(--spacing-6);
+            overflow-y: auto;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .content h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-8) 0 var(--spacing-4) 0;
+            padding-bottom: var(--spacing-2);
+            border-bottom: 2px solid var(--sf-blue);
+        }
+
+        .content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-6) 0 var(--spacing-3) 0;
+        }
+
+        .content h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-4) 0 var(--spacing-2) 0;
+        }
+
+        .content p {
+            margin-bottom: var(--spacing-4);
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .content ul, .content ol {
+            margin-bottom: var(--spacing-4);
+            padding-left: var(--spacing-6);
+        }
+
+        .content li {
+            margin-bottom: var(--spacing-2);
+            color: var(--text-secondary);
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+            border-radius: 12px;
+            padding: var(--spacing-8);
+            margin-bottom: var(--spacing-8);
+            border: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            margin-bottom: var(--spacing-4);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-6);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-4);
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: var(--spacing-3) var(--spacing-6);
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--sf-blue);
+            color: white;
+            box-shadow: 0 2px 4px rgba(13, 157, 218, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--sf-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(13, 157, 218, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--sf-blue);
+            border: 1.5px solid var(--sf-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--sf-blue);
+            color: white;
+        }
+
+        /* Code blocks */
+        .content pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            overflow-x: auto;
+            margin-bottom: var(--spacing-4);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9rem;
+        }
+
+        .content code {
+            background: var(--surface);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-6);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--sf-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Notice boxes */
+        .notice {
+            border-radius: 8px;
+            padding: var(--spacing-6);
+            margin: var(--spacing-6) 0;
+            border-left: 4px solid;
+        }
+
+        .notice-info {
+            background: linear-gradient(135deg, #e8f4fd, #dbeafe);
+            border-left-color: var(--sf-blue);
+        }
+
+        .notice-success {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border-left-color: var(--sf-success);
+        }
+
+        .notice-warning {
+            background: linear-gradient(135deg, #fff9e6, #fff3cd);
+            border-left-color: var(--sf-warning);
+        }
+
+        .notice-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-2);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .notice-content {
+            line-height: 1.6;
+        }
+
+        .notice-info .notice-title { color: #0c4a6e; }
+        .notice-info .notice-content { color: #0c4a6e; }
+        .notice-success .notice-title { color: #155724; }
+        .notice-success .notice-content { color: #155724; }
+        .notice-warning .notice-title { color: #856404; }
+        .notice-warning .notice-content { color: #856404; }
+
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: var(--spacing-12);
+            margin-bottom: var(--spacing-8);
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--sf-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .step h3 {
+            margin-top: 0;
+            margin-bottom: var(--spacing-3);
+        }
+
+        /* Dark theme */
+        [data-theme="dark"] {
+            --background: #081219;
+            --surface: #0c1821;
+            --surface-alt: #16252d;
+            --text-primary: #ecf0f1;
+            --text-secondary: #b0bdc8;
+            --text-weak: #7c8b94;
+            --border: #1b2a33;
+            --border-strong: #243642;
+            --shadow: rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="dark"] .notice-info {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+        }
+
+        [data-theme="dark"] .notice-success {
+            background: linear-gradient(135deg, #166534, #15803d);
+        }
+
+        [data-theme="dark"] .notice-warning {
+            background: linear-gradient(135deg, #a16207, #ca8a04);
+        }
+
+        [data-theme="dark"] .notice-info .notice-title,
+        [data-theme="dark"] .notice-info .notice-content { color: #dbeafe; }
+        [data-theme="dark"] .notice-success .notice-title,
+        [data-theme="dark"] .notice-success .notice-content { color: #dcfce7; }
+        [data-theme="dark"] .notice-warning .notice-title,
+        [data-theme="dark"] .notice-warning .notice-content { color: #fef3c7; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"></div>
+                MCP-Universe
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#results">Leaderboard</a></li>
+                <li><a href="usage.html">Docs</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="contributions.html" class="active">Contributions</a></li>
+            </ul>
+            <div class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Getting Started</div>
+                    <div class="nav-item"><a href="#overview" data-section="overview">Overview</a></div>
+                    <div class="nav-item"><a href="#ways-to-contribute" data-section="ways-to-contribute">Ways to Contribute</a></div>
+                    <div class="nav-item"><a href="#guidelines" data-section="guidelines">Guidelines</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Contributing Tasks</div>
+                    <div class="nav-item"><a href="#task-structure" data-section="task-structure">Task Structure</a></div>
+                    <div class="nav-item"><a href="#task-creation" data-section="task-creation">Creating Tasks</a></div>
+                    <div class="nav-item"><a href="#task-validation" data-section="task-validation">Validation</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Contributing Evaluators</div>
+                    <div class="nav-item"><a href="#evaluator-types" data-section="evaluator-types">Evaluator Types</a></div>
+                    <div class="nav-item"><a href="#evaluator-creation" data-section="evaluator-creation">Creating Evaluators</a></div>
+                    <div class="nav-item"><a href="#evaluator-testing" data-section="evaluator-testing">Testing</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Development</div>
+                    <div class="nav-item"><a href="#setup" data-section="setup">Development Setup</a></div>
+                    <div class="nav-item"><a href="#testing" data-section="testing">Testing</a></div>
+                    <div class="nav-item"><a href="#submission" data-section="submission">Submission Process</a></div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content" id="content">
+            <section id="overview">
+                <div class="hero">
+                    <h1>Contribute to MCP-Universe</h1>
+                    <p>Help us expand and improve the MCP-Universe benchmark by contributing new tasks, evaluators, and enhancements. Your contributions will help advance AI agent evaluation and benefit the entire research community.</p>
+                    <div class="cta-buttons">
+                        <a href="https://github.com/SalesforceAIResearch/MCP-Universe" class="btn btn-primary">
+                            <i class="fab fa-github"></i>
+                            View on GitHub
+                        </a>
+                        <a href="https://discord.gg/t9tU77GF" class="btn btn-outline">
+                            <i class="fab fa-discord"></i>
+                            Join Discord
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ways-to-contribute">
+                <h2>Ways to Contribute</h2>
+                <p>There are many ways you can contribute to the MCP-Universe project. Whether you're a researcher, developer, or domain expert, your contributions are valuable.</p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-tasks"></i></div>
+                        <h3 class="card-title">New Benchmark Tasks</h3>
+                    </div>
+                    <p>Create new evaluation tasks that test different aspects of AI agent capabilities. Tasks should be challenging, realistic, and cover diverse scenarios within existing or new domains.</p>
+                    <ul>
+                        <li>Design tasks that reflect real-world use cases</li>
+                        <li>Ensure tasks are challenging but fair</li>
+                        <li>Include comprehensive evaluation criteria</li>
+                        <li>Provide clear expected outputs and formats</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-check-circle"></i></div>
+                        <h3 class="card-title">Custom Evaluators</h3>
+                    </div>
+                    <p>Develop specialized evaluators that can assess agent performance on specific types of tasks. Evaluators should be robust, reliable, and provide meaningful feedback.</p>
+                    <ul>
+                        <li>Static evaluators for time-invariant content</li>
+                        <li>Dynamic evaluators for real-time data validation</li>
+                        <li>Format evaluators for output structure compliance</li>
+                        <li>Domain-specific evaluation logic</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-server"></i></div>
+                        <h3 class="card-title">MCP Server Integration</h3>
+                    </div>
+                    <p>Integrate new MCP servers to expand the range of tools and services available to agents during evaluation.</p>
+                    <ul>
+                        <li>Identify useful external services and APIs</li>
+                        <li>Create MCP server implementations</li>
+                        <li>Ensure proper authentication and rate limiting</li>
+                        <li>Document server capabilities and limitations</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-bug"></i></div>
+                        <h3 class="card-title">Bug Reports & Improvements</h3>
+                    </div>
+                    <p>Help improve the framework by reporting bugs, suggesting enhancements, and contributing code improvements.</p>
+                    <ul>
+                        <li>Report issues with detailed reproduction steps</li>
+                        <li>Suggest performance optimizations</li>
+                        <li>Improve documentation and examples</li>
+                        <li>Enhance user experience and accessibility</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="guidelines">
+                <h2>Contribution Guidelines</h2>
+                
+                <div class="notice notice-info">
+                    <div class="notice-title">
+                        <i class="fas fa-info-circle"></i>
+                        Before You Start
+                    </div>
+                    <div class="notice-content">
+                        Please read our <a href="https://github.com/SalesforceAIResearch/MCP-Universe/blob/main/CONTRIBUTING.md" style="color: inherit; text-decoration: underline;">Contributing Guide</a> and <a href="https://github.com/SalesforceAIResearch/MCP-Universe/blob/main/CODE_OF_CONDUCT.md" style="color: inherit; text-decoration: underline;">Code of Conduct</a> before making your first contribution.
+                    </div>
+                </div>
+
+                <h3>Quality Standards</h3>
+                <ul>
+                    <li><strong>Clarity</strong>: Tasks and evaluators should have clear, unambiguous specifications</li>
+                    <li><strong>Reproducibility</strong>: All contributions should be reproducible across different environments</li>
+                    <li><strong>Documentation</strong>: Provide comprehensive documentation for new features</li>
+                    <li><strong>Testing</strong>: Include appropriate tests for new functionality</li>
+                    <li><strong>Performance</strong>: Consider the performance impact of new additions</li>
+                </ul>
+
+                <h3>Review Process</h3>
+                <p>All contributions go through a review process to ensure quality and consistency:</p>
+                <ol>
+                    <li>Submit a pull request with your changes</li>
+                    <li>Automated tests and linting checks will run</li>
+                    <li>Core maintainers will review your contribution</li>
+                    <li>Address any feedback or requested changes</li>
+                    <li>Once approved, your contribution will be merged</li>
+                </ol>
+            </section>
+
+            <section id="task-structure">
+                <h2>Contributing Tasks</h2>
+                
+                <h3>Task Structure</h3>
+                <p>Each task is defined as a JSON file with the following structure:</p>
+
+                <pre><code>{
+    "category": "general",
+    "question": "Your task description here...",
+    "output_format": {
+        "answer": "[Expected output format]"
+    },
+    "use_specified_server": true,
+    "mcp_servers": [
+        {
+            "name": "server-name"
+        }
+    ],
+    "evaluators": [
+        {
+            "func": "evaluation_function",
+            "op": "operation",
+            "value": "expected_value"
+        }
+    ]
+}</code></pre>
+
+                <h4>Key Components</h4>
+                <ul>
+                    <li><strong>category</strong>: Classification of the task type</li>
+                    <li><strong>question</strong>: The actual task description or prompt</li>
+                    <li><strong>output_format</strong>: Expected structure of the agent's response</li>
+                    <li><strong>mcp_servers</strong>: List of MCP servers the agent can use</li>
+                    <li><strong>evaluators</strong>: Evaluation criteria and functions</li>
+                </ul>
+            </section>
+
+            <section id="task-creation">
+                <h2>Creating Tasks</h2>
+                
+                <div class="steps">
+                    <div class="step">
+                        <h3>Design the Task</h3>
+                        <p>Start by identifying a real-world scenario that would benefit from AI agent automation. Consider the following:</p>
+                        <ul>
+                            <li>What domain does this task belong to?</li>
+                            <li>What tools or services would an agent need?</li>
+                            <li>What makes this task challenging?</li>
+                            <li>How can success be measured objectively?</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h3>Write the Task Description</h3>
+                        <p>Create a clear, detailed description of what the agent needs to accomplish:</p>
+                        <ul>
+                            <li>Use natural language that a human would understand</li>
+                            <li>Include all necessary context and constraints</li>
+                            <li>Specify the expected output format</li>
+                            <li>Make the task challenging but achievable</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h3>Define Output Format</h3>
+                        <p>Specify the exact structure you expect from the agent's response:</p>
+                        <pre><code>"output_format": {
+    "result": "[Main answer]",
+    "confidence": "[Confidence level]",
+    "sources": ["[List of sources used]"]
+}</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>Select MCP Servers</h3>
+                        <p>Choose which MCP servers the agent should have access to:</p>
+                        <pre><code>"mcp_servers": [
+    {"name": "google-search"},
+    {"name": "fetch"},
+    {"name": "calculator"}
+]</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>Design Evaluators</h3>
+                        <p>Create evaluation criteria that can automatically assess the agent's performance:</p>
+                        <pre><code>"evaluators": [
+    {
+        "func": "json",
+        "op": "contains_key",
+        "value": "result"
+    },
+    {
+        "func": "custom_evaluator",
+        "op": "validate_answer",
+        "op_args": {"expected": "correct_answer"}
+    }
+]</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="task-validation">
+                <h2>Task Validation</h2>
+                
+                <div class="notice notice-warning">
+                    <div class="notice-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Testing Required
+                    </div>
+                    <div class="notice-content">
+                        All new tasks must be tested with at least one agent to ensure they are solvable and the evaluators work correctly.
+                    </div>
+                </div>
+
+                <h3>Validation Checklist</h3>
+                <ul>
+                    <li>Task description is clear and unambiguous</li>
+                    <li>Output format is well-defined and reasonable</li>
+                    <li>Required MCP servers are available and functional</li>
+                    <li>Evaluators correctly assess agent performance</li>
+                    <li>Task is challenging but solvable</li>
+                    <li>JSON syntax is valid and follows schema</li>
+                </ul>
+
+                <h3>Testing Your Task</h3>
+                <pre><code>python -m mcpuniverse.benchmark.runner \
+    --config your_task_config.yaml \
+    --task path/to/your/task.json \
+    --agent test-agent</code></pre>
+            </section>
+
+            <section id="evaluator-types">
+                <h2>Contributing Evaluators</h2>
+                
+                <h3>Types of Evaluators</h3>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-code"></i></div>
+                        <h3 class="card-title">Format Evaluators</h3>
+                    </div>
+                    <p>Validate that agent outputs conform to expected formats (JSON, XML, specific schemas).</p>
+                    <pre><code>{
+    "func": "json",
+    "op": "validate_schema",
+    "op_args": {"schema": "path/to/schema.json"}
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-database"></i></div>
+                        <h3 class="card-title">Static Evaluators</h3>
+                    </div>
+                    <p>Compare agent outputs against known, time-invariant correct answers.</p>
+                    <pre><code>{
+                    "func": "static_match",
+                    "op": "exact_match",
+                    "value": "expected_answer"
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-sync"></i></div>
+                        <h3 class="card-title">Dynamic Evaluators</h3>
+                    </div>
+                    <p>Fetch real-time ground truth data to validate time-sensitive responses.</p>
+                    <pre><code>{
+    "func": "dynamic_check",
+    "op": "api_validation",
+    "op_args": {"endpoint": "https://api.example.com/validate"}
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="evaluator-creation">
+                <h2>Creating Custom Evaluators</h2>
+                
+                <h3>Evaluator Function Template</h3>
+                <pre><code>def custom_evaluator(output, expected, **kwargs):
+    """
+    Custom evaluator function.
+    
+    Args:
+        output: Agent's output to evaluate
+        expected: Expected correct output
+        **kwargs: Additional parameters
+    
+    Returns:
+        dict: Evaluation result with score and details
+    """
+    try:
+        # Your evaluation logic here
+        score = calculate_score(output, expected)
+        
+        return {
+            "score": score,
+            "passed": score >= threshold,
+            "details": "Evaluation details",
+            "error": None
+        }
+    except Exception as e:
+        return {
+            "score": 0.0,
+            "passed": False,
+            "details": "Evaluation failed",
+            "error": str(e)
+        }
+</code></pre>
+
+                <h3>Best Practices</h3>
+                <ul>
+                    <li>Handle edge cases and malformed inputs gracefully</li>
+                    <li>Provide detailed feedback in the evaluation results</li>
+                    <li>Use appropriate scoring metrics for your domain</li>
+                    <li>Include comprehensive error handling</li>
+                    <li>Document your evaluator's behavior and limitations</li>
+                </ul>
+            </section>
+
+            <section id="evaluator-testing">
+                <h2>Testing Evaluators</h2>
+                
+                <h3>Unit Testing</h3>
+                <pre><code>def test_custom_evaluator():
+    # Test correct output
+    result = custom_evaluator("correct answer", "correct answer")
+    assert result["passed"] == True
+    assert result["score"] == 1.0
+    
+    # Test incorrect output
+    result = custom_evaluator("wrong answer", "correct answer")
+    assert result["passed"] == False
+    assert result["score"] < 1.0
+    
+    # Test malformed input
+    result = custom_evaluator(None, "correct answer")
+    assert result["error"] is not None</code></pre>
+            </section>
+
+            <section id="setup">
+                <h2>Development Setup</h2>
+                
+                <h3>Environment Setup</h3>
+                <pre><code># Clone the repository
+git clone https://github.com/SalesforceAIResearch/MCP-Universe.git
+cd MCP-Universe
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+pip install -r dev-requirements.txt
+
+# Install pre-commit hooks
+pre-commit install</code></pre>
+
+                <h3>Development Workflow</h3>
+                <ol>
+                    <li>Create a new branch for your feature</li>
+                    <li>Make your changes following the coding standards</li>
+                    <li>Write tests for new functionality</li>
+                    <li>Run the test suite to ensure nothing is broken</li>
+                    <li>Submit a pull request with a clear description</li>
+                </ol>
+            </section>
+
+            <section id="testing">
+                <h2>Testing</h2>
+                
+                <h3>Running Tests</h3>
+                <pre><code># Run all tests
+python -m pytest
+
+# Run specific test file
+python -m pytest tests/test_evaluators.py
+
+# Run with coverage
+python -m pytest --cov=mcpuniverse</code></pre>
+
+                <h3>Test Categories</h3>
+                <ul>
+                    <li><strong>Unit Tests</strong>: Test individual functions and classes</li>
+                    <li><strong>Integration Tests</strong>: Test component interactions</li>
+                    <li><strong>End-to-End Tests</strong>: Test complete workflows</li>
+                    <li><strong>Performance Tests</strong>: Ensure acceptable performance</li>
+                </ul>
+            </section>
+
+            <section id="submission">
+                <h2>Submission Process</h2>
+                
+                <div class="steps">
+                    <div class="step">
+                        <h3>Prepare Your Contribution</h3>
+                        <ul>
+                            <li>Ensure your code follows the project's style guidelines</li>
+                            <li>Write comprehensive tests for new functionality</li>
+                            <li>Update documentation as needed</li>
+                            <li>Test your changes thoroughly</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h3>Create Pull Request</h3>
+                        <ul>
+                            <li>Fork the repository and create a feature branch</li>
+                            <li>Commit your changes with clear, descriptive messages</li>
+                            <li>Push to your fork and create a pull request</li>
+                            <li>Fill out the pull request template completely</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h3>Review Process</h3>
+                        <ul>
+                            <li>Automated checks will run on your pull request</li>
+                            <li>Core maintainers will review your code</li>
+                            <li>Address any feedback or requested changes</li>
+                            <li>Once approved, your contribution will be merged</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="notice notice-success">
+                    <div class="notice-title">
+                        <i class="fas fa-check-circle"></i>
+                        Ready to Contribute?
+                    </div>
+                    <div class="notice-content">
+                        Join our <a href="https://discord.gg/t9tU77GF" style="color: inherit; text-decoration: underline;">Discord community</a> to discuss ideas, get help, and connect with other contributors. We're excited to see what you'll build!
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Theme toggle handler
+        (function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const icon = toggle.querySelector('i');
+            const key = 'mcp-theme';
+            const apply = (mode) => {
+                if (mode === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    root.removeAttribute('data-theme');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            };
+            const preferred = localStorage.getItem(key) || 'light';
+            apply(preferred);
+            toggle.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                localStorage.setItem(key, next);
+                apply(next);
+            });
+        })();
+
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item a');
+            const sections = document.querySelectorAll('section');
+
+            // Navigation click handlers
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update active state
+                        navItems.forEach(nav => nav.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Scroll spy
+            window.addEventListener('scroll', function() {
+                let current = 'overview';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    if (scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === '#' + current) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logos/mcp-universe-icon.png">
+    <link rel="apple-touch-icon" href="logos/mcp-universe-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="favicon.ico">
     <meta name="description" content="MCP-Universe: Benchmarking LLMs with real-world Model Context Protocol servers across 6 domains and 231 tasks.">
     <meta property="og:title" content="MCP-Universe: Benchmarking LLMs with Real-World MCP Servers">
     <meta property="og:description" content="Comprehensive benchmark evaluating LLMs with real-world MCP servers across 6 domains with execution-based evaluation.">
@@ -16,7 +17,7 @@
     <meta name="twitter:title" content="MCP-Universe Benchmark">
     <meta name="twitter:description" content="Benchmarking LLMs with real-world MCP servers across 6 domains.">
     <meta name="twitter:image" content="intro-mcp-universe.png">
-    <title>MCP-Universe: Benchmarking Large Language Models with Real-World Model Context Protocol Servers</title>
+    <title>MCP-Universe</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -125,13 +126,14 @@
         .logo-icon {
             width: 32px;
             height: 32px;
-            background: var(--sf-blue);
+            background-image: url('logos/mcp-universe-icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1rem;
         }
 
         .nav-links {
@@ -156,8 +158,8 @@
 
         /* Hero Section */
         .hero {
-            padding: var(--spacing-16) 0;
-            text-align: center;
+            padding: var(--spacing-6) 0;
+            text-align: left;
             background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
             position: relative;
             overflow: hidden;
@@ -183,8 +185,8 @@
         .hero h1 {
             font-size: clamp(1.75rem, 3.5vw, 2.5rem);
             font-weight: 700;
-            margin-bottom: var(--spacing-6);
-            line-height: 1.2;
+            margin-bottom: var(--spacing-3);
+            line-height: 1.1;
         }
 
         .hero .brand-name {
@@ -198,19 +200,17 @@
         .hero .subtitle {
             font-size: 1.125rem;
             color: var(--text-secondary);
-            margin-bottom: var(--spacing-8);
+            margin-bottom: var(--spacing-4);
             max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .hero-buttons {
             display: flex;
             gap: var(--spacing-4);
-            justify-content: center;
+            justify-content: flex-start;
             flex-wrap: wrap;
-            margin-bottom: var(--spacing-12);
+            margin-bottom: var(--spacing-5);
         }
 
         .btn {
@@ -252,7 +252,7 @@
 
         /* Authors */
         .authors {
-            text-align: center;
+            text-align: left;
             color: var(--text-secondary);
         }
 
@@ -265,8 +265,8 @@
 
         .author-list {
             font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: var(--spacing-3);
+            line-height: 1.3;
+            margin-bottom: var(--spacing-2);
         }
         .author-list a { color: var(--text-primary); text-decoration: none; border-bottom: 1px dashed var(--border); }
         .author-list a:hover { color: var(--sf-blue); border-bottom-color: var(--sf-blue); }
@@ -274,7 +274,7 @@
         .equal-contrib {
             font-size: 0.95rem;
             color: var(--text-weak);
-            margin-bottom: var(--spacing-3);
+            margin-bottom: var(--spacing-2);
         }
 
         .contact {
@@ -295,24 +295,14 @@
         .institution {
             font-size: 1.1rem;
             margin-top: var(--spacing-1);
+            margin-bottom: var(--spacing-2);
             color: var(--sf-blue);
             font-weight: 500;
         }
 
-        /* Abstract */
-        .abstract {
-            padding: var(--spacing-16) 0;
-            background: var(--surface);
-        }
-
-        .abstract-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
         .section-title {
             font-size: 2rem;
-            margin-bottom: var(--spacing-8);
+            margin-bottom: var(--spacing-5);
             color: var(--sf-blue);
             text-align: center;
             font-weight: 700;
@@ -325,6 +315,36 @@
             background: linear-gradient(90deg, var(--sf-blue), var(--sf-brand));
             border-radius: 2px;
             margin: 12px auto 0;
+        }
+
+        /* Figure */
+        .figure-section {
+            padding: var(--spacing-4) 0;
+        }
+
+        .figure-container {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .figure-image {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .figure-caption {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: var(--spacing-2);
+            line-height: 1.6;
+            font-style: italic;
+            max-width: 1200px;
+            margin: var(--spacing-2) auto 0;
         }
 
         /* Back to top */
@@ -404,176 +424,11 @@
         .results-table table thead th:first-child { position: sticky; left: 0; z-index: 5; }
         .results-table table tbody td:first-child { position: sticky; left: 0; z-index: 2; background: inherit; box-shadow: 2px 0 0 0 var(--border); }
 
-        .abstract p {
-            font-size: 1.125rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-6);
-            text-align: justify;
-        }
 
-        .abstract .highlight {
-            color: var(--sf-blue);
-            font-weight: 600;
-        }
-
-        /* Figure */
-        .figure-section {
-            padding: var(--spacing-16) 0;
-        }
-
-        .figure-container {
-            text-align: center;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .figure-image {
-            width: 100%;
-            max-width: 1000px;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px var(--shadow);
-            border: 1px solid var(--border);
-        }
-
-        .figure-caption {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-top: var(--spacing-4);
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        /* Key Statistics */
-        .stats {
-            padding: var(--spacing-16) 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-6);
-            margin-top: var(--spacing-8);
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: var(--spacing-8);
-            background: var(--surface);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--sf-blue), var(--sf-brand));
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px var(--shadow);
-            border-color: var(--sf-blue);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--sf-blue);
-            margin-bottom: var(--spacing-2);
-            line-height: 1;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 1.125rem;
-        }
-
-        /* Domains */
-        .domains {
-            padding: var(--spacing-16) 0;
-            background: var(--surface);
-        }
-
-        .domains-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--spacing-6);
-            margin-top: var(--spacing-8);
-        }
-
-        .domain-card {
-            background: var(--background);
-            padding: var(--spacing-8);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .domain-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px var(--shadow);
-            border-color: var(--sf-blue);
-        }
-
-        .domain-header {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-4);
-            margin-bottom: var(--spacing-4);
-        }
-
-        .domain-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            background: var(--sf-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .domain-card h3 {
-            font-size: 1.125rem;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .domain-card p {
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-4);
-            line-height: 1.6;
-        }
-
-        .domain-stats {
-            display: flex;
-            justify-content: space-between;
-            padding-top: var(--spacing-4);
-            border-top: 1px solid var(--border);
-            font-size: 0.9rem;
-            color: var(--text-weak);
-        }
-
-        .domain-stats .stat-highlight {
-            color: var(--sf-blue);
-            font-weight: 600;
-        }
 
         /* Results Table */
         .results {
-            padding: var(--spacing-16) 0;
+            padding: var(--spacing-4) 0;
         }
 
         .results-intro {
@@ -711,14 +566,14 @@
 
         /* Key Findings */
         .findings {
-            padding: var(--spacing-16) 0;
+            padding: var(--spacing-4) 0;
         }
 
         .findings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: var(--spacing-6);
-            margin-top: var(--spacing-8);
+            margin-top: var(--spacing-4);
         }
 
         .finding-card {
@@ -868,7 +723,7 @@
 
         /* Citation Section */
         .citation {
-            padding: var(--spacing-16) 0;
+            padding: var(--spacing-4) 0;
             background: var(--surface);
         }
 
@@ -922,31 +777,7 @@
             text-align: center;
         }
 
-        /* Task Examples */
-        .task-examples {
-            padding: var(--spacing-16) 0;
-            background: var(--surface);
-        }
 
-        .example-card {
-            background: var(--background);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: var(--spacing-6);
-            margin-bottom: var(--spacing-4);
-        }
-
-        .example-title {
-            font-weight: 600;
-            color: var(--sf-blue);
-            margin-bottom: var(--spacing-3);
-        }
-
-        .example-text {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -1013,17 +844,14 @@
     <header>
         <nav class="container">
             <a href="#" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-cloud"></i>
-                </div>
+                <div class="logo-icon"></div>
                 MCP-Universe
             </a>
             <ul class="nav-links">
-                <li><a href="#abstract">Abstract</a></li>
-                <li><a href="#benchmark">Benchmark</a></li>
-                <li><a href="#results">Results</a></li>
-                <li><a href="#analysis">Analysis</a></li>
-                <li><a href="#examples">Examples</a></li>
+                <li><a href="#results">Leaderboard</a></li>
+                <li><a href="usage.html">Docs</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="contributions.html">Contributions</a></li>
             </ul>
             <div class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
                 <i class="fas fa-moon"></i>
@@ -1037,7 +865,7 @@
                 <div class="hero-content">
                     <h1><span class="brand-name">MCP-Universe</span>: Benchmarking Large Language Models with<br>Real-World Model Context Protocol Servers</h1>
                     <p class="subtitle">
-                        The first comprehensive benchmark specifically designed to evaluate LLMs in realistic and challenging tasks through interaction with real-world MCP servers across 6 core domains and 231 tasks.
+                        MCP-Universe is a comprehensive framework designed for developing, testing, and benchmarking AI agents. It offers a robust platform for building and evaluating both AI agents and LLMs across a wide range of task environments. The framework also supports seamless integration with external MCP servers and facilitates sophisticated agent orchestration workflows.
                     </p>
                     <div class="hero-buttons">
                         <a href="https://arxiv.org/abs/2508.14704" class="btn btn-primary">
@@ -1080,23 +908,6 @@
             </div>
         </section>
 
-        <section class="abstract" id="abstract">
-            <div class="container">
-                <div class="abstract-content">
-                    <h2 class="section-title">Abstract</h2>
-                    <p>
-                        The Model Context Protocol (MCP) has emerged as a transformative standard for connecting large language models (LLMs) to external data sources and tools, rapidly gaining adoption across major AI providers and development platforms. However, existing benchmarks are overly simplistic and fail to capture real application challenges such as long-horizon reasoning and large, unfamiliar tool spaces.
-                    </p>
-                    <p>
-                        To address this critical gap, we introduce <span class="highlight">MCP-Universe</span>, the first comprehensive benchmark specifically designed to evaluate LLMs in realistic and hard tasks through interaction with real-world MCP servers. Our benchmark encompasses 6 core domains spanning 11 different MCP servers: <em>Location Navigation</em>, <em>Repository Management</em>, <em>Financial Analysis</em>, <em>3D Design</em>, <em>Browser Automation</em>, and <em>Web Searching</em>. To ensure rigorous evaluation, we implement execution-based evaluators, including format evaluators for agent format compliance, static evaluators for time-invariant content matching, and dynamic evaluators that automatically retrieve real-time ground truth for temporally sensitive tasks.
-                    </p>
-                    <p>
-                        Through extensive evaluation of leading LLMs, we find that even top-performing models such as <span class="highlight">GPT-5 (43.72% success rate)</span>, <span class="highlight">Grok-4 (33.33% success rate)</span> and <span class="highlight">Claude-4.0-Sonnet (29.44% success rate)</span> exhibit significant performance limitations. Beyond evaluation, we open-source our extensible evaluation framework with UI support, enabling researchers and practitioners to seamlessly integrate new agents and MCP servers while fostering innovation in the rapidly evolving MCP ecosystem.
-                    </p>
-                </div>
-            </div>
-        </section>
-
         <section class="figure-section">
             <div class="container">
                 <div class="figure-container">
@@ -1108,107 +919,9 @@
             </div>
         </section>
 
-        <section class="stats">
-            <div class="container">
-                <h2 class="section-title">Key Statistics</h2>
-                <div class="stats-grid">
-                    <div class="stat-card fade-in">
-                        <div class="stat-number">231</div>
-                        <div class="stat-label">Total Tasks</div>
-                    </div>
-                    <div class="stat-card fade-in">
-                        <div class="stat-number">6</div>
-                        <div class="stat-label">Core Domains</div>
-                    </div>
-                    <div class="stat-card fade-in">
-                        <div class="stat-number">11</div>
-                        <div class="stat-label">MCP Servers</div>
-                    </div>
-                    <div class="stat-card fade-in">
-                        <div class="stat-number">84</div>
-                        <div class="stat-label">Unique Evaluators</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="domains" id="benchmark">
-            <div class="container">
-                <h2 class="section-title">Benchmark Domains</h2>
-                <div class="domains-grid">
-                    <div class="domain-card fade-in">
-                        <div class="domain-header">
-                            <div class="domain-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <h3>Location Navigation</h3>
-                        </div>
-                        <p>Real-world geospatial navigation tasks involving complex location queries, route planning, and geographic point calculations with actual map data.</p>
-                        <div class="domain-stats">
-                            <span><span class="stat-highlight">45</span> tasks</span>
-                            <span><span class="stat-highlight">19.5%</span> of total</span>
-                        </div>
-                    </div>
-                    <div class="domain-card fade-in">
-                        <div class="domain-header">
-                            <div class="domain-icon"><i class="fas fa-search"></i></div>
-                            <h3>Web Searching</h3>
-                        </div>
-                        <p>Advanced web search tasks requiring multi-step information retrieval, synthesis, and real-time data processing from various sources.</p>
-                        <div class="domain-stats">
-                            <span><span class="stat-highlight">55</span> tasks</span>
-                            <span><span class="stat-highlight">23.8%</span> of total</span>
-                        </div>
-                    </div>
-                    <div class="domain-card fade-in">
-                        <div class="domain-header">
-                            <div class="domain-icon"><i class="fas fa-robot"></i></div>
-                            <h3>Browser Automation</h3>
-                        </div>
-                        <p>Complex browser automation tasks involving real-time web interactions, request submissions, and dynamic content extraction.</p>
-                        <div class="domain-stats">
-                            <span><span class="stat-highlight">39</span> tasks</span>
-                            <span><span class="stat-highlight">16.9%</span> of total</span>
-                        </div>
-                    </div>
-                    <div class="domain-card fade-in">
-                        <div class="domain-header">
-                            <div class="domain-icon"><i class="fas fa-cube"></i></div>
-                            <h3>3D Design</h3>
-                        </div>
-                        <p>Three-dimensional modeling and design tasks using real Blender software tools with geometric constraints and design specifications.</p>
-                        <div class="domain-stats">
-                            <span><span class="stat-highlight">19</span> tasks</span>
-                            <span><span class="stat-highlight">8.2%</span> of total</span>
-                        </div>
-                    </div>
-                    <div class="domain-card fade-in">
-                        <div class="domain-header">
-                            <div class="domain-icon"><i class="fas fa-chart-line"></i></div>
-                            <h3>Financial Analysis</h3>
-                        </div>
-                        <p>Real-time financial data analysis, quantitative investing, market research, and investment calculations involving temporal dynamics and live market data.</p>
-                        <div class="domain-stats">
-                            <span><span class="stat-highlight">40</span> tasks</span>
-                            <span><span class="stat-highlight">17.3%</span> of total</span>
-                        </div>
-                    </div>
-                    <div class="domain-card fade-in">
-                        <div class="domain-header">
-                            <div class="domain-icon"><i class="fas fa-code-branch"></i></div>
-                            <h3>Repository Management</h3>
-                        </div>
-                        <p>Version control workflows, code repository management, and collaborative development tasks across different platforms like GitHub.</p>
-                        <div class="domain-stats">
-                            <span><span class="stat-highlight">33</span> tasks</span>
-                            <span><span class="stat-highlight">14.3%</span> of total</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="results" id="results">
             <div class="container">
-                <h2 class="section-title">Benchmark Results</h2>
+                <h2 class="section-title">Leaderboard</h2>
                 <div class="track-tabs" role="tablist" aria-label="Leaderboard tracks">
                     <button class="track-tab active" id="tab-llm" role="tab" aria-selected="true" aria-controls="panel-llm">LLM Track</button>
                     <button class="track-tab" id="tab-agent" role="tab" aria-selected="false" aria-controls="panel-agent">Agent Track</button>
@@ -1589,61 +1302,7 @@
             </div>
         </section>
 
-        <section class="task-examples" id="examples">
-            <div class="container">
-                <h2 class="section-title">Task Examples</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--spacing-6);">
-                    <div>
-                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Location Navigation</h3>
-                        <div class="example-card">
-                            <div class="example-text">
-                                Hi! My partner and I are planning a special pre-wedding road trip from Los Angeles to San Francisco as one last adventure before we tie the knot! We want to make this journey memorable before we start our married life together. Our plan is to drive through exactly 3 interesting cities between the starting and ending points to really enjoy this time together. Could you please map out exactly 2 distinct driving route options for this pre-wedding celebration? Oh, we must visit friends in Coalinga during our trip to share our exciting news with them!
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Repository Management</h3>
-                        <div class="example-card">
-                            <div class="example-text">
-                                Hi! I'm learning how to use GitHub and I want to practice exploring repositories and working with issues. Can you help me with a research project? I'd like to search for repositories owned by `google' that have `generative-ai' in their name. Once I find them, I want to count how many open issues each repository has that are labeled `type:bug'. This will help me understand how developers track bugs in real projects! After gathering this information, I need to practice creating my own repository called `google-generative-ai-issues' and uploading a CSV file named `google_generative_ai_bug_report.csv' to it.
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Web Searching</h3>
-                        <div class="example-card">
-                            <div class="example-text">
-                                I'm looking for a city based on the clues below: - The city has a football club that was formed in 1895. - One university in this city has a master's program that teaches Natural Language Processing with 7.5 credits. - One graduated PhD student of this university has published one paper at EACL 2021 and one at EACL 2023 as the first author. - One of the professors in this university is a Fellow of the ACL. You need to find the English name of the city.
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Browser Automation</h3>
-                        <div class="example-card">
-                            <div class="example-text">
-                                Help me find a one-way flight from Singapore to Beijing, 5 days from now (If now is 2025-07-07, then 5 days later is 2025-07-12). Find the flight on www.booking.com. I want to find the cheapest flight, direct flight, Economy, and I don't want to go to the Daxing airport. I only want to see the price, so as to determine whether I should fly to Beijing or not. Remember to close the browser after you finish the task.
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">Financial Analysis</h3>
-                        <div class="example-card">
-                            <div class="example-text">
-                                Hi there! I'm completely new to investing and finance, and honestly, I'm feeling pretty overwhelmed by all the jargon and concepts. I've been trying to learn about something called 'fundamental analysis'. I think it has to do with looking at company finances? Anyway, I heard somewhere that you should look for companies where their net income (I think that's like profit?) has been going up for a few quarters in a row. I'm not really sure what that means exactly, but apparently 2 consecutive quarters of rising net income is a good sign? I'm still figuring out what makes a company worth investing in. Could you help a total beginner like me find 3 company tickers that have this pattern? I'm trying to learn by doing some basic research, even though I barely understand what I'm looking for. Any help would be amazing! I'm just trying to get my feet wet in this whole investing world!
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--sf-blue); margin-bottom: var(--spacing-4); font-size: 1.125rem;">3D Design</h3>
-                        <div class="example-card">
-                            <div class="example-text">
-                                Create a Plane named 'Floor' scaled uniformly by 5. Create a Cylinder named 'Pillar' (default caps) with 16 vertices (sides), a radius of 0.5, and a depth of 4; position it at (X=-2, Y=-2, Z=2). Create a UV Sphere named 'Ball' with 32 segments and 16 rings; position it at (X=2, Y=2, Z=5). Create an Empty (Arrows type) named 'ControlTarget' at (X=0, Y=0, Z=3). Add a 'Track To' constraint to the 'Ball' object, making it track the 'ControlTarget'. Finally, create a Camera object, position it at (X=0, Y=-8, Z=3), and set its rotation so it looks directly at the 'Pillar' object's origin.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
     </main>
 
     <button id="backToTop" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up"></i></button>

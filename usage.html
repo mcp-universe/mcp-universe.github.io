@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logos/mcp-universe-icon.png">
+    <link rel="apple-touch-icon" href="logos/mcp-universe-icon.png">
+    <title>Documentations</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Salesforce Official Brand Colors */
+            --sf-blue: #0d9dda;
+            --sf-blue-dark: #0176a3;
+            --sf-blue-light: #87ceeb;
+            --sf-brand-dark: #0b5cab;
+            --sf-brand: #1589ee;
+            --sf-brand-light: #5eb4ff;
+            
+            /* Neutral Colors */
+            --sf-gray-1: #fafaf9;
+            --sf-gray-2: #f3f2f2;
+            --sf-gray-3: #ecebea;
+            --sf-gray-4: #e5e5e5;
+            --sf-gray-5: #c9c7c5;
+            --sf-gray-6: #aeaca9;
+            --sf-gray-7: #918f8d;
+            --sf-gray-8: #706e6b;
+            --sf-gray-9: #514f4d;
+            --sf-gray-10: #3e3e3c;
+            
+            /* Functional Colors */
+            --background: #ffffff;
+            --surface: var(--sf-gray-1);
+            --surface-alt: var(--sf-gray-2);
+            --text-primary: var(--sf-gray-10);
+            --text-secondary: var(--sf-gray-8);
+            --text-weak: var(--sf-gray-6);
+            --border: var(--sf-gray-4);
+            --border-strong: var(--sf-gray-5);
+            --shadow: rgba(0, 0, 0, 0.1);
+            
+            /* Spacing */
+            --spacing-1: 0.25rem;
+            --spacing-2: 0.5rem;
+            --spacing-3: 0.75rem;
+            --spacing-4: 1rem;
+            --spacing-5: 1.25rem;
+            --spacing-6: 1.5rem;
+            --spacing-8: 2rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --spacing-16: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-6);
+        }
+
+        /* Header */
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-4) 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-image: url('logos/mcp-universe-icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-8);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            margin-left: var(--spacing-6);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover { background: var(--border); }
+
+        /* Main layout */
+        .main-container {
+            display: flex;
+            max-width: 1280px;
+            margin: 0 auto;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: var(--spacing-6);
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: var(--spacing-6);
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--spacing-3) var(--spacing-10) var(--spacing-3) var(--spacing-4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--background);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: var(--spacing-3);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-weak);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-section {
+            margin-bottom: var(--spacing-6);
+            width: 100%;
+        }
+
+        .nav-section-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-3);
+            padding: var(--spacing-2) var(--spacing-3);
+            border-bottom: 1px solid var(--border);
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .nav-item {
+            margin-bottom: var(--spacing-1);
+            width: 100%;
+        }
+
+        .nav-item a {
+            display: block;
+            padding: var(--spacing-2) var(--spacing-3);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .nav-item a:hover, .nav-item a.active {
+            background: var(--sf-blue);
+            color: white;
+        }
+
+        /* Content area */
+        .content {
+            flex: 1;
+            padding: var(--spacing-8) var(--spacing-6);
+            overflow-y: auto;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .content h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-8) 0 var(--spacing-4) 0;
+            padding-bottom: var(--spacing-2);
+            border-bottom: 2px solid var(--sf-blue);
+        }
+
+        .content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-6) 0 var(--spacing-3) 0;
+        }
+
+        .content h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-4) 0 var(--spacing-2) 0;
+        }
+
+        .content p {
+            margin-bottom: var(--spacing-4);
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .content ul, .content ol {
+            margin-bottom: var(--spacing-4);
+            padding-left: var(--spacing-6);
+        }
+
+        .content li {
+            margin-bottom: var(--spacing-2);
+            color: var(--text-secondary);
+        }
+
+        /* Code blocks */
+        .content pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            overflow-x: auto;
+            margin-bottom: var(--spacing-4);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9rem;
+        }
+
+        .content code {
+            background: var(--surface);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Tables */
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--spacing-4);
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .content th, .content td {
+            padding: var(--spacing-3);
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content th {
+            background: var(--sf-blue);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Dark theme */
+        [data-theme="dark"] {
+            --background: #081219;
+            --surface: #0c1821;
+            --surface-alt: #16252d;
+            --text-primary: #ecf0f1;
+            --text-secondary: #b0bdc8;
+            --text-weak: #7c8b94;
+            --border: #1b2a33;
+            --border-strong: #243642;
+            --shadow: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Highlight matching search results */
+        .highlight {
+            background: rgba(13, 157, 218, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-4);
+            margin: var(--spacing-6) 0;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-6);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sf-blue), var(--sf-brand));
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Domain cards */
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-4);
+            margin: var(--spacing-6) 0;
+        }
+
+        .domain-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-6);
+            transition: all 0.3s ease;
+        }
+
+        .domain-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow);
+            border-color: var(--sf-blue);
+        }
+
+        .domain-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .domain-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--sf-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .domain-card h4 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .domain-stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: var(--spacing-3);
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-weak);
+            margin-top: var(--spacing-3);
+        }
+
+        .stat-highlight {
+            color: var(--sf-blue);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"></div>
+                MCP-Universe
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#results">Leaderboard</a></li>
+                <li><a href="usage.html" class="active">Docs</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="contributions.html">Contributions</a></li>
+            </ul>
+            <div class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search documentation..." id="searchInput">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Overview</div>
+                    <div class="nav-item"><a href="#abstract" data-section="abstract">Abstract</a></div>
+                    <div class="nav-item"><a href="#key-statistics" data-section="key-statistics">Key Statistics</a></div>
+                    <div class="nav-item"><a href="#benchmark-domains" data-section="benchmark-domains">Benchmark Domains</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Getting Started</div>
+                    <div class="nav-item"><a href="#architecture-overview" data-section="architecture-overview">Architecture Overview</a></div>
+                    <div class="nav-item"><a href="#prerequisites" data-section="prerequisites">Prerequisites</a></div>
+                    <div class="nav-item"><a href="#installation" data-section="installation">Installation</a></div>
+                    <div class="nav-item"><a href="#quick-test" data-section="quick-test">Quick Test</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Evaluation</div>
+                    <div class="nav-item"><a href="#evaluation-prerequisites" data-section="evaluation-prerequisites">Prerequisites</a></div>
+                    <div class="nav-item"><a href="#environment-config" data-section="environment-config">Environment Configuration</a></div>
+                    <div class="nav-item"><a href="#benchmark-config" data-section="benchmark-config">Benchmark Configuration</a></div>
+                    <div class="nav-item"><a href="#execution" data-section="execution">Execution</a></div>
+                    <div class="nav-item"><a href="#save-logs" data-section="save-logs">Save Running Logs</a></div>
+                    <div class="nav-item"><a href="#save-reports" data-section="save-reports">Save Benchmark Reports</a></div>
+                    <div class="nav-item"><a href="#visualize-results" data-section="visualize-results">Visualize Results</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Configuration</div>
+                    <div class="nav-item"><a href="#llm-config" data-section="llm-config">LLM Configuration</a></div>
+                    <div class="nav-item"><a href="#agent-config" data-section="agent-config">Agent Configuration</a></div>
+                    <div class="nav-item"><a href="#workflow-config" data-section="workflow-config">Workflow Configuration</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Custom Benchmarks</div>
+                    <div class="nav-item"><a href="#creating-custom-benchmarks" data-section="creating-custom-benchmarks">Overview</a></div>
+                    <div class="nav-item"><a href="#task-definition" data-section="task-definition">Task Definition</a></div>
+                    <div class="nav-item"><a href="#benchmark-definition" data-section="benchmark-definition">Benchmark Definition</a></div>
+                    <div class="nav-item"><a href="#complex-workflows" data-section="complex-workflows">Complex Workflows</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Advanced Topics</div>
+                    <div class="nav-item"><a href="#system-architecture" data-section="system-architecture">System Architecture</a></div>
+                    <div class="nav-item"><a href="#adding-mcp-servers" data-section="adding-mcp-servers">Adding MCP Servers</a></div>
+                    <div class="nav-item"><a href="#custom-agents" data-section="custom-agents">Custom Agents</a></div>
+                    <div class="nav-item"><a href="#custom-evaluators" data-section="custom-evaluators">Custom Evaluators</a></div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content" id="content">
+            <section id="abstract">
+                <h1>MCP-Universe Documentation</h1>
+                <h2>Abstract</h2>
+                <p>
+                    The Model Context Protocol (MCP) has emerged as a transformative standard for connecting large language models (LLMs) to external data sources and tools, rapidly gaining adoption across major AI providers and development platforms. However, existing benchmarks are overly simplistic and fail to capture real application challenges such as long-horizon reasoning and large, unfamiliar tool spaces.
+                </p>
+                <p>
+                    To address this critical gap, we introduce <strong>MCP-Universe</strong>, the first comprehensive benchmark specifically designed to evaluate LLMs in realistic and hard tasks through interaction with real-world MCP servers. Our benchmark encompasses 6 core domains spanning 11 different MCP servers: <em>Location Navigation</em>, <em>Repository Management</em>, <em>Financial Analysis</em>, <em>3D Design</em>, <em>Browser Automation</em>, and <em>Web Searching</em>. To ensure rigorous evaluation, we implement execution-based evaluators, including format evaluators for agent format compliance, static evaluators for time-invariant content matching, and dynamic evaluators that automatically retrieve real-time ground truth for temporally sensitive tasks.
+                </p>
+                <p>
+                    Through extensive evaluation of leading LLMs, we find that even top-performing models such as <strong>GPT-5 (43.72% success rate)</strong>, <strong>Grok-4 (33.33% success rate)</strong> and <strong>Claude-4.1-Opus (29.44% success rate)</strong> exhibit significant performance limitations. Beyond evaluation, we open-source our extensible evaluation framework with UI support, enabling researchers and practitioners to seamlessly integrate new agents and MCP servers while fostering innovation in the rapidly evolving MCP ecosystem.
+                </p>
+            </section>
+
+            <section id="key-statistics">
+                <h2>Key Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">231</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Core Domains</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">11</div>
+                        <div class="stat-label">MCP Servers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">84</div>
+                        <div class="stat-label">Unique Evaluators</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="benchmark-domains">
+                <h2>Benchmark Domains</h2>
+                <div class="domains-grid">
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <h4>Location Navigation</h4>
+                        </div>
+                        <p>Real-world geospatial navigation tasks involving complex location queries, route planning, and geographic point calculations with actual map data.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">45</span> tasks</span>
+                            <span><span class="stat-highlight">19.5%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-search"></i></div>
+                            <h4>Web Searching</h4>
+                        </div>
+                        <p>Advanced web search tasks requiring multi-step information retrieval, synthesis, and real-time data processing from various sources.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">55</span> tasks</span>
+                            <span><span class="stat-highlight">23.8%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-robot"></i></div>
+                            <h4>Browser Automation</h4>
+                        </div>
+                        <p>Complex browser automation tasks involving real-time web interactions, request submissions, and dynamic content extraction.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">39</span> tasks</span>
+                            <span><span class="stat-highlight">16.9%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-cube"></i></div>
+                            <h4>3D Design</h4>
+                        </div>
+                        <p>Three-dimensional modeling and design tasks using real Blender software tools with geometric constraints and design specifications.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">19</span> tasks</span>
+                            <span><span class="stat-highlight">8.2%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-chart-line"></i></div>
+                            <h4>Financial Analysis</h4>
+                        </div>
+                        <p>Real-time financial data analysis, quantitative investing, market research, and investment calculations involving temporal dynamics and live market data.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">40</span> tasks</span>
+                            <span><span class="stat-highlight">17.3%</span> of total</span>
+                        </div>
+                    </div>
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <div class="domain-icon"><i class="fas fa-code-branch"></i></div>
+                            <h4>Repository Management</h4>
+                        </div>
+                        <p>Version control workflows, code repository management, and collaborative development tasks across different platforms like GitHub.</p>
+                        <div class="domain-stats">
+                            <span><span class="stat-highlight">33</span> tasks</span>
+                            <span><span class="stat-highlight">14.3%</span> of total</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="architecture-overview">
+                <h2>Architecture Overview</h2>
+                <p>The MCP-Universe architecture consists of the following key components:</p>
+                
+                <ul>
+                    <li><strong>Agents</strong> (<code>mcpuniverse/agent/</code>): Base implementations for different agent types</li>
+                    <li><strong>Workflows</strong> (<code>mcpuniverse/workflows/</code>): Orchestration and coordination layer</li>
+                    <li><strong>MCP Servers</strong> (<code>mcpuniverse/mcp/</code>): Protocol management and external service integration</li>
+                    <li><strong>LLM Integration</strong> (<code>mcpuniverse/llm/</code>): Multi-provider language model support</li>
+                    <li><strong>Benchmarking</strong> (<code>mcpuniverse/benchmark/</code>): Evaluation and testing framework</li>
+                    <li><strong>Dashboard</strong> (<code>mcpuniverse/dashboard/</code>): Visualization and monitoring interface</li>
+                </ul>
+
+                <p>The diagram below illustrates the high-level view:</p>
+                <pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                      Application Layer                          │
+├─────────────────────────────────────────────────────────────────┤
+│  Dashboard  │    Web API      │   Python Lib   │   Benchmarks   │
+│   (Gradio)  │   (FastAPI)     │                │                │
+└─────────────┬─────────────────┬────────────────┬────────────────┘
+              │                 │                │
+┌─────────────▼─────────────────▼────────────────▼────────────────┐
+│                      Orchestration Layer                        │
+├─────────────────────────────────────────────────────────────────┤
+│           Workflows           │        Benchmark Runner         │
+│    (Chain, Router, etc.)      │      (Evaluation Engine)        │
+└─────────────┬─────────────────┬────────────────┬────────────────┘
+              │                 │                │
+┌─────────────▼─────────────────▼────────────────▼────────────────┐
+│                        Agent Layer                              │
+├─────────────────────────────────────────────────────────────────┤
+│  BasicAgent │   ReActAgent    │  FunctionCall  │     Other      │
+│             │                 │     Agent      │     Agents     │
+└─────────────┬─────────────────┬────────────────┬────────────────┘
+              │                 │                │
+┌─────────────▼─────────────────▼────────────────▼────────────────┐
+│                      Foundation Layer                           │
+├─────────────────────────────────────────────────────────────────┤
+│   MCP Manager   │   LLM Manager   │  Memory Systems │  Tracers  │
+│   (Servers &    │   (Multi-Model  │   (RAM, Redis)  │ (Logging) │
+│    Clients)     │    Support)     │                 │           │
+└─────────────────┴─────────────────┴─────────────────┴───────────┘</code></pre>
+
+                <p>More information can be found in the <a href="https://github.com/SalesforceAIResearch/MCP-Universe/blob/main/docs" target="_blank" rel="noopener noreferrer">documentation</a>.</p>
+            </section>
+
+            <section id="prerequisites">
+                <h2>Prerequisites</h2>
+                <p>Before getting started with MCP-Universe, ensure you have the following prerequisites installed on your system:</p>
+                
+                <ul>
+                    <li><strong>Python</strong>: Requires version 3.10 or higher</li>
+                    <li><strong>Docker</strong>: Used for running Dockerized MCP servers</li>
+                    <li><strong>PostgreSQL</strong> (optional): Used for database storage and persistence</li>
+                    <li><strong>Redis</strong> (optional): Used for caching and memory management</li>
+                </ul>
+            </section>
+
+            <section id="installation">
+                <h2>Installation</h2>
+                <p>Follow these steps to install MCP-Universe on your system:</p>
+                
+                <h3>1. Clone the repository</h3>
+                <pre><code>git clone https://github.com/SalesforceAIResearch/MCP-Universe.git
+cd MCP-Universe</code></pre>
+
+                <h3>2. Create and activate virtual environment</h3>
+                <pre><code>python3 -m venv venv
+source venv/bin/activate</code></pre>
+
+                <h3>3. Install dependencies</h3>
+                <pre><code>pip install -r requirements.txt
+pip install -r dev-requirements.txt</code></pre>
+
+                <h3>4. Platform-specific requirements</h3>
+                <p><strong>Linux:</strong></p>
+                <pre><code>sudo apt-get install libpq-dev</code></pre>
+                
+                <p><strong>macOS:</strong></p>
+                <pre><code>brew install postgresql</code></pre>
+
+                <h3>5. Configure pre-commit hooks</h3>
+                <pre><code>pre-commit install</code></pre>
+
+                <h3>6. Environment configuration</h3>
+                <pre><code>cp .env.example .env
+# Edit .env with your API keys and configuration</code></pre>
+            </section>
+
+            <section id="quick-test">
+                <h2>Quick Test</h2>
+                <p>To run benchmarks, you first need to set environment variables:</p>
+                
+                <ol>
+                    <li>Copy the <code>.env.example</code> file to a new file named <code>.env</code></li>
+                    <li>In the <code>.env</code> file, set the required API keys for various services used by the agents, such as <code>OPENAI_API_KEY</code> and <code>GOOGLE_MAPS_API_KEY</code></li>
+                </ol>
+
+                <p>To execute a benchmark programmatically:</p>
+                <pre><code>from mcpuniverse.tracer.collectors import MemoryCollector  # You can also use SQLiteCollector
+from mcpuniverse.benchmark.runner import BenchmarkRunner
+
+async def test():
+    trace_collector = MemoryCollector()
+    # Choose a benchmark config file under the folder "mcpuniverse/benchmark/configs"
+    benchmark = BenchmarkRunner("dummy/benchmark_1.yaml")
+    # Run the specified benchmark
+    results = await benchmark.run(trace_collector=trace_collector)
+    # Get traces
+    trace_id = results[0].task_trace_ids["dummy/tasks/weather.json"]
+    trace_records = trace_collector.get(trace_id)</code></pre>
+            </section>
+
+            <section id="evaluation-prerequisites">
+                <h2>Evaluating LLMs and Agents</h2>
+                <p>This section provides comprehensive instructions for evaluating LLMs and AI agents using the MCP-Universe benchmark suite. The framework supports evaluation across multiple domains including web search, location navigation, browser automation, financial analysis, repository management, and 3D design.</p>
+                
+                <h3>Prerequisites</h3>
+                <p>Before running benchmark evaluations, ensure you have completed the Getting Started section and have the following:</p>
+                <ul>
+                    <li>Python: Version 3.10 or higher</li>
+                    <li>Docker: Installed and available in your environment</li>
+                    <li>All required dependencies installed via <code>pip install -r requirements.txt</code></li>
+                    <li>Active virtual environment</li>
+                    <li>Appropriate API access for the services you intend to evaluate</li>
+                </ul>
+            </section>
+
+            <section id="environment-config">
+                <h2>Environment Configuration</h2>
+                
+                <h3>Initial Setup</h3>
+                <p>Copy the environment template and configure your API credentials:</p>
+                <pre><code>cp .env.example .env</code></pre>
+
+                <h3>API Keys and Configuration</h3>
+                <p>Configure the following environment variables in your <code>.env</code> file. The required keys depend on which benchmark domains you plan to evaluate:</p>
+
+                <h4>Core LLM Providers</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Environment Variable</th>
+                            <th>Provider</th>
+                            <th>Description</th>
+                            <th>Required For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>OPENAI_API_KEY</code></td>
+                            <td>OpenAI</td>
+                            <td>API key for GPT models (gpt-5, etc.)</td>
+                            <td>All domains</td>
+                        </tr>
+                        <tr>
+                            <td><code>ANTHROPIC_API_KEY</code></td>
+                            <td>Anthropic</td>
+                            <td>API key for Claude models</td>
+                            <td>All domains</td>
+                        </tr>
+                        <tr>
+                            <td><code>GEMINI_API_KEY</code></td>
+                            <td>Google</td>
+                            <td>API key for Gemini models</td>
+                            <td>All domains</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Domain-Specific Services</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Environment Variable</th>
+                            <th>Service</th>
+                            <th>Description</th>
+                            <th>Setup Instructions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>SERP_API_KEY</code></td>
+                            <td>SerpAPI</td>
+                            <td>Web search API for search benchmark evaluation</td>
+                            <td><a href="https://serpapi.com/" target="_blank" rel="noopener noreferrer">Get API key</a></td>
+                        </tr>
+                        <tr>
+                            <td><code>GOOGLE_MAPS_API_KEY</code></td>
+                            <td>Google Maps</td>
+                            <td>Geolocation and mapping services</td>
+                            <td><a href="https://console.cloud.google.com/google/maps-apis/credentials" target="_blank" rel="noopener noreferrer">Setup Guide</a></td>
+                        </tr>
+                        <tr>
+                            <td><code>GITHUB_PERSONAL_ACCESS_TOKEN</code></td>
+                            <td>GitHub</td>
+                            <td>Personal access token for repository operations</td>
+                            <td><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens" target="_blank" rel="noopener noreferrer">Token Setup</a></td>
+                        </tr>
+                        <tr>
+                            <td><code>GITHUB_PERSONAL_ACCOUNT_NAME</code></td>
+                            <td>GitHub</td>
+                            <td>Your GitHub username</td>
+                            <td>N/A</td>
+                        </tr>
+                        <tr>
+                            <td><code>NOTION_API_KEY</code></td>
+                            <td>Notion</td>
+                            <td>Integration token for Notion workspace access</td>
+                            <td><a href="https://developers.notion.com/docs/authorization#obtaining-a-token" target="_blank" rel="noopener noreferrer">Integration Setup</a></td>
+                        </tr>
+                        <tr>
+                            <td><code>NOTION_ROOT_PAGE</code></td>
+                            <td>Notion</td>
+                            <td>Root page ID for your Notion workspace</td>
+                            <td>See configuration example below</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>System Paths</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Environment Variable</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>BLENDER_APP_PATH</code></td>
+                            <td>Full path to Blender executable (we used v4.4.0)</td>
+                            <td><code>/Applications/Blender.app/Contents/MacOS/Blender</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>MCPUniverse_DIR</code></td>
+                            <td>Absolute path to your MCP-Universe repository</td>
+                            <td><code>/Users/username/MCP-Universe</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Configuration Examples</h4>
+                <p><strong>Notion Root Page ID:</strong><br>
+                If your Notion page URL is:</p>
+                <pre><code>https://www.notion.so/your_workspace/MCP-Evaluation-1dd6d96e12345678901234567eaf9eff</code></pre>
+                <p>Set <code>NOTION_ROOT_PAGE=MCP-Evaluation-1dd6d96e12345678901234567eaf9eff</code></p>
+
+                <p><strong>Blender Installation:</strong></p>
+                <ol>
+                    <li>Download Blender v4.4.0 from <a href="https://www.blender.org/" target="_blank" rel="noopener noreferrer">blender.org</a></li>
+                    <li>Install our modified Blender MCP server following the <a href="https://github.com/SalesforceAIResearch/MCP-Universe/blob/main/docs/blender-setup.md" target="_blank" rel="noopener noreferrer">installation guide</a></li>
+                    <li>Set the path to the Blender executable</li>
+                </ol>
+
+                <h4>⚠️ Security Recommendations</h4>
+                <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; margin: 16px 0; border-radius: 4px;">
+                    <p><strong>🔒 IMPORTANT SECURITY NOTICE</strong></p>
+                    <p>Please read and follow these security guidelines carefully before running benchmarks:</p>
+                    <ul>
+                        <li><strong>🚨 GitHub Integration</strong>: <strong>CRITICAL</strong> - We strongly recommend using a dedicated test GitHub account for benchmark evaluation. The AI agent will perform real operations on GitHub repositories, which could potentially modify or damage your personal repositories.</li>
+                        <li><strong>🔐 API Key Management</strong>: Store API keys securely and never commit them to version control. Use environment variables or secure key management systems. Regularly rotate your API keys for enhanced security.</li>
+                        <li><strong>🛡️ Access Permissions</strong>: Grant minimal necessary permissions for each service integration. Review and limit API key scopes to only required operations. Monitor API usage and set appropriate rate limits.</li>
+                        <li><strong>⚡ Blender Operations</strong>: The 3D design benchmarks will execute Blender commands that may modify or create files on your system. Ensure you have adequate backups and run in an isolated environment if necessary.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="benchmark-config">
+                <h2>Benchmark Configuration</h2>
+                <p>Each benchmark domain has a dedicated YAML configuration file located in <code>mcpuniverse/benchmark/configs/test/</code>. To evaluate your LLM/agent, modify the appropriate configuration file:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Domain</th>
+                            <th>Configuration File</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Web Search</td>
+                            <td><code>web_search.yaml</code></td>
+                            <td>Search engine and information retrieval tasks</td>
+                        </tr>
+                        <tr>
+                            <td>Location Navigation</td>
+                            <td><code>location_navigation.yaml</code></td>
+                            <td>Geographic and mapping-related queries</td>
+                        </tr>
+                        <tr>
+                            <td>Browser Automation</td>
+                            <td><code>browser_automation.yaml</code></td>
+                            <td>Web interaction and automation scenarios</td>
+                        </tr>
+                        <tr>
+                            <td>Financial Analysis</td>
+                            <td><code>financial_analysis.yaml</code></td>
+                            <td>Market data analysis and financial computations</td>
+                        </tr>
+                        <tr>
+                            <td>Repository Management</td>
+                            <td><code>repository_management.yaml</code></td>
+                            <td>Git operations and code repository tasks</td>
+                        </tr>
+                        <tr>
+                            <td>3D Design</td>
+                            <td><code>3d_design.yaml</code></td>
+                            <td>Blender-based 3D modeling and design tasks</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="execution">
+                <h2>Execution</h2>
+                <p>Once you have configured your environment and benchmark settings, you can execute evaluations using the following methods:</p>
+
+                <h3>Running Individual Benchmarks</h3>
+                <p>Execute specific domain benchmarks using the following commands:</p>
+                <pre><code># Set Python path and run individual benchmarks
+export PYTHONPATH=.
+
+# Location Navigation
+python tests/benchmark/test_benchmark_location_navigation.py
+
+# Browser Automation  
+python tests/benchmark/test_benchmark_browser_automation.py
+
+# Financial Analysis
+python tests/benchmark/test_benchmark_financial_analysis.py
+
+# Repository Management
+python tests/benchmark/test_benchmark_repository_management.py
+
+# Web Search
+python tests/benchmark/test_benchmark_web_search.py
+
+# 3D Design
+python tests/benchmark/test_benchmark_3d_design.py</code></pre>
+
+                <h3>Batch Execution</h3>
+                <p>For comprehensive evaluation across all domains:</p>
+                <pre><code>#!/bin/bash
+export PYTHONPATH=.
+
+domains=("location_navigation" "browser_automation" "financial_analysis" 
+         "repository_management" "web_search" "3d_design")
+
+for domain in "${domains[@]}"; do
+    echo "Running benchmark: $domain"
+    python "tests/benchmark/test_benchmark_${domain}.py"
+    echo "Completed: $domain"
+done</code></pre>
+
+                <h3>Programmatic Execution</h3>
+                <pre><code>from mcpuniverse.benchmark.runner import BenchmarkRunner
+from mcpuniverse.tracer.collectors import MemoryCollector
+
+async def run_benchmark():
+    trace_collector = MemoryCollector()
+    # Choose a benchmark config file under the folder "mcpuniverse/benchmark/configs"
+    benchmark = BenchmarkRunner("dummy/benchmark_1.yaml")
+    # Run the specified benchmark
+    results = await benchmark.run(trace_collector=trace_collector)
+    # Get traces
+    trace_id = results[0].task_trace_ids["dummy/tasks/weather.json"]
+    trace_records = trace_collector.get(trace_id)
+    return results</code></pre>
+            </section>
+
+            <section id="save-logs">
+                <h2>Save Running Logs</h2>
+                <p>If you want to save the running log, you can pass the <code>trace_collector</code> to the benchmark run function:</p>
+                <pre><code>from mcpuniverse.tracer.collectors import FileCollector
+
+trace_collector = FileCollector(log_file="log/location_navigation.log")
+benchmark_results = await benchmark.run(trace_collector=trace_collector)</code></pre>
+            </section>
+
+            <section id="save-reports">
+                <h2>Save Benchmark Reports</h2>
+                <p>If you want to save a report of the benchmark result, you can use <code>BenchmarkReport</code> to dump a report:</p>
+                <pre><code>from mcpuniverse.benchmark.report import BenchmarkReport
+
+report = BenchmarkReport(benchmark, trace_collector=trace_collector)
+report.dump()</code></pre>
+            </section>
+
+            <section id="visualize-results">
+                <h2>Visualize Results</h2>
+                <p>To run the benchmark with intermediate results and see real-time progress, pass <code>callbacks=get_vprint_callbacks()</code> to the run function:</p>
+                <pre><code>from mcpuniverse.callbacks.handlers.vprint import get_vprint_callbacks
+
+benchmark_results = await benchmark.run(
+    trace_collector=trace_collector, 
+    callbacks=get_vprint_callbacks()
+)</code></pre>
+                <p>This will print out the intermediate results as the benchmark runs.</p>
+
+                <h3>Generate Reports</h3>
+                <pre><code>python -m mcpuniverse.benchmark.report --results benchmark_results.db --output report.html</code></pre>
+
+                <h3>Launch Dashboard</h3>
+                <pre><code>python -m mcpuniverse.dashboard.app</code></pre>
+            </section>
+
+            <section id="llm-config">
+                <h2>LLM Configuration</h2>
+                <p>Configure different LLM providers for your agents:</p>
+
+                <h3>OpenAI Configuration</h3>
+                <pre><code>kind: llm
+spec:
+  name: gpt-5-medium
+  type: openai
+  config:
+    model_name: gpt-5-medium
+    temperature: 0.1
+    max_tokens: 4096</code></pre>
+
+                <h3>Anthropic Configuration</h3>
+                <pre><code>kind: llm
+spec:
+  name: claude-4-sonnet
+  type: anthropic
+  config:
+    model_name: claude-4.0-sonnet
+    temperature: 0.1
+    max_tokens: 4096</code></pre>
+
+                <h3>Google Configuration</h3>
+                <pre><code>kind: llm
+spec:
+  name: gemini-pro
+  type: google
+  config:
+    model_name: gemini-pro
+    temperature: 0.1
+    max_tokens: 4096</code></pre>
+            </section>
+
+            <section id="agent-config">
+                <h2>Agent Configuration</h2>
+                <p>Configure different agent types for your evaluations:</p>
+
+                <h3>ReAct Agent</h3>
+                <pre><code>kind: agent
+spec:
+  name: react-agent
+  type: react
+  config:
+    llm: gpt-5-medium
+    max_iterations: 10
+    reflection_enabled: true</code></pre>
+
+                <h3>Function Call Agent</h3>
+                <pre><code>kind: agent
+spec:
+  name: function-call-agent
+  type: function_call
+  config:
+    llm: claude-4-sonnet
+    parallel_calls: true</code></pre>
+
+                <h3>Basic Agent</h3>
+                <pre><code>kind: agent
+spec:
+  name: basic-agent
+  type: basic
+  config:
+    llm: gemini-pro
+    instruction: "You are a helpful assistant."</code></pre>
+            </section>
+
+            <section id="workflow-config">
+                <h2>Workflow Configuration</h2>
+                <p>Configure workflows to orchestrate multiple agents:</p>
+
+                <h3>Sequential Workflow</h3>
+                <pre><code>kind: workflow
+spec:
+  name: sequential-workflow
+  type: chain
+  config:
+    agents:
+      - react-agent
+      - function-call-agent
+    coordination: sequential</code></pre>
+
+                <h3>Orchestrator Workflow</h3>
+                <pre><code>kind: workflow
+spec:
+  name: orchestrator-workflow
+  type: orchestrator
+  config:
+    llm: gpt-5-medium
+    agents:
+      - basic-agent
+      - function-call-agent</code></pre>
+            </section>
+
+            <section id="creating-custom-benchmarks">
+                <h2>Creating Custom Benchmarks</h2>
+                <p>A benchmark is defined by three main configuration elements: the task definition, agent/workflow definition, and the benchmark configuration itself. Below is an example using a simple "weather forecasting" task.</p>
+            </section>
+
+            <section id="task-definition">
+                <h2>Task Definition</h2>
+                <p>The task definition is provided in JSON format, for example:</p>
+                <pre><code>{
+  "category": "general",
+  "question": "What's the weather in San Francisco now?",
+  "mcp_servers": [
+    {
+      "name": "weather"
+    }
+  ],
+  "output_format": {
+    "city": "&lt;City&gt;",
+    "weather": "&lt;Weather forecast results&gt;"
+  },
+  "evaluators": [
+    {
+      "func": "json -> get(city)",
+      "op": "=",
+      "value": "San Francisco"
+    }
+  ]
+}</code></pre>
+
+                <h4>Field Descriptions:</h4>
+                <ol>
+                    <li><strong>category</strong>: The task category, e.g., "general", "google-maps", etc. You can set any value for this property.</li>
+                    <li><strong>question</strong>: The main question you want to ask in this task. This is treated as a user message.</li>
+                    <li><strong>mcp_servers</strong>: A list of MCP servers that are supported in this framework.</li>
+                    <li><strong>output_format</strong>: The desired output format of agent responses.</li>
+                    <li><strong>evaluators</strong>: A list of tests to evaluate. For each test/evaluator, it has three attributes: "func" indicates how to extract values from the agent response, "op" is the comparison operator, and "value" is the ground-truth value.</li>
+                </ol>
+
+                <h4>Predefined Functions</h4>
+                <p>In "evaluators", you need to write a rule ("func" attribute) showing how to extract values for testing. There are several predefined functions in this repo:</p>
+                <ol>
+                    <li><strong>json</strong>: Perform JSON decoding.</li>
+                    <li><strong>get</strong>: Get the value of a key.</li>
+                    <li><strong>len</strong>: Get the length of a list.</li>
+                    <li><strong>foreach</strong>: Do a FOR-EACH loop.</li>
+                </ol>
+
+                <p>For example, let's define:</p>
+                <pre><code>data = {"x": [{"y": [1]}, {"y": [1, 1]}, {"y": [1, 2, 3, 4]}]}</code></pre>
+                <p>Then <code>get(x) -> foreach -> get(y) -> len</code> will do the following:</p>
+                <ol>
+                    <li>Get the value of "x": <code>[{"y": [1]}, {"y": [1, 1]}, {"y": [1, 2, 3, 4]}]</code>.</li>
+                    <li>Do a foreach loop and get the value of "y": <code>[[1], [1, 1], [1, 2, 3, 4]]</code>.</li>
+                    <li>Get the length of each list: <code>[1, 2, 4]</code>.</li>
+                </ol>
+
+                <p>If these predefined functions are not enough, you can implement custom ones. For more details, please check this <a href="https://github.com/SalesforceAIResearch/MCP-Universe/blob/main/docs/custom-evaluators-guide.md" target="_blank" rel="noopener noreferrer">documentation</a>.</p>
+            </section>
+
+            <section id="benchmark-definition">
+                <h3>Benchmark Definition</h3>
+                <p>Define agent(s) and benchmark in a YAML file. Here's a simple weather forecast benchmark:</p>
+                <pre><code>kind: llm
+spec:
+  name: llm-1
+  type: openai
+  config:
+    model_name: gpt-4o
+
+---
+kind: agent
+spec:
+  name: ReAct-agent
+  type: react
+  config:
+    llm: llm-1
+    instruction: You are an agent for weather forecasting.
+    servers:
+      - name: weather
+
+---
+kind: benchmark
+spec:
+  description: Test the agent for weather forecasting
+  agent: ReAct-agent
+  tasks:
+    - dummy/tasks/weather.json</code></pre>
+
+                <p>The benchmark definition mainly contains two parts: the agent definition and the benchmark configuration. The benchmark configuration is simple—you just need to specify the agent to use (by the defined agent name) and a list of tasks to evaluate.</p>
+
+                <h4>Configuration Steps:</h4>
+                <ol>
+                    <li><strong>Specify LLMs</strong>: Begin by declaring the large language models (LLMs) you want the agents to use. Each LLM component must be assigned a unique name (e.g., <code>"llm-1"</code>).</li>
+                    <li><strong>Define an agent</strong>: Next, define an agent by providing its name and selecting an agent class. Agent classes are available in the <a href="https://github.com/SalesforceAIResearch/MCP-Universe/tree/main/mcpuniverse/agent" target="_blank" rel="noopener noreferrer">mcpuniverse.agent</a> package. Commonly used classes include <code>"basic"</code>, <code>"function-call"</code>, and <code>"react"</code>.</li>
+                    <li><strong>Create complex workflows</strong>: Beyond simple agents, the framework supports the definition of sophisticated, orchestrated workflows where multiple agents interact or collaborate to solve more complex tasks.</li>
+                </ol>
+            </section>
+
+            <section id="complex-workflows">
+                <h3>Complex Workflows</h3>
+                <p>For example, here's a complex workflow with multiple agents:</p>
+                <pre><code>kind: llm
+spec:
+  name: llm-1
+  type: openai
+  config:
+    model_name: gpt-4o
+
+---
+kind: agent
+spec:
+  name: basic-agent
+  type: basic
+  config:
+    llm: llm-1
+    instruction: Return the latitude and the longitude of a place.
+
+---
+kind: agent
+spec:
+  name: function-call-agent
+  type: function-call
+  config:
+    llm: llm-1
+    instruction: You are an agent for weather forecast. Please return the weather today at the given latitude and longitude.
+    servers:
+      - name: weather
+
+---
+kind: workflow
+spec:
+  name: orchestrator-workflow
+  type: orchestrator
+  config:
+    llm: llm-1
+    agents:
+      - basic-agent
+      - function-call-agent
+
+---
+kind: benchmark
+spec:
+  description: Test the agent for weather forecasting
+  agent: orchestrator-workflow
+  tasks:
+    - dummy/tasks/weather.json</code></pre>
+                
+                <p>For further details, refer to the in-code documentation or existing configuration samples in the repository.</p>
+            </section>
+
+            <section id="system-architecture">
+                <h2>System Architecture</h2>
+                <p>This section provides a comprehensive overview of the MCP-Universe system architecture, including its core components, design patterns, and how the different layers interact.</p>
+
+                <h3>Core Components</h3>
+                
+                <h4>1. Agent Layer (<code>mcpuniverse/agent/</code>)</h4>
+                <p>The agent layer is the core of MCP-Universe, providing different types of AI agents that can reason, act, and interact with external tools.</p>
+                
+                <h5>BaseAgent</h5>
+                <ul>
+                    <li><strong>Purpose</strong>: Abstract base class that all agents inherit from</li>
+                    <li><strong>Key Features</strong>:
+                        <ul>
+                            <li>MCP server connection management</li>
+                            <li>Tool execution capabilities</li>
+                            <li>Configuration management</li>
+                            <li>Tracing and debugging support</li>
+                            <li>Lifecycle management (initialize, execute, cleanup)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h5>Agent Types</h5>
+                <ul>
+                    <li><strong>BasicAgent</strong>: Simple LLM interaction agent for straightforward tasks</li>
+                    <li><strong>ReActAgent</strong>: Implements reasoning and acting pattern with iterative thinking</li>
+                    <li><strong>FunctionCallAgent</strong>: Uses native LLM tool calling APIs</li>
+                    <li><strong>ReflectionAgent</strong>: Self-reflective agent with memory capabilities</li>
+                    <li><strong>ClaudeCodeAgent</strong>: Specialized agent for code-related tasks</li>
+                </ul>
+
+                <h4>2. MCP Layer (<code>mcpuniverse/mcp/</code>)</h4>
+                <p>Manages Model Control Protocol servers and clients, enabling agents to interact with external tools and services.</p>
+                
+                <h5>MCPManager</h5>
+                <ul>
+                    <li><strong>Purpose</strong>: Central management of MCP server configurations and client connections</li>
+                    <li><strong>Key Features</strong>:
+                        <ul>
+                            <li>Server configuration loading from JSON</li>
+                            <li>Dynamic server registration and management</li>
+                            <li>Client building for stdio and SSE transports</li>
+                            <li>Environment variable templating</li>
+                            <li>Parameter validation</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h5>Built-in MCP Servers</h5>
+                <ul>
+                    <li><strong>Weather</strong>: National Weather Service API integration</li>
+                    <li><strong>Google Search</strong>: Search functionality via SERP API</li>
+                    <li><strong>Google Maps</strong>: Location and navigation services</li>
+                    <li><strong>Google Sheets</strong>: Spreadsheet operations</li>
+                    <li><strong>Wikipedia</strong>: Knowledge base access</li>
+                    <li><strong>Blender</strong>: 3D modeling operations</li>
+                    <li><strong>Yahoo Finance</strong>: Financial data access</li>
+                    <li><strong>GitHub</strong>: Repository management</li>
+                    <li><strong>Playwright</strong>: Web browser automation</li>
+                </ul>
+
+                <h4>3. LLM Layer (<code>mcpuniverse/llm/</code>)</h4>
+                <p>Provides unified interface to multiple language model providers.</p>
+                
+                <h5>Supported Providers</h5>
+                <ul>
+                    <li><strong>OpenAI</strong>: GPT models (GPT-4o, GPT-4o-mini, etc.)</li>
+                    <li><strong>Anthropic</strong>: Claude models (Claude-3.5-Sonnet, Claude-3-Opus, etc.)</li>
+                    <li><strong>Google</strong>: Gemini models (Gemini-2.0-Flash, Gemini-1.5-Pro, etc.)</li>
+                    <li><strong>Mistral</strong>: Mistral AI models</li>
+                    <li><strong>Ollama</strong>: Local model serving</li>
+                    <li><strong>Grok</strong>: xAI's Grok models</li>
+                    <li><strong>DeepSeek</strong>: DeepSeek models</li>
+                </ul>
+
+                <h4>4. Workflow Layer (<code>mcpuniverse/workflows/</code>)</h4>
+                <p>Orchestrates complex multi-agent interactions and task execution patterns.</p>
+                
+                <h5>Workflow Types</h5>
+                <ul>
+                    <li><strong>Chain</strong>: Sequential agent execution</li>
+                    <li><strong>Router</strong>: Conditional agent selection based on input</li>
+                    <li><strong>Parallelization</strong>: Concurrent agent execution</li>
+                    <li><strong>Orchestrator</strong>: Complex multi-agent coordination</li>
+                    <li><strong>EvaluatorOptimizer</strong>: Agent performance optimization</li>
+                </ul>
+
+                <h4>5. Benchmark Layer (<code>mcpuniverse/benchmark/</code>)</h4>
+                <p>Comprehensive system for evaluating agent performance across different tasks and domains.</p>
+                
+                <h5>Supported Benchmark Domains</h5>
+                <ul>
+                    <li><strong>Location Navigation</strong>: Google Maps integration for navigation tasks</li>
+                    <li><strong>Web Search</strong>: Information retrieval and search tasks</li>
+                    <li><strong>Browser Automation</strong>: Web interaction and automation scenarios</li>
+                    <li><strong>Financial Analysis</strong>: Market data analysis and financial computations</li>
+                    <li><strong>Repository Management</strong>: Git operations and code repository tasks</li>
+                    <li><strong>3D Design</strong>: Blender-based 3D modeling and design tasks</li>
+                </ul>
+
+                <h3>Data Flow</h3>
+                
+                <h4>Agent Execution Flow</h4>
+                <pre><code>User Input → Agent.execute() → LLM.generate() → Tool Execution → Response
+     ↓              ↓              ↓              ↓              ↓
+  Callbacks ←   Tracer     ←   Callbacks   ←   MCP Client  ←  Evaluation</code></pre>
+
+                <h4>MCP Tool Execution Flow</h4>
+                <pre><code>Agent → MCPManager → MCPClient → MCP Server → External Service
+  ↑         ↑           ↑           ↑             ↑
+Config    Server     Transport   Tool Call    API/Service
+Loading   Selection   Protocol    Execution    Response</code></pre>
+
+                <h4>Benchmark Execution Flow</h4>
+                <pre><code>YAML Config → BenchmarkRunner → Task Execution → Evaluation → Results
+     ↓              ↓               ↓              ↓          ↓
+  Task Def    Agent Creation   Agent Execution  Scoring   Report Gen</code></pre>
+
+                <h3>Configuration Management</h3>
+                
+                <h4>Hierarchical Configuration</h4>
+                <ul>
+                    <li><strong>Global</strong>: Framework-level settings</li>
+                    <li><strong>Agent</strong>: Agent-specific configurations</li>
+                    <li><strong>Server</strong>: MCP server configurations</li>
+                    <li><strong>Task</strong>: Benchmark task definitions</li>
+                </ul>
+
+                <h4>Environment Variable Templating</h4>
+                <pre><code>{
+  "env": {
+    "API_KEY": "{{MY_API_KEY}}",
+    "PORT": "{{PORT}}"
+  }
+}</code></pre>
+
+                <p>This modular architecture provides a solid foundation for AI agent development while maintaining flexibility, scalability, and extensibility.</p>
+            </section>
+
+            <section id="adding-mcp-servers">
+                <h2>Adding MCP Servers</h2>
+                <p>This guide explains how to add new Model Control Protocol (MCP) servers to the MCP-Universe framework. There are three main approaches: creating custom Python MCP servers, integrating existing third-party servers, and connecting to remote MCP servers.</p>
+
+                <h3>Overview</h3>
+                <p>MCP-Universe uses a centralized server configuration system that manages different types of MCP servers. All server configurations are stored in <code>mcpuniverse/mcp/configs/server_list.json</code>, which defines how to launch, connect to, and manage each server.</p>
+
+                <h3>1. Adding Custom Python MCP Servers</h3>
+                
+                <h4>Step 1: Create Your Server Implementation</h4>
+                <p>Create a new directory in <code>mcpuniverse/mcp/servers/</code> for your server:</p>
+                <pre><code>mkdir mcpuniverse/mcp/servers/my_custom_server</code></pre>
+
+                <p>Create the server implementation file:</p>
+                <pre><code>"""
+A custom MCP server implementation
+"""
+import click
+from typing import Any
+from mcp.server.fastmcp import FastMCP
+from mcpuniverse.common.logger import get_logger
+
+def build_server(port: int) -> FastMCP:
+    """Initialize the MCP server."""
+    mcp = FastMCP("my-custom-server", port=port)
+    logger = get_logger("my-custom-server")
+    
+    @mcp.tool()
+    async def my_custom_tool(param1: str, param2: int = 10) -> str:
+        """
+        Description of what this tool does.
+        
+        Args:
+            param1: Description of parameter 1
+            param2: Description of parameter 2 (optional)
+            
+        Returns:
+            Result description
+        """
+        logger.info(f"Executing custom tool with {param1} and {param2}")
+        result = f"Processed {param1} with value {param2}"
+        return result
+    
+    return mcp</code></pre>
+
+                <h4>Step 2: Register Your Server</h4>
+                <p>Add your server configuration to <code>mcpuniverse/mcp/configs/server_list.json</code>:</p>
+                <pre><code>{
+  "my-custom-server": {
+    "stdio": {
+      "command": "python3",
+      "args": [
+        "-m", "mcpuniverse.mcp.servers.my_custom_server"
+      ]
+    },
+    "sse": {
+      "command": "python3", 
+      "args": [
+        "-m", "mcpuniverse.mcp.servers.my_custom_server",
+        "--transport", "sse",
+        "--port", "{{PORT}}"
+      ]
+    },
+    "env": {
+      "CUSTOM_API_KEY": "{{CUSTOM_API_KEY}}",
+      "CUSTOM_CONFIG": "{{CUSTOM_CONFIG_PATH}}"
+    }
+  }
+}</code></pre>
+
+                <h4>Step 3: Usage in Agents</h4>
+                <p>Use your server in agent configurations:</p>
+                <pre><code>kind: agent
+spec:
+  name: test-agent
+  type: function-call
+  config:
+    llm: gpt-4o-llm
+    instruction: An agent that uses my custom server
+    servers:
+      - name: my-custom-server
+      - name: weather  # Can combine with other servers</code></pre>
+
+                <h3>2. Adding Third-Party MCP Servers</h3>
+                
+                <h4>NPM/Node.js Packages</h4>
+                <p>For servers published as NPM packages:</p>
+                <pre><code>{
+  "github": {
+    "stdio": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ]
+    },
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "{{GITHUB_PERSONAL_ACCESS_TOKEN}}"
+    }
+  },
+  
+  "filesystem": {
+    "stdio": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "@modelcontextprotocol/server-filesystem",
+        "{{FILESYSTEM_DIRECTORY}}"
+      ]
+    }
+  }
+}</code></pre>
+
+                <h4>Python Packages</h4>
+                <p>For Python packages available via pip:</p>
+                <pre><code>{
+  "calculator": {
+    "stdio": {
+      "command": "python3",
+      "args": [
+        "-m", "mcp_server_calculator"
+      ]
+    }
+  },
+  
+  "fetch": {
+    "stdio": {
+      "command": "python3", 
+      "args": [
+        "-m", "mcp_server_fetch",
+        "--ignore-robots-txt"
+      ]
+    }
+  }
+}</code></pre>
+
+                <h3>3. Environment Variables and Configuration</h3>
+                <p>Create a <code>.env</code> file in your project root:</p>
+                <pre><code># Third-party API keys
+GITHUB_PERSONAL_ACCESS_TOKEN=your_github_token_here
+GOOGLE_MAPS_API_KEY=your_google_maps_key
+SERP_API_KEY=your_serp_api_key
+
+# Custom server configurations
+CUSTOM_API_KEY=your_custom_api_key
+FILESYSTEM_DIRECTORY=/path/to/allowed/directory
+
+# Remote server authentication
+REMOTE_API_TOKEN=your_remote_token</code></pre>
+
+                <h4>Template Variables</h4>
+                <p>The server configuration supports template variables that are replaced at runtime:</p>
+                <ul>
+                    <li><code>{{PORT}}</code>: Automatically assigned port for SSE transport</li>
+                    <li>Any environment variable in <code>{{VARIABLE_NAME}}</code> format</li>
+                </ul>
+
+                <h3>Best Practices</h3>
+                <ol>
+                    <li><strong>Documentation</strong>: Document your tools with clear descriptions and parameter types</li>
+                    <li><strong>Error Handling</strong>: Implement proper error handling in your server tools</li>
+                    <li><strong>Testing</strong>: Write comprehensive tests for your server functionality</li>
+                    <li><strong>Security</strong>: Never hardcode API keys; always use environment variables</li>
+                    <li><strong>Performance</strong>: Consider async operations for I/O bound tasks</li>
+                    <li><strong>Logging</strong>: Use structured logging for debugging and monitoring</li>
+                </ol>
+            </section>
+
+            <section id="custom-agents">
+                <h2>Custom Agent Implementation</h2>
+                <p>This guide explains how to implement custom agents in the MCP-Universe framework, building upon the existing agent architecture to create specialized AI agents.</p>
+
+                <h3>Architecture Overview</h3>
+                <p>MCP-Universe provides a flexible agent framework with the following core components:</p>
+                <ul>
+                    <li><strong>BaseAgent</strong>: Abstract base class that all agents inherit from</li>
+                    <li><strong>BaseAgentConfig</strong>: Configuration class for agent parameters</li>
+                    <li><strong>AgentResponse</strong>: Standardized response format</li>
+                    <li><strong>MCPManager</strong>: Manages connections to MCP servers</li>
+                    <li><strong>Tracer</strong>: Handles execution tracing and debugging</li>
+                </ul>
+
+                <h3>Step 1: Define Your Agent Configuration</h3>
+                <p>Create a configuration class that extends <code>BaseAgentConfig</code>:</p>
+                <pre><code>from dataclasses import dataclass
+from mcpuniverse.agent.base import BaseAgentConfig
+
+@dataclass
+class MyCustomAgentConfig(BaseAgentConfig):
+    """Configuration for your custom agent."""
+    
+    # Add custom configuration parameters
+    max_retries: int = 3
+    temperature: float = 0.7
+    enable_memory: bool = True
+    custom_prompt_path: str = "custom_prompt.j2"
+    
+    # You can override default values
+    system_prompt: str = "path/to/your/custom_system_prompt.j2"
+    max_iterations: int = 10</code></pre>
+
+                <h3>Step 2: Implement Your Custom Agent Class</h3>
+                <p>Create your agent class by inheriting from <code>BaseAgent</code>:</p>
+                <pre><code>from typing import Optional, Union, Dict, List
+from mcpuniverse.agent.base import BaseAgent
+from mcpuniverse.agent.types import AgentResponse
+from mcpuniverse.mcp.manager import MCPManager
+from mcpuniverse.llm.base import BaseLLM
+from mcpuniverse.tracer import Tracer
+
+class MyCustomAgent(BaseAgent):
+    """A custom agent implementation."""
+    
+    # Required class attributes
+    config_class = MyCustomAgentConfig
+    alias = ["custom", "my-agent"]  # Alternative names
+    
+    def __init__(
+        self,
+        mcp_manager: Optional[MCPManager] = None,
+        llm: BaseLLM = None,
+        config: Optional[Union[Dict, str]] = None,
+        **kwargs
+    ):
+        """Initialize your custom agent."""
+        super().__init__(mcp_manager=mcp_manager, llm=llm, config=config)
+        
+        # Initialize any custom attributes
+        self._custom_memory = []
+        self._retry_count = 0
+    
+    async def _execute(
+        self,
+        message: Union[str, List[str]],
+        **kwargs
+    ) -> AgentResponse:
+        """Main execution method - implement your agent logic here."""
+        
+        # Get tracer for debugging
+        tracer = kwargs.get("tracer", Tracer())
+        callbacks = kwargs.get("callbacks", [])
+        
+        # Implement your custom reasoning logic
+        response = await self._custom_reasoning_loop(
+            message, tracer, callbacks
+        )
+        
+        return AgentResponse(
+            name=self._name,
+            class_name=self.__class__.__name__,
+            response=response,
+            trace_id=tracer.trace_id
+        )</code></pre>
+
+                <h3>Step 3: Create Custom Prompt Templates</h3>
+                <p>Create Jinja2 templates for your agent's prompts:</p>
+                <pre><code>You are a specialized AI agent designed for {{INSTRUCTION}}.
+
+{% if TOOLS_PROMPT is defined and TOOLS_PROMPT|length %}
+{{TOOLS_PROMPT}}
+
+When you need to use tools, respond with this JSON format:
+{
+    "server": "server-name",
+    "tool": "tool-name", 
+    "arguments": {"key": "value"}
+}
+{% endif %}
+
+Follow these guidelines:
+1. Be thorough in your analysis
+2. Use tools when additional information is needed
+3. Provide clear, actionable responses
+4. If uncertain, ask clarifying questions</code></pre>
+
+                <h3>Step 4: Testing Your Custom Agent</h3>
+                <p>Create tests for your agent:</p>
+                <pre><code>import pytest
+from mcpuniverse.agent.my_custom_agent import MyCustomAgent
+from mcpuniverse.llm.manager import ModelManager
+from mcpuniverse.mcp.manager import MCPManager
+
+@pytest.mark.asyncio
+async def test_custom_agent():
+    # Setup    
+    agent = MyCustomAgent(
+        mcp_manager=MCPManager(),
+        llm=ModelManager().build_model(name="openai"),
+        config={"name": "test-agent", "instruction": "Test agent"}
+    )
+    
+    # Test initialization
+    await agent.initialize()
+    # Test execution
+    response = await agent.execute(message="Hello, world!")
+    assert response.name == "test-agent"
+    assert isinstance(response.response, str)
+    # Cleanup
+    await agent.cleanup()</code></pre>
+
+                <h3>Best Practices</h3>
+                <ol>
+                    <li><strong>Configuration Management</strong>: Use YAML files for configuration and support environment variable substitution</li>
+                    <li><strong>Error Handling</strong>: Implement comprehensive error handling with meaningful error messages</li>
+                    <li><strong>Logging</strong>: Use the framework's logging system for debugging and monitoring</li>
+                    <li><strong>Resource Cleanup</strong>: Always implement proper cleanup in the <code>_cleanup</code> method</li>
+                    <li><strong>Memory Management</strong>: Consider memory usage for long-running agents</li>
+                    <li><strong>Testing</strong>: Write comprehensive tests for your agent's functionality</li>
+                    <li><strong>Documentation</strong>: Document your agent's capabilities, configuration options, and usage examples</li>
+                </ol>
+            </section>
+
+            <section id="custom-evaluators">
+                <h2>Custom Evaluators Implementation</h2>
+                <p>This guide provides comprehensive documentation for implementing custom evaluators in MCP-Universe. Evaluators are essential components that assess agent performance against specific criteria and validation rules.</p>
+
+                <h3>Evaluator System Overview</h3>
+                <p>The evaluator system consists of two main function types:</p>
+                <ul>
+                    <li><strong>Evaluation Functions</strong>: Transform and extract data from agent responses</li>
+                    <li><strong>Comparison Functions</strong>: Compare processed data against expected values</li>
+                </ul>
+
+                <h3>Implementation Steps</h3>
+                
+                <h4>Step 1: Create Module Structure</h4>
+                <pre><code>mkdir mcpuniverse/evaluator/my_domain
+touch mcpuniverse/evaluator/my_domain/__init__.py
+touch mcpuniverse/evaluator/my_domain/functions.py</code></pre>
+
+                <h4>Step 2: Implement Evaluation Functions</h4>
+                <pre><code>from mcpuniverse.evaluator.functions import eval_func, FunctionResult
+
+@eval_func(name="extract_score")
+async def extract_score(x: FunctionResult, *args, **kwargs) -> FunctionResult:
+    """Extract numerical score from response."""
+    if isinstance(x, FunctionResult):
+        data = x.result
+        if isinstance(data, dict) and 'score' in data:
+            return FunctionResult(result=float(data['score']))
+        elif isinstance(data, str):
+            # Try to extract number from string
+            import re
+            match = re.search(r'\d+\.?\d*', data)
+            if match:
+                return FunctionResult(result=float(match.group()))
+    raise ValueError("Could not extract score from input")</code></pre>
+
+                <h4>Step 3: Implement Comparison Functions</h4>
+                <pre><code>from mcpuniverse.evaluator.functions import compare_func
+
+@compare_func(name="score_threshold")
+async def score_threshold(a: Any, b: Any, *args, **kwargs) -> tuple[bool, str]:
+    """Check if score meets threshold."""
+    if isinstance(a, FunctionResult):
+        a = a.result
+    if isinstance(b, FunctionResult):
+        b = b.result
+    
+    threshold = float(b)
+    score = float(a)
+    
+    if score >= threshold:
+        return True, ""
+    return False, f"Score {score} below threshold {threshold}"</code></pre>
+
+                <h3>Built-in Evaluation Functions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Function</th>
+                            <th>Purpose</th>
+                            <th>Usage Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>json</code></td>
+                            <td>Parse JSON string</td>
+                            <td><code>"json"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>get(key)</code></td>
+                            <td>Extract dictionary value</td>
+                            <td><code>"json -> get(city)"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>len</code></td>
+                            <td>Get array/string length</td>
+                            <td><code>"json -> get(items) -> len"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>foreach</code></td>
+                            <td>Iterate over arrays</td>
+                            <td><code>"json -> get(routes) -> foreach -> get(name)"</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Task Configuration Example</h3>
+                <pre><code>{
+    "category": "ecommerce",
+    "question": "Calculate the final price for a shopping cart with discount",
+    "evaluators": [
+        {
+            "func": "json -> extract_score",
+            "op": "score_threshold",
+            "value": 0.8,
+            "op_args": {
+                "threshold": 0.8
+            }
+        }
+    ]
+}</code></pre>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Theme toggle handler
+        (function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const icon = toggle.querySelector('i');
+            const key = 'mcp-theme';
+            const apply = (mode) => {
+                if (mode === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    root.removeAttribute('data-theme');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            };
+            const preferred = localStorage.getItem(key) || 'light';
+            apply(preferred);
+            toggle.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                localStorage.setItem(key, next);
+                apply(next);
+            });
+        })();
+
+        // Navigation and search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const navItems = document.querySelectorAll('.nav-item a');
+            const sections = document.querySelectorAll('section');
+            const content = document.getElementById('content');
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                // Clear previous highlights
+                content.querySelectorAll('.highlight').forEach(el => {
+                    el.outerHTML = el.innerHTML;
+                });
+                
+                if (searchTerm.length > 2) {
+                    // Highlight matching text
+                    sections.forEach(section => {
+                        const text = section.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            highlightText(section, searchTerm);
+                        }
+                    });
+                    
+                    // Filter navigation items
+                    navItems.forEach(item => {
+                        const text = item.textContent.toLowerCase();
+                        const parentItem = item.closest('.nav-item');
+                        if (text.includes(searchTerm)) {
+                            parentItem.style.display = 'block';
+                        } else {
+                            parentItem.style.display = 'none';
+                        }
+                    });
+                } else {
+                    // Show all navigation items
+                    navItems.forEach(item => {
+                        item.closest('.nav-item').style.display = 'block';
+                    });
+                }
+            });
+
+            // Navigation click handlers
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update active state
+                        navItems.forEach(nav => nav.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // Scroll spy
+            window.addEventListener('scroll', function() {
+                let current = 'abstract';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    if (scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === '#' + current) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            function highlightText(element, searchTerm) {
+                const walker = document.createTreeWalker(
+                    element,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
+                
+                const textNodes = [];
+                let node;
+                while (node = walker.nextNode()) {
+                    textNodes.push(node);
+                }
+                
+                textNodes.forEach(textNode => {
+                    const text = textNode.textContent;
+                    const lowerText = text.toLowerCase();
+                    const index = lowerText.indexOf(searchTerm);
+                    
+                    if (index !== -1) {
+                        const beforeText = text.substring(0, index);
+                        const matchText = text.substring(index, index + searchTerm.length);
+                        const afterText = text.substring(index + searchTerm.length);
+                        
+                        const span = document.createElement('span');
+                        span.className = 'highlight';
+                        span.textContent = matchText;
+                        
+                        const fragment = document.createDocumentFragment();
+                        if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
+                        fragment.appendChild(span);
+                        if (afterText) fragment.appendChild(document.createTextNode(afterText));
+                        
+                        textNode.parentNode.replaceChild(fragment, textNode);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
