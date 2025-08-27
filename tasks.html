@@ -376,6 +376,7 @@
             margin-bottom: var(--spacing-4);
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -437,7 +438,7 @@
             background: var(--background);
             border-radius: 12px;
             width: 90%;
-            max-width: 800px;
+            max-width: 90vw;
             max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px var(--shadow);
@@ -485,9 +486,28 @@
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             font-size: 0.9rem;
             white-space: pre-wrap;
-            overflow-x: auto;
-            max-height: 400px;
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            overflow-x: hidden;
+            max-height: 60vh;
             overflow-y: auto;
+        }
+
+        .json-viewer pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .json-viewer code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            display: block;
         }
 
         /* Dark theme - Salesforce inspired */
@@ -757,6 +777,22 @@
             .search-input {
                 font-size: 1rem;
                 padding: var(--spacing-3);
+            }
+
+            .modal-content {
+                width: 95%;
+                max-width: 95vw;
+                max-height: 90vh;
+            }
+
+            .modal-body {
+                padding: var(--spacing-3);
+            }
+
+            .json-viewer {
+                font-size: 0.8rem;
+                padding: var(--spacing-3);
+                max-height: 70vh;
             }
         }
 
