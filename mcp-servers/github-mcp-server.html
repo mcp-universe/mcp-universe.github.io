@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../logos/mcp-universe-icon.png">
+    <link rel="apple-touch-icon" href="../logos/mcp-universe-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description" content="GitHub MCP Server - Comprehensive GitHub integration enabling repository management, issue tracking, pull request workflows, 
+                            and collaborative development through the GitHub API. Perfect for automating development workflows.">
+    <meta property="og:title" content="GitHub MCP Server">
+    <meta property="og:description" content="Comprehensive GitHub integration enabling repository management, issue tracking, pull request workflows, 
+                            and collaborative development through the GitHub API. Perfect for automating development workflows.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../intro-mcp-universe.png">
+    <title>GitHub MCP Server - MCP Universe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Salesforce Official Brand Colors */
+            --sf-blue: #0d9dda;
+            --sf-blue-dark: #0176a3;
+            --sf-blue-light: #87ceeb;
+            --sf-cloud-blue: #1f77b4;
+            
+            /* Salesforce Lightning Design System Colors */
+            --sf-brand-dark: #0b5cab;
+            --sf-brand: #1589ee;
+            --sf-brand-light: #5eb4ff;
+            
+            /* Neutral Colors from SLDS */
+            --sf-gray-1: #fafaf9;
+            --sf-gray-2: #f3f2f2;
+            --sf-gray-3: #ecebea;
+            --sf-gray-4: #e5e5e5;
+            --sf-gray-5: #c9c7c5;
+            --sf-gray-6: #aeaca9;
+            --sf-gray-7: #918f8d;
+            --sf-gray-8: #706e6b;
+            --sf-gray-9: #514f4d;
+            --sf-gray-10: #3e3e3c;
+            
+            /* Semantic Colors */
+            --sf-success: #45c65a;
+            --sf-warning: #ffb75d;
+            --sf-error: #ea001e;
+            --sf-info: --sf-blue;
+            
+            /* Functional Colors */
+            --background: #ffffff;
+            --surface: var(--sf-gray-1);
+            --surface-alt: var(--sf-gray-2);
+            --text-primary: var(--sf-gray-10);
+            --text-secondary: var(--sf-gray-8);
+            --text-weak: var(--sf-gray-6);
+            --border: var(--sf-gray-4);
+            --border-strong: var(--sf-gray-5);
+            --shadow: rgba(0, 0, 0, 0.1);
+            
+            /* Spacing following 8pt grid */
+            --spacing-1: 0.25rem;
+            --spacing-2: 0.5rem;
+            --spacing-3: 0.75rem;
+            --spacing-4: 1rem;
+            --spacing-5: 1.25rem;
+            --spacing-6: 1.5rem;
+            --spacing-8: 2rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --spacing-16: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-6);
+        }
+
+        /* Header */
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-4) 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-image: url('../logos/mcp-universe-icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-8);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        .nav-links a.active {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            margin-left: var(--spacing-6);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover { background: var(--border); }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: var(--spacing-3) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--sf-blue);
+            text-decoration: none;
+        }
+
+        .breadcrumb-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-weak);
+        }
+
+        /* Hero Section - More Compact */
+        .hero {
+            padding: var(--spacing-8) 0;
+            background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23e5e5e5" opacity="0.3"/></svg>') repeat;
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-6);
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #24292e, #586069);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-info h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-3);
+            color: var(--text-primary);
+        }
+
+        .hero-info .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-4);
+            line-height: 1.5;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: var(--spacing-2);
+            flex-wrap: wrap;
+        }
+
+        .hero-tag {
+            background: var(--sf-blue);
+            color: white;
+            padding: var(--spacing-1) var(--spacing-3);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Content sections - More Compact */
+        .content-section {
+            padding: var(--spacing-8) 0;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-4);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+        }
+
+        .section-title i {
+            color: var(--sf-blue);
+        }
+
+        .section-content {
+            display: grid;
+            gap: var(--spacing-6);
+        }
+
+        /* Configuration section */
+        .config-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-5);
+        }
+
+        .config-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-3);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .config-title i {
+            color: var(--sf-blue);
+        }
+
+        .code-block {
+            background: var(--text-primary);
+            color: var(--surface);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: var(--spacing-2);
+            right: var(--spacing-2);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: var(--spacing-1) var(--spacing-2);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Source Code section */
+        .source-block {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-5);
+        }
+
+        .source-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            padding: var(--spacing-4);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .source-link:hover {
+            border-color: var(--sf-blue);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .source-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: var(--sf-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .source-info h4 {
+            font-weight: 600;
+            margin-bottom: var(--spacing-1);
+        }
+
+        .source-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .source-badge {
+            background: var(--sf-success);
+            color: white;
+            padding: var(--spacing-1) var(--spacing-2);
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        .source-badge.community {
+            background: var(--sf-warning);
+        }
+
+        .source-badge.official {
+            background: var(--sf-brand);
+        }
+
+        /* API methods - Scrollable */
+        .api-methods-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--background);
+        }
+
+        .api-methods {
+            display: grid;
+            gap: 0;
+        }
+
+        .api-method {
+            background: var(--surface-alt);
+            padding: var(--spacing-4);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .api-method:last-child {
+            border-bottom: none;
+        }
+
+        .method-signature {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-weight: 600;
+            color: var(--sf-blue);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-2);
+        }
+
+        .method-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-2);
+            font-size: 0.9rem;
+        }
+
+        .method-params {
+            font-size: 0.85rem;
+        }
+
+        .method-params strong {
+            color: var(--text-primary);
+        }
+
+        /* Installation section */
+        .install-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-5);
+        }
+
+        .install-content {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .install-content h1 {
+            font-family: 'Salesforce Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-3);
+            color: var(--text-primary);
+        }
+
+        .install-content code {
+            background: var(--text-primary);
+            color: var(--surface);
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 4px;
+            display: block;
+            margin: var(--spacing-2) 0;
+            overflow-x: auto;
+        }
+
+        /* Dark theme */
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --surface: #0b1220;
+            --surface-alt: #0f1a2a;
+            --text-primary: #e5e7eb;
+            --text-secondary: #cbd5e1;
+            --text-weak: #94a3b8;
+            --border: #1f2937;
+            --border-strong: #334155;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--spacing-4);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--spacing-4);
+            }
+
+            .hero-icon {
+                width: 64px;
+                height: 64px;
+                font-size: 1.5rem;
+            }
+
+            .hero-info h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-info .subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .api-methods-container {
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon"></div>
+                MCP-Universe
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#results">Leaderboard</a></li>
+                <li><a href="../usage.html">Docs</a></li>
+                <li><a href="../tasks.html">Tasks</a></li>
+                <li><a href="../mcp-servers-hubs.html" class="active">MCP Hub</a></li>
+                <li><a href="../contributions.html">Contributions</a></li>
+            </ul>
+            <div class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="hero-info">
+                        <h1>GitHub MCP Server</h1>
+                        <p class="subtitle">Comprehensive GitHub integration enabling repository management, issue tracking, pull request workflows, 
+                            and collaborative development through the GitHub API. Perfect for automating development workflows.</p>
+                        <div class="hero-tags">
+                            <span class="hero-tag">Repository Management</span>
+                            <span class="hero-tag">Git</span><span class="hero-tag">CI/CD</span><span class="hero-tag">Collaboration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-cog"></i>
+                    Configuration
+                </h2>
+                <div class="section-content">
+                    <div class="config-block">
+                        <h3 class="config-title">
+                            <i class="fas fa-file-code"></i>
+                            MCP Settings Configuration
+                        </h3>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyToClipboard(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <pre>{
+  "github": {
+    "stdio": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ]
+    },
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "your_github_token_here"
+    }
+  }
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-code-branch"></i>
+                    Source Code
+                </h2>
+                <div class="source-block">
+                    <a href="https://github.com/github/github-mcp-server" target="_blank" class="source-link">
+                        <div class="source-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="source-info">
+                            <h4>View Source Code</h4>
+                            <p>Browse the implementation on GitHub</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    Available Tools & Methods
+                </h2>
+                <div class="api-methods-container">
+                    <div class="api-methods">
+                        <!-- Repositories -->
+                        <div class="api-method">
+                            <div class="method-signature">create_repository(name, description, private, auto_init)</div>
+                            <div class="method-description">Create a new repository</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> name (string), description (string, optional), private (boolean, optional), auto_init (boolean, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_repository(owner, repo)</div>
+                            <div class="method-description">Get repository information</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_repositories(owner, type, sort, direction)</div>
+                            <div class="method-description">List repositories</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), type (string, optional), sort (string, optional), direction (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">fork_repository(owner, repo, organization)</div>
+                            <div class="method-description">Fork a repository</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), organization (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_repository_languages(owner, repo)</div>
+                            <div class="method-description">Get repository languages</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string)
+                            </div>
+                        </div>
+                        
+                        <!-- Files -->
+                        <div class="api-method">
+                            <div class="method-signature">get_file_contents(owner, repo, path, ref)</div>
+                            <div class="method-description">Get file contents</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), path (string), ref (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">create_or_update_file(owner, repo, path, message, content, sha, branch)</div>
+                            <div class="method-description">Create or update a file</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), path (string), message (string), content (string), sha (string, optional), branch (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">delete_file(owner, repo, path, message, sha, branch)</div>
+                            <div class="method-description">Delete a file</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), path (string), message (string), sha (string), branch (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">push_files(owner, repo, branch, files, message)</div>
+                            <div class="method-description">Push multiple files in a single commit</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), branch (string), files (array), message (string)
+                            </div>
+                        </div>
+                        
+                        <!-- Issues -->
+                        <div class="api-method">
+                            <div class="method-signature">create_issue(owner, repo, title, body, assignees, milestone, labels)</div>
+                            <div class="method-description">Create an issue</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), title (string), body (string, optional), assignees (array, optional), milestone (number, optional), labels (array, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_issue(owner, repo, issue_number)</div>
+                            <div class="method-description">Get an issue</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), issue_number (number)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_issues(owner, repo, milestone, state, assignee, creator, mentioned, labels, sort, direction)</div>
+                            <div class="method-description">List issues</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), milestone (string, optional), state (string, optional), assignee (string, optional), creator (string, optional), mentioned (string, optional), labels (string, optional), sort (string, optional), direction (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">update_issue(owner, repo, issue_number, title, body, assignees, milestone, labels, state)</div>
+                            <div class="method-description">Update an issue</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), issue_number (number), title (string, optional), body (string, optional), assignees (array, optional), milestone (number, optional), labels (array, optional), state (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">add_issue_comment(owner, repo, issue_number, body)</div>
+                            <div class="method-description">Add comment to an issue</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), issue_number (number), body (string)
+                            </div>
+                        </div>
+                        
+                        <!-- Pull Requests -->
+                        <div class="api-method">
+                            <div class="method-signature">create_pull_request(owner, repo, title, head, base, body, draft, maintainer_can_modify)</div>
+                            <div class="method-description">Create a pull request</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), title (string), head (string), base (string), body (string, optional), draft (boolean, optional), maintainer_can_modify (boolean, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_pull_request(owner, repo, pull_number)</div>
+                            <div class="method-description">Get a pull request</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), pull_number (number)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_pull_requests(owner, repo, state, head, base, sort, direction)</div>
+                            <div class="method-description">List pull requests</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), state (string, optional), head (string, optional), base (string, optional), sort (string, optional), direction (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_pull_request_files(owner, repo, pull_number)</div>
+                            <div class="method-description">Get files changed in a pull request</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), pull_number (number)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">create_pull_request_review(owner, repo, pull_number, body, event, comments)</div>
+                            <div class="method-description">Create a pull request review</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), pull_number (number), body (string), event (string), comments (array, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">merge_pull_request(owner, repo, pull_number, commit_title, commit_message, merge_method)</div>
+                            <div class="method-description">Merge a pull request</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), pull_number (number), commit_title (string, optional), commit_message (string, optional), merge_method (string, optional)
+                            </div>
+                        </div>
+                        
+                        <!-- Branches -->
+                        <div class="api-method">
+                            <div class="method-signature">create_branch(owner, repo, branch, from_branch)</div>
+                            <div class="method-description">Create a branch</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), branch (string), from_branch (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_branches(owner, repo, protected)</div>
+                            <div class="method-description">List branches</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), protected (boolean, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_commits(owner, repo, sha, author, page, perPage)</div>
+                            <div class="method-description">List commits</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), sha (string, optional), author (string, optional), page (number, optional), perPage (number, optional)
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="api-method">
+                            <div class="method-signature">list_workflow_runs(owner, repo, workflow_id, actor, branch, event, status)</div>
+                            <div class="method-description">List workflow runs</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), workflow_id (string, optional), actor (string, optional), branch (string, optional), event (string, optional), status (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_workflow_run(owner, repo, run_id)</div>
+                            <div class="method-description">Get a workflow run</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), run_id (number)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_workflow_jobs(owner, repo, run_id, filter)</div>
+                            <div class="method-description">List jobs for a workflow run</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), run_id (number), filter (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">cancel_workflow_run(owner, repo, run_id)</div>
+                            <div class="method-description">Cancel a workflow run</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), run_id (number)
+                            </div>
+                        </div>
+                        
+                        <!-- Search -->
+                        <div class="api-method">
+                            <div class="method-signature">search_repositories(query, sort, order, page, perPage)</div>
+                            <div class="method-description">Search repositories</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> query (string), sort (string, optional), order (string, optional), page (number, optional), perPage (number, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">search_code(query, sort, order, page, perPage)</div>
+                            <div class="method-description">Search code</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> query (string), sort (string, optional), order (string, optional), page (number, optional), perPage (number, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">search_issues(query, sort, order, page, perPage)</div>
+                            <div class="method-description">Search issues and pull requests</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> query (string), sort (string, optional), order (string, optional), page (number, optional), perPage (number, optional)
+                            </div>
+                        </div>
+                        
+                        <!-- Users -->
+                        <div class="api-method">
+                            <div class="method-signature">search_users(query, sort, order, page, perPage)</div>
+                            <div class="method-description">Search users</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> query (string), sort (string, optional), order (string, optional), page (number, optional), perPage (number, optional)
+                            </div>
+                        </div>
+                        
+                        <!-- Code Security -->
+                        <div class="api-method">
+                            <div class="method-signature">list_code_scanning_alerts(owner, repo, ref, severity, state, tool_name)</div>
+                            <div class="method-description">List code scanning alerts</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), ref (string, optional), severity (string, optional), state (string, optional), tool_name (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_code_scanning_alert(owner, repo, alertNumber)</div>
+                            <div class="method-description">Get a code scanning alert</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), alertNumber (number)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_dependabot_alerts(owner, repo, severity, state)</div>
+                            <div class="method-description">List Dependabot alerts</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), severity (string, optional), state (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_dependabot_alert(owner, repo, alertNumber)</div>
+                            <div class="method-description">Get a Dependabot alert</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), alertNumber (number)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_secret_scanning_alerts(owner, repo, state, secret_type, resolution)</div>
+                            <div class="method-description">List secret scanning alerts</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), state (string, optional), secret_type (string, optional), resolution (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">get_secret_scanning_alert(owner, repo, alertNumber)</div>
+                            <div class="method-description">Get a secret scanning alert</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), alertNumber (number)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_global_security_advisories(affects, cveId, cwes, ecosystem, ghsaId, isWithdrawn, modified, published, severity, type, updated)</div>
+                            <div class="method-description">List global security advisories</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> affects (string, optional), cveId (string, optional), cwes (array, optional), ecosystem (string, optional), ghsaId (string, optional), isWithdrawn (boolean, optional), modified (string, optional), published (string, optional), severity (string, optional), type (string, optional), updated (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_org_repository_security_advisories(org, direction, sort, state)</div>
+                            <div class="method-description">List org repository security advisories</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> org (string), direction (string, optional), sort (string, optional), state (string, optional)
+                            </div>
+                        </div>
+                        <div class="api-method">
+                            <div class="method-signature">list_repository_security_advisories(owner, repo, direction, sort, state)</div>
+                            <div class="method-description">List repository security advisories</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), direction (string, optional), sort (string, optional), state (string, optional)
+                            </div>
+                        </div>
+                        
+                        <!-- Copilot Integration -->
+                        <div class="api-method">
+                            <div class="method-signature">create_pull_request_with_copilot(owner, repo, problem_statement, title, base_ref)</div>
+                            <div class="method-description">Perform task with GitHub Copilot coding agent</div>
+                            <div class="method-params">
+                                <strong>Parameters:</strong> owner (string), repo (string), problem_statement (string), title (string), base_ref (string, optional)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-download"></i>
+                    Installation Guide
+                </h2>
+                <div class="install-block">
+                    <div class="install-content"># Installation
+
+## Option 1: Using Docker (Recommended)
+
+```bash
+docker run -i --rm \
+  -e GITHUB_PERSONAL_ACCESS_TOKEN=<your-token> \
+  ghcr.io/github/github-mcp-server
+```
+
+## Option 2: Download Binary
+
+1. Download the latest release from [GitHub Releases](https://github.com/github/github-mcp-server/releases)
+2. Extract and run:
+
+```bash
+./github-mcp-server
+```
+
+## Authentication Setup
+
+1. Create a GitHub Personal Access Token:
+   - Go to GitHub Settings > Developer settings > Personal access tokens
+   - Generate a new token with appropriate scopes
+2. Set the environment variable:
+
+```bash
+export GITHUB_PERSONAL_ACCESS_TOKEN="your_token_here"
+```
+
+## Configuration Options
+
+### Toolsets
+Specify which toolsets to enable:
+
+```bash
+# Enable specific toolsets
+GITHUB_TOOLSETS="repos,issues,pull_requests,actions" ./github-mcp-server
+
+# Enable all toolsets
+GITHUB_TOOLSETS="all" ./github-mcp-server
+```
+
+### Read-Only Mode
+For read-only access:
+
+```bash
+./github-mcp-server --read-only
+```
+
+### Dynamic Tool Discovery
+Enable dynamic toolset discovery:
+
+```bash
+./github-mcp-server --dynamic-toolsets
+```</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Theme toggle handler
+        (function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const icon = toggle.querySelector('i');
+            const key = 'mcp-theme';
+            const apply = (mode) => {
+                if (mode === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    root.removeAttribute('data-theme');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            };
+            const preferred = localStorage.getItem(key) || 'light';
+            apply(preferred);
+            toggle.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                localStorage.setItem(key, next);
+                apply(next);
+            });
+        })();
+
+        // Copy to clipboard functionality
+        function copyToClipboard(button) {
+            const codeBlock = button.parentElement;
+            const code = codeBlock.querySelector('pre').textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

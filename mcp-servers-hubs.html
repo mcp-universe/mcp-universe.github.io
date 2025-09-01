@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logos/mcp-universe-icon.png">
+    <link rel="apple-touch-icon" href="logos/mcp-universe-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description" content="MCP Servers Hub: Discover and explore Model Context Protocol servers for GitHub, Google Maps, and Notion.">
+    <meta property="og:title" content="MCP Servers Hub">
+    <meta property="og:description" content="Explore powerful MCP servers for GitHub, Google Maps, and Notion integration.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="intro-mcp-universe.png">
+    <title>MCP Servers Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Salesforce Official Brand Colors */
+            --sf-blue: #0d9dda;
+            --sf-blue-dark: #0176a3;
+            --sf-blue-light: #87ceeb;
+            --sf-cloud-blue: #1f77b4;
+            
+            /* Salesforce Lightning Design System Colors */
+            --sf-brand-dark: #0b5cab;
+            --sf-brand: #1589ee;
+            --sf-brand-light: #5eb4ff;
+            
+            /* Neutral Colors from SLDS */
+            --sf-gray-1: #fafaf9;
+            --sf-gray-2: #f3f2f2;
+            --sf-gray-3: #ecebea;
+            --sf-gray-4: #e5e5e5;
+            --sf-gray-5: #c9c7c5;
+            --sf-gray-6: #aeaca9;
+            --sf-gray-7: #918f8d;
+            --sf-gray-8: #706e6b;
+            --sf-gray-9: #514f4d;
+            --sf-gray-10: #3e3e3c;
+            
+            /* Semantic Colors */
+            --sf-success: #45c65a;
+            --sf-warning: #ffb75d;
+            --sf-error: #ea001e;
+            --sf-info: --sf-blue;
+            
+            /* Functional Colors */
+            --background: #ffffff;
+            --surface: var(--sf-gray-1);
+            --surface-alt: var(--sf-gray-2);
+            --text-primary: var(--sf-gray-10);
+            --text-secondary: var(--sf-gray-8);
+            --text-weak: var(--sf-gray-6);
+            --border: var(--sf-gray-4);
+            --border-strong: var(--sf-gray-5);
+            --shadow: rgba(0, 0, 0, 0.1);
+            
+            /* Spacing following 8pt grid */
+            --spacing-1: 0.25rem;
+            --spacing-2: 0.5rem;
+            --spacing-3: 0.75rem;
+            --spacing-4: 1rem;
+            --spacing-5: 1.25rem;
+            --spacing-6: 1.5rem;
+            --spacing-8: 2rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --spacing-16: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-6);
+        }
+
+        /* Header */
+        header {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-4) 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-image: url('logos/mcp-universe-icon.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-8);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        .nav-links a.active {
+            color: var(--sf-blue);
+            background: var(--surface);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            margin-left: var(--spacing-6);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover { background: var(--border); }
+
+        /* Main layout */
+        .main-container {
+            display: flex;
+            max-width: 1280px;
+            margin: 0 auto;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: var(--spacing-6);
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: var(--spacing-6);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--spacing-3) var(--spacing-10) var(--spacing-3) var(--spacing-4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--background);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: var(--spacing-3);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-weak);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-section {
+            margin-bottom: var(--spacing-6);
+            width: 100%;
+        }
+
+        .nav-section-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-3);
+            padding: var(--spacing-2) var(--spacing-3);
+            border-bottom: 1px solid var(--border);
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .nav-item {
+            margin-bottom: var(--spacing-1);
+            width: 100%;
+        }
+
+        .nav-item a {
+            display: block;
+            padding: var(--spacing-2) var(--spacing-3);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .nav-item a:hover, .nav-item a.active {
+            background: var(--sf-blue);
+            color: white;
+        }
+
+        /* Content area */
+        .content {
+            flex: 1;
+            padding: var(--spacing-8) var(--spacing-6);
+            overflow-y: auto;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--sf-blue);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .content-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-8);
+            line-height: 1.6;
+        }
+
+        /* Servers Grid */
+        .servers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-6);
+            margin-top: var(--spacing-6);
+        }
+
+        .server-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-6);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .server-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(13, 157, 218, 0.15);
+            border-color: var(--sf-blue);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .server-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--sf-blue), var(--sf-brand));
+        }
+
+        .server-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .server-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .date-icon {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+        }
+
+        .weather-icon {
+            background: linear-gradient(135deg, #87ceeb, #4682b4);
+        }
+
+        .echo-icon {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .google-search-icon {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+        }
+
+        .wikipedia-icon {
+            background: linear-gradient(135deg, #000000, #636363);
+        }
+
+        .google-maps-icon {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+        }
+
+        .fetch-icon {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .github-icon {
+            background: linear-gradient(135deg, #24292e, #586069);
+        }
+
+        .google-sheets-icon {
+            background: linear-gradient(135deg, #0f9d58, #0d8043);
+        }
+
+        .filesystem-icon {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .slack-icon {
+            background: linear-gradient(135deg, #4a154b, #350d36);
+        }
+
+        .postgres-icon {
+            background: linear-gradient(135deg, #336791, #2d5a87);
+        }
+
+        .calculator-icon {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+
+        .yfinance-icon {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .blender-icon {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        }
+
+        .notion-icon {
+            background: linear-gradient(135deg, #000000, #37352f);
+        }
+
+        .playwright-icon {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .markitdown-icon {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .server-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .server-category {
+            background: var(--surface);
+            color: var(--text-weak);
+            padding: var(--spacing-1) var(--spacing-2);
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .server-description {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: var(--spacing-4);
+            font-size: 0.9rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .server-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .server-tags {
+            display: flex;
+            gap: var(--spacing-1);
+            flex-wrap: wrap;
+        }
+
+        .server-tag {
+            background: var(--sf-blue);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .view-more {
+            color: var(--sf-blue);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-1);
+        }
+
+        .view-more i {
+            font-size: 0.7rem;
+        }
+
+        /* Expanded Details */
+        .server-details {
+            display: none;
+            margin-top: var(--spacing-6);
+            padding-top: var(--spacing-6);
+            border-top: 1px solid var(--border);
+        }
+
+        .server-details.expanded {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .details-section {
+            margin-bottom: var(--spacing-6);
+        }
+
+        .details-section h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-3);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .details-section h5 i {
+            color: var(--sf-blue);
+        }
+
+        .code-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .api-methods {
+            display: grid;
+            gap: var(--spacing-3);
+        }
+
+        .api-method {
+            background: var(--surface-alt);
+            border-radius: 8px;
+            padding: var(--spacing-3);
+        }
+
+        .method-name {
+            font-weight: 600;
+            color: var(--sf-blue);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-1);
+        }
+
+        .method-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Dark theme */
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --surface: #0b1220;
+            --surface-alt: #0f1a2a;
+            --text-primary: #e5e7eb;
+            --text-secondary: #cbd5e1;
+            --text-weak: #94a3b8;
+            --border: #1f2937;
+            --border-strong: #334155;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            
+            .content {
+                padding: var(--spacing-6) var(--spacing-4);
+            }
+            
+            .servers-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .sidebar {
+                padding: var(--spacing-4);
+            }
+            
+            .nav-section-title {
+                font-size: 0.8rem;
+            }
+            
+            .nav-item a {
+                font-size: 0.85rem;
+                padding: var(--spacing-2);
+            }
+
+            .content h1 {
+                font-size: 2rem;
+            }
+
+            .content-intro {
+                font-size: 1rem;
+            }
+
+            .servers-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-4);
+            }
+
+            .server-card {
+                padding: var(--spacing-4);
+            }
+
+            .server-header {
+                gap: var(--spacing-2);
+            }
+            
+            .server-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .server-info h3 {
+                font-size: 1.1rem;
+            }
+            
+            .server-description {
+                font-size: 0.85rem;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+            }
+
+            .server-footer {
+                flex-direction: column;
+                gap: var(--spacing-2);
+                align-items: flex-start;
+            }
+            
+            .view-more {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"></div>
+                MCP-Universe
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#results">Leaderboard</a></li>
+                <li><a href="usage.html">Docs</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="mcp-servers-hubs.html" class="active">MCP Hub</a></li>
+                <li><a href="contributions.html">Contributions</a></li>
+            </ul>
+            <div class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search MCP servers..." id="searchInput">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Overview</div>
+                    <div class="nav-item"><a href="#overview" data-section="overview">All Servers</a></div>
+                    <!-- <div class="nav-item"><a href="#featured" data-section="featured">Featured</a></div> -->
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">By Category</div>
+                    <div class="nav-item"><a href="#repository-management" data-section="repository-management">Repository Management</a></div>
+                    <div class="nav-item"><a href="#location-navigation" data-section="location-navigation">Location & Navigation</a></div>
+                    <div class="nav-item"><a href="#knowledge-management" data-section="knowledge-management">Knowledge Management</a></div>
+                    <div class="nav-item"><a href="#web-automation" data-section="web-automation">Web Automation</a></div>
+                    <div class="nav-item"><a href="#financial-data" data-section="financial-data">Financial Data</a></div>
+                    <div class="nav-item"><a href="#3d-modeling" data-section="3d-modeling">3D Modeling</a></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">By Provider</div>
+                    <div class="nav-item"><a href="#github-servers" data-section="github-servers">GitHub</a></div>
+                    <div class="nav-item"><a href="#google-servers" data-section="google-servers">Google</a></div>
+                    <div class="nav-item"><a href="#notion-servers" data-section="notion-servers">Notion</a></div>
+                    <div class="nav-item"><a href="#community-servers" data-section="community-servers">Community</a></div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content" id="content">
+            <section id="overview">
+                <h1>MCP Servers Hub</h1>
+                <p class="content-intro">
+                    Discover powerful Model Context Protocol servers that extend AI capabilities with real-world integrations. 
+                    Each server provides specialized tools and APIs for different domains and use cases.
+                </p>
+                
+                <div class="servers-grid">
+                    <!-- Date MCP Server -->
+                    <a href="mcp-servers/date-mcp-server.html" class="server-card" data-server="date">
+                        <div class="server-header">
+                            <div class="server-icon date-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Date MCP Server</h3>
+                                <span class="server-category">Utilities</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Provide date and time utilities: it can return today's date, the current datetime (local or UTC), the datetime in a specified timezone, and the current Unix timestamp.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Date</span>
+                                <span class="server-tag">Time</span>
+                                <span class="server-tag">Utilities</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Weather MCP Server -->
+                    <a href="mcp-servers/weather-mcp-server.html" class="server-card" data-server="weather">
+                        <div class="server-header">
+                            <div class="server-icon weather-icon">
+                                <i class="fas fa-cloud-sun"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Weather MCP Server</h3>
+                                <span class="server-category">Data Services</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Provide weather data: it can fetch active weather alerts for a US state and get short-term forecasts (temperature, wind, and conditions) for a given latitude/longitude.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Weather</span>
+                                <span class="server-tag">Forecast</span>
+                                <span class="server-tag">Location</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Echo MCP Server -->
+                    <a href="mcp-servers/echo-mcp-server.html" class="server-card" data-server="echo">
+                        <div class="server-header">
+                            <div class="server-icon echo-icon">
+                                <i class="fas fa-volume-up"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Echo MCP Server</h3>
+                                <span class="server-category">Testing & Development</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Simple echo server for testing and development purposes, useful for debugging MCP connections and protocols.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Testing</span>
+                                <span class="server-tag">Debug</span>
+                                <span class="server-tag">Development</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Google Search MCP Server -->
+                    <a href="mcp-servers/google-search-mcp-server.html" class="server-card" data-server="google-search">
+                        <div class="server-header">
+                            <div class="server-icon google-search-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Google Search MCP Server</h3>
+                                <span class="server-category">Web Search</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Provide Google search functionality: it queries the SerpAPI, retrieves organic search results, and returns them (title, snippet, link, position) in JSON format.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Search</span>
+                                <span class="server-tag">Web</span>
+                                <span class="server-tag">Google</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Wikipedia MCP Server -->
+                    <a href="mcp-servers/wikipedia-mcp-server.html" class="server-card" data-server="wikipedia">
+                        <div class="server-header">
+                            <div class="server-icon wikipedia-icon">
+                                <i class="fab fa-wikipedia-w"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Wikipedia MCP Server</h3>
+                                <span class="server-category">Knowledge Base</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Provide Wikipedia search: it looks up a query on Wikipedia and returns the page's title and summary if found.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Wikipedia</span>
+                                <span class="server-tag">Knowledge</span>
+                                <span class="server-tag">Search</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Google Maps MCP Server -->
+                    <a href="mcp-servers/google-maps-mcp-server.html" class="server-card" data-server="google-maps">
+                        <div class="server-header">
+                            <div class="server-icon google-maps-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Google Maps MCP Server</h3>
+                                <span class="server-category">Location & Navigation</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Powerful geospatial capabilities through Google Maps API integration. Provides geocoding, directions, 
+                            place search, and elevation data for location-aware applications.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Geospatial</span>
+                                <span class="server-tag">Navigation</span>
+                                <span class="server-tag">Location</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Fetch MCP Server -->
+                    <a href="mcp-servers/fetch-mcp-server.html" class="server-card" data-server="fetch">
+                        <div class="server-header">
+                            <div class="server-icon fetch-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Fetch MCP Server</h3>
+                                <span class="server-category">Web Scraping</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Web content fetching and scraping capabilities with robots.txt handling for extracting data from websites. Convert HTML into Markdown (or raw text).
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Fetch</span>
+                                <span class="server-tag">Scraping</span>
+                                <span class="server-tag">Web</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- GitHub MCP Server -->
+                    <a href="mcp-servers/github-mcp-server.html" class="server-card" data-server="github">
+                        <div class="server-header">
+                            <div class="server-icon github-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>GitHub MCP Server</h3>
+                                <span class="server-category">Repository Management</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Comprehensive GitHub integration enabling repository management, issue tracking, pull request workflows, 
+                            and collaborative development through the GitHub API.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Git</span>
+                                <span class="server-tag">CI/CD</span>
+                                <span class="server-tag">Collaboration</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Google Sheets MCP Server -->
+                    <a href="mcp-servers/google-sheets-mcp-server.html" class="server-card" data-server="google-sheets">
+                        <div class="server-header">
+                            <div class="server-icon google-sheets-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Google Sheets MCP Server</h3>
+                                <span class="server-category">Spreadsheet Management</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Manage Google Spreadsheets and Drive: it supports authentication via OAuth or service accounts, reading and updating cells, batch updates, adding rows/columns, listing/renaming/copying sheets, creating spreadsheets and new sheets, retrieving spreadsheet info, and listing spreadsheets in a specified Drive folder.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Spreadsheet</span>
+                                <span class="server-tag">Data</span>
+                                <span class="server-tag">Google</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Filesystem MCP Server -->
+                    <a href="mcp-servers/filesystem-mcp-server.html" class="server-card" data-server="filesystem">
+                        <div class="server-header">
+                            <div class="server-icon filesystem-icon">
+                                <i class="fas fa-folder-open"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Filesystem MCP Server</h3>
+                                <span class="server-category">File Operations</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Local filesystem operations including file reading, writing, directory management, and file system navigation.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Files</span>
+                                <span class="server-tag">System</span>
+                                <span class="server-tag">Local</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Slack MCP Server -->
+                    <a href="mcp-servers/slack-mcp-server.html" class="server-card" data-server="slack">
+                        <div class="server-header">
+                            <div class="server-icon slack-icon">
+                                <i class="fab fa-slack"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Slack MCP Server</h3>
+                                <span class="server-category">Communication</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Slack workspace integration for messaging, channel management, and team communication automation.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Chat</span>
+                                <span class="server-tag">Team</span>
+                                <span class="server-tag">Communication</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- PostgreSQL MCP Server -->
+                    <a href="mcp-servers/postgres-mcp-server.html" class="server-card" data-server="postgres">
+                        <div class="server-header">
+                            <div class="server-icon postgres-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>PostgreSQL MCP Server</h3>
+                                <span class="server-category">Database</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            PostgreSQL database integration for SQL operations, data querying, and database management tasks.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Database</span>
+                                <span class="server-tag">SQL</span>
+                                <span class="server-tag">PostgreSQL</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Calculator MCP Server -->
+                    <a href="mcp-servers/calculator-mcp-server.html" class="server-card" data-server="calculator">
+                        <div class="server-header">
+                            <div class="server-icon calculator-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Calculator MCP Server</h3>
+                                <span class="server-category">Mathematics</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Mathematical calculations and computational operations for numerical processing and formula evaluation.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Math</span>
+                                <span class="server-tag">Calculator</span>
+                                <span class="server-tag">Computation</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Yahoo Finance MCP Server -->
+                    <a href="mcp-servers/yfinance-mcp-server.html" class="server-card" data-server="yfinance">
+                        <div class="server-header">
+                            <div class="server-icon yfinance-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Yahoo Finance MCP Server</h3>
+                                <span class="server-category">Financial Data</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Financial market data and stock information through Yahoo Finance API for investment analysis and tracking.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Finance</span>
+                                <span class="server-tag">Stocks</span>
+                                <span class="server-tag">Market</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Blender MCP Server -->
+                    <a href="mcp-servers/blender-mcp-server.html" class="server-card" data-server="blender">
+                        <div class="server-header">
+                            <div class="server-icon blender-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Blender MCP Server</h3>
+                                <span class="server-category">3D Modeling</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            3D modeling and animation capabilities through Blender integration for creating and manipulating 3D content.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">3D</span>
+                                <span class="server-tag">Modeling</span>
+                                <span class="server-tag">Animation</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Notion MCP Server -->
+                    <a href="mcp-servers/notion-mcp-server.html" class="server-card" data-server="notion">
+                        <div class="server-header">
+                            <div class="server-icon notion-icon">
+                                <i class="fas fa-sticky-note"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Notion MCP Server</h3>
+                                <span class="server-category">Knowledge Management</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Seamless integration with Notion workspace for knowledge management, documentation, and collaborative 
+                            content creation. Access databases, pages, and blocks through the Notion API.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Documentation</span>
+                                <span class="server-tag">Knowledge Base</span>
+                                <span class="server-tag">Collaboration</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Playwright MCP Server -->
+                    <a href="mcp-servers/playwright-mcp-server.html" class="server-card" data-server="playwright">
+                        <div class="server-header">
+                            <div class="server-icon playwright-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>Playwright MCP Server</h3>
+                                <span class="server-category">Browser Automation</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Browser automation and web testing capabilities through Playwright for automated web interactions and testing.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Automation</span>
+                                <span class="server-tag">Testing</span>
+                                <span class="server-tag">Browser</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- MarkItDown MCP Server -->
+                    <a href="mcp-servers/markitdown-mcp-server.html" class="server-card" data-server="markitdown">
+                        <div class="server-header">
+                            <div class="server-icon markitdown-icon">
+                                <i class="fab fa-markdown"></i>
+                            </div>
+                            <div class="server-info">
+                                <h3>MarkItDown MCP Server</h3>
+                                <span class="server-category">Document Processing</span>
+                            </div>
+                        </div>
+                        
+                        <p class="server-description">
+                            Document conversion and markdown processing capabilities for transforming various document formats.
+                        </p>
+                        
+                        <div class="server-footer">
+                            <div class="server-tags">
+                                <span class="server-tag">Markdown</span>
+                                <span class="server-tag">Conversion</span>
+                                <span class="server-tag">Documents</span>
+                            </div>
+                            <div class="view-more">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Theme toggle handler
+        (function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const icon = toggle.querySelector('i');
+            const key = 'mcp-theme';
+            const apply = (mode) => {
+                if (mode === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    root.removeAttribute('data-theme');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            };
+            const preferred = localStorage.getItem(key) || 'light';
+            apply(preferred);
+            toggle.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                localStorage.setItem(key, next);
+                apply(next);
+            });
+        })();
+
+        // Navigation handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-item a');
+            const sections = document.querySelectorAll('section');
+            
+            // Set active nav item
+            function setActiveNav(activeId) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === activeId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    setActiveNav(sectionId);
+                    
+                    // Show/hide content based on section
+                    if (sectionId === 'overview') {
+                        showAllServers();
+                    } else if (sectionId === 'featured') {
+                        showFeaturedServers();
+                    } else {
+                        filterServersByCategory(sectionId);
+                    }
+                });
+            });
+            
+            // Set initial active state
+            setActiveNav('overview');
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const serverCards = document.querySelectorAll('.server-card');
+            
+            serverCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('.server-description').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.server-tag')).map(tag => tag.textContent.toLowerCase());
+                
+                const matches = title.includes(searchTerm) || 
+                               description.includes(searchTerm) || 
+                               tags.some(tag => tag.includes(searchTerm));
+                
+                card.style.display = matches ? 'block' : 'none';
+            });
+        });
+
+        // Filter functions
+        function showAllServers() {
+            const serverCards = document.querySelectorAll('.server-card');
+            serverCards.forEach(card => {
+                card.style.display = 'block';
+            });
+        }
+
+        function showFeaturedServers() {
+            // For now, show all servers as featured
+            showAllServers();
+        }
+
+        function filterServersByCategory(category) {
+            const serverCards = document.querySelectorAll('.server-card');
+            const categoryMap = {
+                'repository-management': ['github'],
+                'location-navigation': ['google-maps'],
+                'knowledge-management': ['notion', 'wikipedia'],
+                'web-automation': ['playwright', 'fetch'],
+                'financial-data': ['yfinance'],
+                '3d-modeling': ['blender'],
+                'github-servers': ['github'],
+                'google-servers': ['google-maps', 'google-search', 'google-sheets'],
+                'notion-servers': ['notion'],
+                'community-servers': ['date', 'weather', 'echo', 'fetch', 'filesystem', 'slack', 'postgres', 'calculator', 'yfinance', 'blender', 'playwright', 'markitdown', 'wikipedia']
+            };
+            
+            const relevantServers = categoryMap[category] || [];
+            
+            serverCards.forEach(card => {
+                const serverId = card.getAttribute('data-server');
+                card.style.display = relevantServers.includes(serverId) ? 'block' : 'none';
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
