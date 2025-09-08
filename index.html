@@ -723,6 +723,27 @@
             }
         }
 
+        /* Track Description */
+        .track-description {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .track-description p {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .track-description strong {
+            color: var(--sf-blue);
+            font-weight: 600;
+        }
+
         /* Citation Section */
         .citation {
             padding: var(--spacing-4) 0;
@@ -879,7 +900,7 @@
                             <i class="fab fa-github"></i>
                             Code
                         </a>
-                        <a href="https://discord.gg/7k8YMFJnjn" class="btn btn-outline">
+                        <a href="https://discord.gg/t9tU77GF" class="btn btn-outline">
                             <i class="fab fa-discord"></i>
                             Discord
                         </a>
@@ -926,7 +947,8 @@
             <div class="container">
                 <h2 class="section-title">Leaderboard</h2>
                 <div class="track-tabs" role="tablist" aria-label="Leaderboard tracks">
-                    <button class="track-tab active" id="tab-llm" role="tab" aria-selected="true" aria-controls="panel-llm">LLM Track</button>
+                    <button class="track-tab active" id="tab-llm" role="tab" aria-selected="true" aria-controls="panel-llm">LLM (w/ ReAct) Track</button>
+                    <button class="track-tab" id="tab-function-call" role="tab" aria-selected="false" aria-controls="panel-function-call">LLM (w/ Function Calls) Track</button>
                     <button class="track-tab" id="tab-agent" role="tab" aria-selected="false" aria-controls="panel-agent">Agent Track</button>
                 </div>
                 <div class="contact-notice">
@@ -952,6 +974,9 @@
                 </div>
                 
                 <div id="panel-llm" class="results-table" role="tabpanel" aria-labelledby="tab-llm">
+                    <div class="track-description">
+                        <p><strong>LLM (w/ ReAct) Track:</strong> Evaluates large language models using the ReAct (Reasoning and Acting) prompting strategy, in which models alternate between reasoning about the task and taking actions through MCP server function calls. In each step, the LLM can use only one tool.</p>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -1185,19 +1210,19 @@
                                  <td>22.08</td>
                              </tr>
                              <tr>
-                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://z.ai/blog/glm-4.5" target="_blank" style="color: inherit; text-decoration: none;">GLM-4.5-Air<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
-                                 <td>17.78</td>
-                                 <td>6.06</td>
-                                 <td>42.50</td>
-                                 <td>10.53</td>
-                                 <td>17.95</td>
-                                 <td>16.36</td>
-                                 <td>37.42</td>
-                                 <td>6.42</td>
-                                 <td>19.48</td>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://moonshotai.github.io/Kimi-K2/" target="_blank" style="color: inherit; text-decoration: none;">Kimi-K2-0905<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>11.11</td>
+                                 <td>3.03</td>
+                                 <td>52.50</td>
+                                 <td>15.79</td>
+                                 <td>25.64</td>
+                                 <td>10.91</td>
+                                 <td>41.28</td>
+                                 <td>6.96</td>
+                                 <td>19.91</td>
                              </tr>
                                                          <tr>
-                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://moonshotai.github.io/Kimi-K2/" target="_blank" style="color: inherit; text-decoration: none;">Kimi-K2<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://moonshotai.github.io/Kimi-K2/" target="_blank" style="color: inherit; text-decoration: none;">Kimi-K2-0711<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
                                  <td>11.11</td>
                                  <td>9.09</td>
                                  <td>47.50</td>
@@ -1207,6 +1232,18 @@
                                  <td>35.10</td>
                                  <td>6.07</td>
                                  <td>19.05</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://modelstudio.console.alibabacloud.com/?tab=doc#/doc/?type=model&url=2840914_2&modelId=qwen3-max-preview" target="_blank" style="color: inherit; text-decoration: none;">Qwen3-Max-Preview (Instruct)<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>20.00</td>
+                                 <td>6.06</td>
+                                 <td>42.50</td>
+                                 <td>31.58</td>
+                                 <td>10.26</td>
+                                 <td>7.27</td>
+                                 <td>37.74</td>
+                                 <td>5.50</td>
+                                 <td>18.18</td>
                              </tr>
                                                          <tr>
                                 <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507" target="_blank" style="color: inherit; text-decoration: none;">Qwen3-235B-A22B-Instruct-2507<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
@@ -1248,7 +1285,178 @@
                     </table>
                 </div>
 
+                <div id="panel-function-call" class="results-table hidden" role="tabpanel" aria-labelledby="tab-function-call">
+                    <div class="track-description">
+                        <p><strong>LLM (w/ Function Calls) Track:</strong> Evaluates large language models using native function calling capabilities, where models directly invoke MCP server functions without requiring explicit ReAct-like reasoning steps in their responses. In each step, the LLM can use more than one tool.</p>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;" data-column="model">Model</th>
+                                <th class="sortable" data-column="location" data-type="number">Location<br>Navigation</th>
+                                <th class="sortable" data-column="repository" data-type="number">Repository<br>Management</th>
+                                <th class="sortable" data-column="financial" data-type="number">Financial<br>Analysis</th>
+                                <th class="sortable" data-column="3d" data-type="number">3D<br>Designing</th>
+                                <th class="sortable" data-column="browser" data-type="number">Browser<br>Automation</th>
+                                <th class="sortable" data-column="web" data-type="number">Web<br>Searching</th>
+                                <th class="sortable" data-column="ae" data-type="number">Average<br>Evaluator Score</th>
+                                <th class="sortable" data-column="as" data-type="number">Average<br>Steps</th>
+                                <th class="sortable" data-column="overall" data-type="number">Overall<br>Success Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://platform.openai.com/docs/models/gpt-5" target="_blank" style="color: inherit; text-decoration: none;">GPT-5-medium<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>35.56</td>
+                                 <td>30.30</td>
+                                 <td>60.00</td>
+                                 <td>52.63</td>
+                                 <td>43.59</td>
+                                 <td>36.36</td>
+                                 <td>59.29</td>
+                                 <td>7.85</td>
+                                 <td>41.99</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-4" target="_blank" style="color: inherit; text-decoration: none;">Claude-4.0-Sonnet-Thinking<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>24.44</td>
+                                 <td>6.06</td>
+                                 <td>72.50</td>
+                                 <td>47.37</td>
+                                 <td>35.90</td>
+                                 <td>14.55</td>
+                                 <td>50.83</td>
+                                 <td>9.12</td>
+                                 <td>31.60</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-4" target="_blank" style="color: inherit; text-decoration: none;">Claude-4.0-Sonnet<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>22.22</td>
+                                 <td>6.06</td>
+                                 <td>77.50</td>
+                                 <td>36.84</td>
+                                 <td>35.90</td>
+                                 <td>21.82</td>
+                                 <td>32.90</td>
+                                 <td>9.78</td>
+                                 <td>32.90</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://x.ai/news/grok-code-fast-1" target="_blank" style="color: inherit; text-decoration: none;">Grok-Code-Fast-1<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>17.78</td>
+                                 <td>12.12</td>
+                                 <td>57.50</td>
+                                 <td>26.32</td>
+                                 <td>15.38</td>
+                                 <td>20.00</td>
+                                 <td>43.89</td>
+                                 <td>7.61</td>
+                                 <td>24.68</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://platform.openai.com/docs/models/gpt-4.1" target="_blank" style="color: inherit; text-decoration: none;">GPT-4.1<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>15.56</td>
+                                 <td>6.06</td>
+                                 <td>45.00</td>
+                                 <td>26.32</td>
+                                 <td>28.21</td>
+                                 <td>5.45</td>
+                                 <td>39.58</td>
+                                 <td>6.83</td>
+                                 <td>19.91</td>
+                             </tr>
+                                                         <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://platform.openai.com/docs/models/gpt-4o" target="_blank" style="color: inherit; text-decoration: none;">GPT-4o-2024-08-06<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>8.89</td>
+                                 <td>6.06</td>
+                                 <td>35.00</td>
+                                 <td>10.53</td>
+                                 <td>12.82</td>
+                                 <td>7.27</td>
+                                 <td>32.43</td>
+                                 <td>6.65</td>
+                                 <td>13.42</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://modelstudio.console.alibabacloud.com/?tab=doc#/doc/?type=model&url=2840914_2&modelId=qwen3-max-preview" target="_blank" style="color: inherit; text-decoration: none;">Qwen3-Max-Preview (Instruct)<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>13.33</td>
+                                 <td>15.15</td>
+                                 <td>40.00</td>
+                                 <td>21.05</td>
+                                 <td>15.38</td>
+                                 <td>5.45</td>
+                                 <td>36.71</td>
+                                 <td>8.57</td>
+                                 <td>17.32</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://z.ai/blog/glm-4.5" target="_blank" style="color: inherit; text-decoration: none;">GLM-4.5<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>22.22</td>
+                                 <td>9.09</td>
+                                 <td>37.50</td>
+                                 <td>26.32</td>
+                                 <td>10.26</td>
+                                 <td>16.36</td>
+                                 <td>37.58</td>
+                                 <td>10.17</td>
+                                 <td>19.91</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://moonshotai.github.io/Kimi-K2/" target="_blank" style="color: inherit; text-decoration: none;">Kimi-K2-0905<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>17.78</td>
+                                 <td>6.06</td>
+                                 <td>42.50</td>
+                                 <td>15.79</td>
+                                 <td>23.08</td>
+                                 <td>10.91</td>
+                                 <td>38.52</td>
+                                 <td>10.20</td>
+                                 <td>19.48</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" target="_blank" style="color: inherit; text-decoration: none;">DeepSeek-V3.1<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>11.11</td>
+                                 <td>6.06</td>
+                                 <td>45.00</td>
+                                 <td>26.32</td>
+                                 <td>23.08</td>
+                                 <td>12.73</td>
+                                 <td>38.88</td>
+                                 <td>10.74</td>
+                                 <td>19.91</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://z.ai/blog/glm-4.5" target="_blank" style="color: inherit; text-decoration: none;">GLM-4.5-Air<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                 <td>8.89</td>
+                                 <td>3.03</td>
+                                 <td>25.00</td>
+                                 <td>10.53</td>
+                                 <td>7.69</td>
+                                 <td>14.55</td>
+                                 <td>26.47</td>
+                                 <td>12.21</td>
+                                 <td>12.12</td>
+                             </tr>
+                             <tr>
+                                <td class="model-name"><i class="fas fa-unlock" style="color: #10b981; margin-right: 0.5rem;" title="Open-Source Model"></i><a href="https://huggingface.co/openai/gpt-oss-120b" target="_blank" style="color: inherit; text-decoration: none;">GPT-OSS-120B<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                <td>24.44</td>
+                                <td>15.15</td>
+                                <td>42.50</td>
+                                <td>36.84</td>
+                                <td>20.51</td>
+                                <td>20.00</td>
+                                <td>39.78</td>
+                                <td>7.53</td>
+                                <td>25.54</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
                 <div id="panel-agent" class="results-table hidden" role="tabpanel" aria-labelledby="tab-agent">
+                    <div class="track-description">
+                        <p><strong>Agent Track:</strong> Evaluates complete AI agent systems that combine LLMs with specialized frameworks, tools, and orchestration mechanisms to handle complex multi-step tasks and workflows.</p>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -1535,27 +1743,52 @@
             backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             // Track tabs switching
             const tabLLM = document.getElementById('tab-llm');
+            const tabFunctionCall = document.getElementById('tab-function-call');
             const tabAgent = document.getElementById('tab-agent');
             const panelLLM = document.getElementById('panel-llm');
+            const panelFunctionCall = document.getElementById('panel-function-call');
             const panelAgent = document.getElementById('panel-agent');
+            
             function activate(tab) {
+                // Remove active class from all tabs
+                tabLLM.classList.remove('active');
+                tabFunctionCall.classList.remove('active');
+                tabAgent.classList.remove('active');
+                
+                // Hide all panels
+                panelLLM.classList.add('hidden');
+                panelFunctionCall.classList.add('hidden');
+                panelAgent.classList.add('hidden');
+                
+                // Set all aria-selected to false
+                tabLLM.setAttribute('aria-selected', 'false');
+                tabFunctionCall.setAttribute('aria-selected', 'false');
+                tabAgent.setAttribute('aria-selected', 'false');
+                
+                // Activate the selected tab
                 if (tab === 'llm') {
                     tabLLM.classList.add('active');
-                    tabAgent.classList.remove('active');
                     panelLLM.classList.remove('hidden');
-                    panelAgent.classList.add('hidden');
                     tabLLM.setAttribute('aria-selected', 'true');
-                    tabAgent.setAttribute('aria-selected', 'false');
-                } else {
+                    // Re-apply sorting and highlighting when switching to this tab
+                    setTimeout(() => autoSortAndHighlight('#panel-llm table'), 10);
+                } else if (tab === 'function-call') {
+                    tabFunctionCall.classList.add('active');
+                    panelFunctionCall.classList.remove('hidden');
+                    tabFunctionCall.setAttribute('aria-selected', 'true');
+                    // Re-apply sorting and highlighting when switching to this tab
+                    setTimeout(() => autoSortAndHighlight('#panel-function-call table'), 10);
+                } else if (tab === 'agent') {
                     tabAgent.classList.add('active');
-                    tabLLM.classList.remove('active');
                     panelAgent.classList.remove('hidden');
-                    panelLLM.classList.add('hidden');
                     tabAgent.setAttribute('aria-selected', 'true');
-                    tabLLM.setAttribute('aria-selected', 'false');
+                    // Re-apply sorting and highlighting when switching to this tab
+                    setTimeout(() => autoSortAndHighlight('#panel-agent table'), 10);
                 }
             }
+            
             tabLLM.addEventListener('click', () => activate('llm'));
+            tabFunctionCall.addEventListener('click', () => activate('function-call'));
             tabAgent.addEventListener('click', () => activate('agent'));
 
             // Initialize sorting for both tables
@@ -1592,9 +1825,15 @@
                 });
             }
 
-            // Initialize sorting for both LLM and Agent tables
+            // Initialize sorting for all three tables
             initTableSorting('#panel-llm table');
+            initTableSorting('#panel-function-call table');
             initTableSorting('#panel-agent table');
+            
+            // Auto-sort all tables by Overall Success Rate (descending) and highlight best scores
+            autoSortAndHighlight('#panel-llm table');
+            autoSortAndHighlight('#panel-function-call table');
+            autoSortAndHighlight('#panel-agent table');
         });
 
         function sortTable(table, column, direction, dataType) {
@@ -1630,11 +1869,15 @@
             // Clear tbody and re-add all rows
             tbody.innerHTML = '';
             rows.forEach(row => tbody.appendChild(row));
+            
+            // Re-apply highlighting after sorting
+            highlightBestScores(table);
         }
 
         function getColumnIndex(column, table) {
             // Check which table we're working with
             const isAgentTable = table.closest('#panel-agent') !== null;
+            const isFunctionCallTable = table.closest('#panel-function-call') !== null;
             
             if (isAgentTable) {
                 const agentColumnMap = {
@@ -1648,6 +1891,20 @@
                     'overall': 7
                 };
                 return agentColumnMap[column];
+            } else if (isFunctionCallTable) {
+                const functionCallColumnMap = {
+                    'model': 0,
+                    'location': 1,
+                    'repository': 2,
+                    'financial': 3,
+                    '3d': 4,
+                    'browser': 5,
+                    'web': 6,
+                    'ae': 7,
+                    'as': 8,
+                    'overall': 9
+                };
+                return functionCallColumnMap[column];
             } else {
                 const llmColumnMap = {
                     'model': 0,
@@ -1662,6 +1919,70 @@
                     'overall': 9
                 };
                 return llmColumnMap[column];
+            }
+        }
+
+        function autoSortAndHighlight(tableSelector) {
+            const table = document.querySelector(tableSelector);
+            if (!table) return;
+            
+            // Auto-sort by Overall Success Rate (last column) in descending order
+            const isAgentTable = table.closest('#panel-agent') !== null;
+            const overallColumn = isAgentTable ? 'overall' : 'overall';
+            const overallColumnIndex = getColumnIndex(overallColumn, table);
+            
+            // Sort the table
+            sortTable(table, overallColumn, 'desc', 'number');
+            
+            // Update header to show it's sorted
+            const headers = table.querySelectorAll('th.sortable');
+            headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+            const overallHeader = table.querySelector(`th[data-column="${overallColumn}"]`);
+            if (overallHeader) {
+                overallHeader.classList.add('sort-desc');
+            }
+            
+            // Highlight best scores in each column
+            highlightBestScores(table);
+        }
+        
+        function highlightBestScores(table) {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            if (rows.length === 0) return;
+            
+            // Get the number of columns (excluding the first model name column)
+            const firstRow = rows[0];
+            const numColumns = firstRow.cells.length;
+            
+            // For each numeric column (skip the first column which is model names)
+            for (let colIndex = 1; colIndex < numColumns; colIndex++) {
+                let maxValue = -Infinity;
+                const columnValues = [];
+                
+                // Collect all values in this column
+                rows.forEach((row, rowIndex) => {
+                    const cell = row.cells[colIndex];
+                    const value = parseFloat(cell.textContent.trim());
+                    columnValues.push({ value: isNaN(value) ? -Infinity : value, rowIndex, cell });
+                    if (!isNaN(value) && value > maxValue) {
+                        maxValue = value;
+                    }
+                });
+                
+                // Remove existing best-score class from this column
+                columnValues.forEach(({ cell }) => {
+                    cell.classList.remove('best-score');
+                });
+                
+                // Highlight the best score(s) in this column
+                if (maxValue > -Infinity) {
+                    columnValues.forEach(({ value, cell }) => {
+                        if (value === maxValue) {
+                            cell.classList.add('best-score');
+                        }
+                    });
+                }
             }
         }
 
