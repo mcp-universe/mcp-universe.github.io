@@ -900,7 +900,7 @@
                             <i class="fab fa-github"></i>
                             Code
                         </a>
-                        <a href="https://discord.gg/7k8YMFJnjn" class="btn btn-outline">
+                        <a href="https://discord.gg/t9tU77GF" class="btn btn-outline">
                             <i class="fab fa-discord"></i>
                             Discord
                         </a>
@@ -1957,6 +1957,20 @@
             
             // For each numeric column (skip the first column which is model names)
             for (let colIndex = 1; colIndex < numColumns; colIndex++) {
+                // Get the corresponding header to check if this is the "Average Steps" column
+                const headerRow = table.querySelector('thead tr');
+                const header = headerRow.cells[colIndex];
+                
+                // Skip highlighting for "Average Steps" columns
+                if (header && header.getAttribute('data-column') === 'as') {
+                    // Still remove any existing highlighting from this column
+                    rows.forEach(row => {
+                        const cell = row.cells[colIndex];
+                        cell.classList.remove('best-score');
+                    });
+                    continue;
+                }
+                
                 let maxValue = -Infinity;
                 const columnValues = [];
                 
