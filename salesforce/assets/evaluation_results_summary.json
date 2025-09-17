@@ -1,0 +1,232 @@
+{
+  "react-no-transform": {
+    "1": {
+      "task_name": "task1_simple_example",
+      "question": "Get the list of all services that has keyword 'sdb'. From the details of these services and their dependencies, find the longest chains of 'start' dependencies, 'validate' dependencies and 'authorized' clients dependencies.",
+      "success": false,
+      "passed_evals": 0,
+      "total_evals": 8,
+      "failed_reasons": [
+        "Eval 1: JSON decoding error",
+        "Eval 2: JSON decoding error",
+        "Eval 3: JSON decoding error",
+        "Eval 4: JSON decoding error",
+        "Eval 5: JSON decoding error",
+        "Eval 6: JSON decoding error",
+        "Eval 7: JSON decoding error",
+        "Eval 8: JSON decoding error"
+      ]
+    },
+    "2": {
+      "task_name": "task2_simple_example",
+      "question": "For mission critical services related to 'sdb' check if they have a disaster recovery runbook (usually this would be inside their deployment runbook information) and if their utility pipelines are fit (Falcon Integration Test) (You can assume pipelines that are FIT will have that appropriately titled). Generate a comprehensive report in the given format",
+      "success": false,
+      "passed_evals": 6,
+      "total_evals": 7,
+      "failed_reasons": [
+        "Eval 7: Services with non-FIT utility pipelines: [\"sdb: ['fedx-perpetualrestore-sdb', 'drsync-sdb', 'deploy-sdb', 'delete-sdb-artifacts', 'restoreprod-sdb', 'restoreloganalysis-sdb', 'fedx-restoreloganalysis-sdb', 'restoreprod-by-version', 'restorevalidate-sdb', 'restorevalidate-by-version', 'restoreclone-sdb', 'sdb-dynamic-config-updater', 'start-sdb', 'stop-sdb', 'scale-sdb', 'sdb-failover', 'sdb-audit', 'sdb-utility', 'sdb-app-state-ro-switcher', 'sdb-app-state-rw-switcher', 'migrate-sdb-cell', 'archival-utility', 'sdb-trigger-lsm-merge', 'sdb-archival-test', 'prod-restore-test', 'sdb-clone-test', 'fedx-deploy-sdb', 'fedx-delete-sdb-artifacts', 'fedx-restoreprod-sdb', 'fedx-restoreprod-by-version', 'fedx-restorevalidate-sdb', 'fedx-restorevalidate-by-version', 'fedx-restoreclone-sdb', 'fedx-sdb-dynamic-config-updater', 'fedx-on-demand', 'fedx-rapid-rollback', 'fedx-downgrade-out-crashloop', 'fedx-downgrade-out-crashloop-final', 'fedx-start-sdb', 'fedx-stop-sdb', 'fedx-schema-upgrade-sdb', 'fedx-scale-sdb', 'fedx-sdb-failover', 'fedx-sdb-audit', 'fedx-sdb-utility', 'fedx-sdb-app-state-ro-switcher', 'fedx-sdb-app-state-rw-switcher', 'fedx-migrate-sdb-cell', 'fedx-archival-utility', 'fedx-sdb-trigger-lsm-merge', 'fedx-sdb-archival-test', 'fedx-sdb-perf-data-refresh', 'fedx-sdb-meta-release-acceptance-test', 'fedx-prod-restore-test', 'fedx-sdb-clone-test', 'fedx-workload-identity']\", \"sdbcloudstore: ['fedx-workload-identity']\", \"sdbstore: ['clone-sdb', 'destroy-cluuid', 'destroy-cluuid-by-version', 'sdbstore-decommissioner', 'sdbstore-upscaler', 'storage-collector', 'fedx-deploy-sdbstore-via-operator', 'fedx-clone-sdb', 'fedx-destroy-cluuid', 'fedx-destroy-cluuid-by-version', 'fedx-sdbstore-decommissioner', 'fedx-sdbstore-upscaler', 'fedx-storage-collector', 'fedx-recreate-storage-class', 'fedx-workload-identity']\", \"sdbarchivalworker: ['fedx-workload-identity']\"]"
+      ]
+    },
+    "3": {
+      "task_name": "task4_simple_example",
+      "question": "Get the stats of the top 5 trace ids (from mdc.trace_id field of the splunk logs) from the splunk logs for services with names starting with 'bot-svc-llm' prefix, with index=globaldefault and check for any '504 Gateway Timeout' error pattern in those services from 10:00 to 10:05 yesterday (UTC time).",
+      "success": false,
+      "passed_evals": 6,
+      "total_evals": 7,
+      "failed_reasons": [
+        "Eval 4: Missing trace analysis sections: ['top_sql_queries', 'top_soql_queries', 'top_llm_calls']"
+      ]
+    },
+    "4": {
+      "task_name": "task4.1_simple_example",
+      "question": "Get the GUS product tags for all the mission critical services (whose names start with 'bot-svc-llm' prefix).",
+      "success": false,
+      "passed_evals": 6,
+      "total_evals": 8,
+      "failed_reasons": [
+        "Eval 7: Services with invalid GUS product tags: [\"bot-svc-llm: expected 'Einstein GPT Foundations', got 'Einstein GPT Foundations->LLM Services'\", \"bot-svc-llmagent: expected 'Chatbot Runtime', got 'Chatbot Runtime->Chatbot Runtime'\"]",
+        "Eval 8: Failed to check GUS investigations: Expecting value: line 1 column 1 (char 0)"
+      ]
+    },
+    "5": {
+      "task_name": "task4.2_simple_example",
+      "question": "For all the mission critical services (which names starting with 'bot-svc-llm' prefix), get their gus product tags  (from the gusProductTagId field in their service definition) and from that the list of gus investigations created for those services in the last 10 days. Finally output the list of gus investigation ids (ids usually in format 'W-<numbers>')",
+      "success": true,
+      "passed_evals": 8,
+      "total_evals": 8,
+      "failed_reasons": []
+    },
+    "6": {
+      "task_name": "task4.3_simple_example",
+      "question": "For all the mission critical services which name 'bot-svc-llm', get their gus product tags (from the gusProductTagId field in their service definition) and from that the list of gus investigations created for those services in the last 10 days. From the GUS investigations extract the gus investigation ids (in format 'W-<numbers>') and the exact splunk queries that were used during the investigations. Generate your output as a list of splunk queries.",
+      "success": false,
+      "passed_evals": 0,
+      "total_evals": 9,
+      "failed_reasons": [
+        "Eval 1: JSON decoding error",
+        "Eval 2: JSON decoding error",
+        "Eval 3: JSON decoding error",
+        "Eval 4: JSON decoding error",
+        "Eval 5: JSON decoding error",
+        "Eval 6: JSON decoding error",
+        "Eval 7: JSON decoding error",
+        "Eval 8: JSON decoding error",
+        "Eval 9: JSON decoding error"
+      ]
+    },
+    "7": {
+      "task_name": "task6_simple_example",
+      "question": "First list the teams related to Core Database Performance. Then find the start time (in epoch_seconds) format of the Connection Pool (or often abbreviated in different forms) related incidents handled by those teams in the last 60 days.",
+      "success": true,
+      "passed_evals": 8,
+      "total_evals": 8,
+      "failed_reasons": []
+    }
+  },
+  "react-transform": {
+    "1": {
+      "task_name": "task1_simple_example",
+      "question": "Get the list of all services that has keyword 'sdb'. From the details of these services and their dependencies, find the longest chains of 'start' dependencies, 'validate' dependencies and 'authorized' clients dependencies.",
+      "success": false,
+      "passed_evals": 2,
+      "total_evals": 8,
+      "failed_reasons": [
+        "Eval 1: Invalid input type: <class 'str'>",
+        "Eval 2: Invalid input type: <class 'str'>",
+        "Eval 3: Invalid input type: <class 'str'>",
+        "Eval 4: Invalid input type: <class 'str'>",
+        "Eval 5: Invalid input type: <class 'str'>",
+        "Eval 6: Invalid input type: <class 'str'>"
+      ]
+    },
+    "2": {
+      "task_name": "task2_simple_example",
+      "question": "For mission critical services related to 'sdb' check if they have a disaster recovery runbook (usually this would be inside their deployment runbook information) and if their utility pipelines are fit (Falcon Integration Test) (You can assume pipelines that are FIT will have that appropriately titled). Generate a comprehensive report in the given format",
+      "success": false,
+      "passed_evals": 6,
+      "total_evals": 7,
+      "failed_reasons": [
+        "Eval 7: Services with non-FIT utility pipelines: [\"sdb: ['fedx-perpetualrestore-sdb', 'drsync-sdb', 'deploy-sdb', 'delete-sdb-artifacts', 'restoreprod-sdb', 'restoreloganalysis-sdb', 'fedx-restoreloganalysis-sdb', 'restoreprod-by-version', 'restorevalidate-sdb', 'restorevalidate-by-version', 'restoreclone-sdb', 'sdb-dynamic-config-updater', 'start-sdb', 'stop-sdb', 'scale-sdb', 'sdb-failover', 'sdb-audit', 'sdb-utility', 'sdb-app-state-ro-switcher', 'sdb-app-state-rw-switcher', 'migrate-sdb-cell', 'archival-utility', 'sdb-trigger-lsm-merge', 'sdb-archival-test', 'prod-restore-test', 'sdb-clone-test', 'fedx-deploy-sdb', 'fedx-delete-sdb-artifacts', 'fedx-restoreprod-sdb', 'fedx-restoreprod-by-version', 'fedx-restorevalidate-sdb', 'fedx-restorevalidate-by-version', 'fedx-restoreclone-sdb', 'fedx-sdb-dynamic-config-updater', 'fedx-on-demand', 'fedx-rapid-rollback', 'fedx-downgrade-out-crashloop', 'fedx-downgrade-out-crashloop-final', 'fedx-start-sdb', 'fedx-stop-sdb', 'fedx-schema-upgrade-sdb', 'fedx-scale-sdb', 'fedx-sdb-failover', 'fedx-sdb-audit', 'fedx-sdb-utility', 'fedx-sdb-app-state-ro-switcher', 'fedx-sdb-app-state-rw-switcher', 'fedx-migrate-sdb-cell', 'fedx-archival-utility', 'fedx-sdb-trigger-lsm-merge', 'fedx-sdb-archival-test', 'fedx-sdb-perf-data-refresh', 'fedx-sdb-meta-release-acceptance-test', 'fedx-prod-restore-test', 'fedx-sdb-clone-test', 'fedx-workload-identity']\", \"sdbstore: ['clone-sdb', 'destroy-cluuid', 'destroy-cluuid-by-version', 'sdbstore-decommissioner', 'sdbstore-upscaler', 'storage-collector', 'fedx-deploy-sdbstore-via-operator', 'fedx-clone-sdb', 'fedx-destroy-cluuid', 'fedx-destroy-cluuid-by-version', 'fedx-sdbstore-decommissioner', 'fedx-sdbstore-upscaler', 'fedx-storage-collector', 'fedx-recreate-storage-class', 'fedx-workload-identity']\"]"
+      ]
+    },
+    "3": {
+      "task_name": "task4_simple_example",
+      "question": "Get the stats of the top 5 trace ids (from mdc.trace_id field of the splunk logs) from the splunk logs for services with names starting with 'bot-svc-llm' prefix, with index=globaldefault and check for any '504 Gateway Timeout' error pattern in those services from 10:00 to 10:05 yesterday (UTC time).",
+      "success": false,
+      "passed_evals": 5,
+      "total_evals": 7,
+      "failed_reasons": [
+        "Eval 2: Found 0 trace IDs, but minimum required is 1",
+        "Eval 4: Missing trace analysis sections: ['top_sql_queries', 'top_soql_queries', 'top_llm_calls']"
+      ]
+    },
+    "4": {
+      "task_name": "task4.1_simple_example",
+      "question": "Get the GUS product tags for all the mission critical services (whose names start with 'bot-svc-llm' prefix).",
+      "success": true,
+      "passed_evals": 8,
+      "total_evals": 8,
+      "failed_reasons": []
+    },
+    "5": {
+      "task_name": "task4.2_simple_example",
+      "question": "For all the mission critical services (which names starting with 'bot-svc-llm' prefix), get their gus product tags  (from the gusProductTagId field in their service definition) and from that the list of gus investigations created for those services in the last 10 days. Finally output the list of gus investigation ids (ids usually in format 'W-<numbers>')",
+      "success": true,
+      "passed_evals": 8,
+      "total_evals": 8,
+      "failed_reasons": []
+    },
+    "6": {
+      "task_name": "task4.3_simple_example",
+      "question": "For all the mission critical services which name 'bot-svc-llm', get their gus product tags (from the gusProductTagId field in their service definition) and from that the list of gus investigations created for those services in the last 10 days. From the GUS investigations extract the gus investigation ids (in format 'W-<numbers>') and the exact splunk queries that were used during the investigations. Generate your output as a list of splunk queries.",
+      "success": true,
+      "passed_evals": 9,
+      "total_evals": 9,
+      "failed_reasons": []
+    },
+    "7": {
+      "task_name": "task6_simple_example",
+      "question": "First list the teams related to Core Database Performance. Then find the start time (in epoch_seconds) format of the Connection Pool (or often abbreviated in different forms) related incidents handled by those teams in the last 60 days.",
+      "success": true,
+      "passed_evals": 8,
+      "total_evals": 8,
+      "failed_reasons": []
+    }
+  },
+  "cursor-agent": {
+    "1": {
+      "task_name": "task1_simple_example",
+      "question": "Task 1 - Check evaluation file for details",
+      "success": false,
+      "passed_evals": 5,
+      "total_evals": 8,
+      "failed_reasons": [
+        "salesforce.dependency_chain_match: Start dependency chain mismatch. Expected: ['dbpiesdb', 'sdb', 'sdbzk', 'sdb-file-notification'], Got: ['dbpiesdb', 'sdb', 'sdbarchivalworker', 'sdbcloudstore', 'sdbstore', 'sdbzk', 'sdb-observability-service']",
+        "salesforce.dependency_chain_match: Authorized_Client dependency chain mismatch. Expected: ['sdbperftools-hf (dataprotection)', 'sdbperftools-hf'], Got: ['sdb-management-plane', 'sdbselfhealing', 'sdb']",
+        "salesforce.dependency_chain_match: Validate dependency chain mismatch. Expected: ['dbpiesdb', 'sdb', 'sdbzk'], Got: ['dbpiesdb', 'sdb', 'sdbarchivalworker', 'sdbstore', 'sdbzk']"
+      ]
+    },
+    "3": {
+      "task_name": "task4_simple_example",
+      "question": "Task 3 - Check evaluation file for details",
+      "success": false,
+      "passed_evals": 5,
+      "total_evals": 7,
+      "failed_reasons": [
+        "salesforce.has_trace_ids: Found 0 trace IDs, but minimum required is 1",
+        "salesforce.has_trace_analysis: Missing trace analysis sections: ['top_sql_queries', 'top_soql_queries', 'top_llm_calls']"
+      ]
+    },
+    "7": {
+      "task_name": "task6_simple_example",
+      "question": "Task 7 - Check evaluation file for details",
+      "success": true,
+      "passed_evals": 8,
+      "total_evals": 8,
+      "failed_reasons": []
+    },
+    "4": {
+      "task_name": "task4.1_simple_example",
+      "question": "Task 4 - Check evaluation file for details",
+      "success": false,
+      "passed_evals": 6,
+      "total_evals": 8,
+      "failed_reasons": [
+        "salesforce.gus_product_tags_are_valid: Services with invalid GUS product tags: [\"bot-svc-llm: expected 'Einstein GPT Foundations', got 'Einstein GPT Foundations->LLM Services'\", \"bot-svc-llmagent: expected 'Chatbot Runtime', got 'Chatbot Runtime->Chatbot Runtime'\"]",
+        "salesforce.services_have_gus_investigations_in_timeframe: Failed to check GUS investigations: Expecting value: line 1 column 1 (char 0)"
+      ]
+    },
+    "2": {
+      "task_name": "task2_simple_example",
+      "question": "Task 2 - Check evaluation file for details",
+      "success": false,
+      "passed_evals": 6,
+      "total_evals": 7,
+      "failed_reasons": [
+        "salesforce.services_have_fit_utility_pipelines: Services with non-FIT utility pipelines: [\"sdb: ['fedx-perpetualrestore-sdb', 'drsync-sdb', 'deploy-sdb', 'delete-sdb-artifacts', 'restoreprod-sdb', 'restoreloganalysis-sdb', 'fedx-restoreloganalysis-sdb', 'restoreprod-by-version', 'restorevalidate-sdb', 'restorevalidate-by-version', 'restoreclone-sdb', 'sdb-dynamic-config-updater', 'start-sdb', 'stop-sdb', 'scale-sdb', 'sdb-failover', 'sdb-audit', 'sdb-utility', 'sdb-app-state-ro-switcher', 'sdb-app-state-rw-switcher', 'migrate-sdb-cell', 'archival-utility', 'sdb-trigger-lsm-merge', 'sdb-archival-test', 'prod-restore-test', 'sdb-clone-test', 'fedx-deploy-sdb', 'fedx-delete-sdb-artifacts', 'fedx-restoreprod-sdb', 'fedx-restoreprod-by-version', 'fedx-restorevalidate-sdb', 'fedx-restorevalidate-by-version', 'fedx-restoreclone-sdb', 'fedx-sdb-dynamic-config-updater', 'fedx-on-demand', 'fedx-rapid-rollback', 'fedx-downgrade-out-crashloop', 'fedx-downgrade-out-crashloop-final', 'fedx-start-sdb', 'fedx-stop-sdb', 'fedx-schema-upgrade-sdb', 'fedx-scale-sdb', 'fedx-sdb-failover', 'fedx-sdb-audit', 'fedx-sdb-utility', 'fedx-sdb-app-state-ro-switcher', 'fedx-sdb-app-state-rw-switcher', 'fedx-migrate-sdb-cell', 'fedx-archival-utility', 'fedx-sdb-trigger-lsm-merge', 'fedx-sdb-archival-test', 'fedx-sdb-perf-data-refresh', 'fedx-sdb-meta-release-acceptance-test', 'fedx-prod-restore-test', 'fedx-sdb-clone-test', 'fedx-workload-identity']\", \"sdbstore: ['clone-sdb', 'destroy-cluuid', 'destroy-cluuid-by-version', 'sdbstore-decommissioner', 'sdbstore-upscaler', 'storage-collector', 'fedx-deploy-sdbstore-via-operator', 'fedx-clone-sdb', 'fedx-destroy-cluuid', 'fedx-destroy-cluuid-by-version', 'fedx-sdbstore-decommissioner', 'fedx-sdbstore-upscaler', 'fedx-storage-collector', 'fedx-recreate-storage-class', 'fedx-workload-identity']\", \"sdbcloudstore: ['fedx-workload-identity']\"]"
+      ]
+    },
+    "5": {
+      "task_name": "task4.2_simple_example",
+      "question": "Task 5 - Check evaluation file for details",
+      "success": false,
+      "passed_evals": 6,
+      "total_evals": 8,
+      "failed_reasons": [
+        "salesforce.has_gus_product_tags: Services missing GUS product tags: ['bot-svc-llm', 'bot-svc-llmagent']",
+        "salesforce.has_gus_investigations: Services missing GUS investigations: ['bot-svc-llm']"
+      ]
+    },
+    "6": {
+      "task_name": "task4.3_simple_example",
+      "question": "Task 6 - Check evaluation file for details",
+      "success": false,
+      "passed_evals": 7,
+      "total_evals": 9,
+      "failed_reasons": [
+        "salesforce.has_gus_investigations: Services missing GUS investigations: ['bot-svc-llm']",
+        "salesforce.has_splunk_queries_from_investigations: Services missing splunk queries from investigations: ['bot-svc-llm']"
+      ]
+    }
+  }
+}

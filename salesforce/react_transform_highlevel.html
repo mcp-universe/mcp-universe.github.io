@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReAct Tool Transform - High-Level Flow</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .config-info {
+            background-color: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #27ae60;
+            font-size: 16px;
+        }
+        .diagram-container {
+            margin: 30px 0;
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+        .features-summary {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #ffc107;
+            text-align: left;
+        }
+        .features-summary h3 {
+            margin-top: 0;
+            color: #856404;
+            text-align: center;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+        }
+        .feature-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 ReAct Tool Transform</h1>
+        <div class="subtitle">High-Level Processing Flow</div>
+        
+        <div class="config-info">
+            <strong>Configuration:</strong> <code>transform_tool_response_by_coding = True</code> (Default)
+        </div>
+
+        <div class="diagram-container">
+            <div class="mermaid">
+                flowchart TD
+                    A1[Tool Execution Complete] --> B1{Need Transform?}
+                    B1 -->|No| C1[❌ Skip Transform<br/>Use Raw Output]
+                    B1 -->|Yes| D1[🔧 INTELLIGENT TRANSFORM<br/>Analyze + Generate + Execute Code]
+                    
+                    D1 --> E1{Success?}
+                    E1 -->|Yes| F1[✅ Use Transformed Data]
+                    E1 -->|No| G1[🔄 RETRY & SELF-REFINE<br/>Up to 3 attempts with error feedback]
+                    
+                    G1 --> H1{More Attempts?}
+                    H1 -->|Yes| D1
+                    H1 -->|No| I1[❌ Fallback to Original]
+                    
+                    F1 --> J1[Continue Agent Loop]
+                    C1 --> J1
+                    I1 --> J1
+                    
+                    style D1 fill:#ffeb3b,stroke:#f57f17,stroke-width:4px
+                    style G1 fill:#ff5722,stroke:#bf360c,stroke-width:4px
+                    style H1 fill:#2196f3,stroke:#0d47a1,stroke-width:3px
+                    style B1 fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                    style E1 fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                    style F1 fill:#c8e6c9,stroke:#2e7d32,stroke-width:3px
+                    style C1 fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+                    style I1 fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+            </div>
+        </div>
+
+        <div class="features-summary">
+            <h3>🎯 Key Capabilities</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🔧</span>
+                    <span><strong>Intelligent Transform:</strong> LLM-powered code generation</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔄</span>
+                    <span><strong>Retry System:</strong> Up to 3 attempts</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🛠️</span>
+                    <span><strong>Self-Refinement:</strong> Error-aware code fixes</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">❌</span>
+                    <span><strong>Graceful Fallback:</strong> Original data on failure</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🧠</span>
+                    <span><strong>Context Awareness:</strong> Agent reasoning integration</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📦</span>
+                    <span><strong>Function Reuse:</strong> History-based optimization</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>

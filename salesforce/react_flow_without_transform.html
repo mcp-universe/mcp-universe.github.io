@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReAct Agent Flow - WITHOUT Tool Transform</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .config-info {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        .diagram-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .key-features {
+            background-color: #f3e5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #9c27b0;
+        }
+        .key-features h3 {
+            margin-top: 0;
+            color: #4a148c;
+        }
+        .key-features ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .key-features li {
+            margin: 5px 0;
+        }
+        .comparison {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+        }
+        .comparison h3 {
+            margin-top: 0;
+            color: #e65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ ReAct Agent Execution Flow - WITHOUT Tool Transform</h1>
+        
+        <div class="config-info">
+            <strong>Configuration:</strong> <code>transform_tool_response_by_coding = False</code><br>
+            <em>Alternative: <code>summarize_tool_response = True</code> for LLM-based summarization</em>
+        </div>
+
+        <div class="diagram-container">
+            <div class="mermaid">
+                flowchart TD
+                    A[Start: User Message] --> B[Initialize Agent]
+                    B --> C[Begin Iteration Loop<br/>max_iterations = 5]
+                    
+                    C --> D[Build Prompt with History]
+                    D --> E[LLM Generate Response]
+                    E --> F{Parse JSON Response}
+                    
+                    F -->|Invalid JSON| G[Add Error to History<br/>Continue to Next Iteration]
+                    G --> H{More Iterations?}
+                    
+                    F -->|Valid JSON| I{Response Type?}
+                    
+                    I -->|answer| J[Add Answer to History<br/>Return Final Response]
+                    
+                    I -->|action| K[Validate Action Format]
+                    K -->|Invalid| L[Add Invalid Action to History]
+                    L --> H
+                    
+                    K -->|Valid| M[Add Thought & Action to History]
+                    M --> N[Call Tool via MCP Manager]
+                    N --> O[Get Tool Result]
+                    
+                    O --> P{summarize_tool_response?}
+                    P -->|Yes| Q[📝 Summarize with LLM]
+                    Q --> R[Add Summary to History]
+                    
+                    P -->|No| S[✅ Use Raw Tool Output]
+                    S --> T[Add Raw Output to History]
+                    
+                    R --> U[Send Callback Message]
+                    T --> U
+                    U --> H
+                    
+                    I -->|result| V[Add Thought & Result to History]
+                    V --> H
+                    
+                    H -->|Yes| C
+                    H -->|No| W[Return Failure Message<br/>Max Iterations Reached]
+                    
+                    J --> X[End: Return AgentResponse]
+                    W --> X
+                    
+                    style S fill:#4caf50,stroke:#2e7d32,stroke-width:3px
+                    style T fill:#4caf50,stroke:#2e7d32,stroke-width:2px
+                    style Q fill:#03a9f4,stroke:#0277bd,stroke-width:2px
+                    style R fill:#03a9f4,stroke:#0277bd,stroke-width:2px
+                    style P fill:#ff9800,stroke:#f57c00,stroke-width:2px
+            </div>
+        </div>
+
+        <div class="key-features">
+            <h3>⚡ Key Features of Non-Transform Mode</h3>
+            <ul>
+                <li><strong>Direct Output:</strong> Tool responses are used directly without modification</li>
+                <li><strong>Faster Execution:</strong> No additional LLM calls for transformation</li>
+                <li><strong>Raw Data Preservation:</strong> Complete tool output is preserved in agent history</li>
+                <li><strong>Optional Summarization:</strong> Can use LLM summarization instead of transformation</li>
+                <li><strong>Simpler Flow:</strong> Fewer decision points and error handling paths</li>
+                <li><strong>Lower Token Usage:</strong> No additional prompts for transformation logic</li>
+            </ul>
+        </div>
+
+        <div class="comparison">
+            <h3>🔄 When to Use Each Mode</h3>
+            <ul>
+                <li><strong>WITH Transform:</strong> Complex data processing, need to extract specific info, bulky responses</li>
+                <li><strong>WITHOUT Transform:</strong> Simple tools, need full data, performance-critical scenarios</li>
+                <li><strong>Summarization Mode:</strong> Large responses that need human-readable summaries</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>

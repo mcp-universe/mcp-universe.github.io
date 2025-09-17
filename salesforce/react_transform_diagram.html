@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReAct Tool Transform Flow</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .diagram-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 900px;
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin: 0 0 20px 0;
+        }
+        .config-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .diagram-wrapper {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #e9ecef;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .feature {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .feature-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="diagram-card">
+        <div class="header">
+            <div class="title">🔧 ReAct Tool Transform</div>
+            <div class="subtitle">Intelligent Response Processing with Self-Refinement</div>
+            <div class="config-badge">transform_tool_response_by_coding = True</div>
+        </div>
+
+        <div class="diagram-wrapper">
+            <div class="mermaid">
+                flowchart TD
+                    A["🚀 Tool Execution Complete"] --> B{"🤔 Need Transform?"}
+                    B -->|"❌ No"| C["📄 Skip Transform<br/>Use Raw Output"]
+                    B -->|"✅ Yes"| D["🔧 INTELLIGENT TRANSFORM<br/>🧠 Analyze + 🛠️ Generate + ⚡ Execute Code"]
+                    
+                    D --> E{"✅ Success?"}
+                    E -->|"🎉 Yes"| F["✨ Use Transformed Data"]
+                    E -->|"❌ No"| G["🔄 RETRY & SELF-REFINE<br/>📚 Up to 3 attempts with error feedback"]
+                    
+                    G --> H{"🔄 More Attempts?"}
+                    H -->|"🔁 Yes"| D
+                    H -->|"🛑 No"| I["⚠️ Fallback to Original"]
+                    
+                    F --> J["🎯 Continue Agent Loop"]
+                    C --> J
+                    I --> J
+                    
+                    style D fill:#ffeb3b,stroke:#f57f17,stroke-width:4px
+                    style G fill:#ff5722,stroke:#bf360c,stroke-width:4px
+                    style H fill:#2196f3,stroke:#0d47a1,stroke-width:3px
+                    style B fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+                    style E fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+                    style F fill:#c8e6c9,stroke:#2e7d32,stroke-width:4px
+                    style C fill:#ffcdd2,stroke:#c62828,stroke-width:3px
+                    style I fill:#ffcdd2,stroke:#c62828,stroke-width:3px
+                    style A fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+                    style J fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">🔧</span>
+                Intelligent Transform
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔄</span>
+                Retry System
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🛠️</span>
+                Self-Refinement
+            </div>
+            <div class="feature">
+                <span class="feature-icon">❌</span>
+                Graceful Fallback
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            }
+        });
+        
+        // Wait for mermaid to render, then you can take a screenshot
+        setTimeout(() => {
+            console.log('Diagram ready for screenshot');
+        }, 2000);
+    </script>
+</body>
+</html>

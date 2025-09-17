@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReAct Agent Flow - WITH Tool Transform</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .config-info {
+            background-color: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+        }
+        .diagram-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .key-features {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        .key-features h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+        .key-features ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .key-features li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 ReAct Agent Execution Flow - WITH Tool Transform</h1>
+        
+        <div class="config-info">
+            <strong>Configuration:</strong> <code>transform_tool_response_by_coding = True</code> (Default)
+        </div>
+
+        <div class="diagram-container">
+            <div class="mermaid">
+                flowchart TD
+                    A[Start: User Message] --> B[Initialize Agent]
+                    B --> C[Begin Iteration Loop<br/>max_iterations = 5]
+                    
+                    C --> D[Build Prompt with History]
+                    D --> E[LLM Generate Response]
+                    E --> F{Parse JSON Response}
+                    
+                    F -->|Invalid JSON| G[Add Error to History<br/>Continue to Next Iteration]
+                    G --> H{More Iterations?}
+                    
+                    F -->|Valid JSON| I{Response Type?}
+                    
+                    I -->|answer| J[Add Answer to History<br/>Return Final Response]
+                    
+                    I -->|action| K[Validate Action Format]
+                    K -->|Invalid| L[Add Invalid Action to History]
+                    L --> H
+                    
+                    K -->|Valid| M[Add Thought & Action to History]
+                    M --> N[Call Tool via MCP Manager]
+                    N --> O[Get Tool Result]
+                    
+                    O --> P{Is Error Response?}
+                    P -->|Yes| Q[Skip Transformation<br/>Use Original Output]
+                    P -->|No| R[🔧 Transform Tool Response]
+                    
+                    R --> S[Fetch Function History]
+                    S --> T[Build Transformation Prompt]
+                    T --> U[LLM Generate Transform Code]
+                    U --> V{Parse Transform Response}
+                    
+                    V -->|No Transform Needed| W[Use Original Output]
+                    V -->|Reuse Existing Function| X[Execute Existing Function]
+                    V -->|New Function| Y[Execute New Function Code]
+                    V -->|Invalid Response| ZZ[🔄 Retry Loop<br/>tries += 1]
+                    
+                    X --> Z{Transform Success?}
+                    Y --> Z
+                    
+                    Z -->|Success| AA[Add Function to History<br/>Use Transformed Output]
+                    Z -->|Failure| BB[🛠️ Self-Refinement<br/>Build Error Context]
+                    BB --> BBB[Create Self-Refinement Prompt<br/>Include: Previous Code + Error]
+                    BBB --> ZZ
+                    
+                    ZZ --> CC{Retry Count < 3?}
+                    CC -->|Yes| T
+                    CC -->|No| DD[❌ All Retries Failed<br/>Use Original Output + Warning]
+                    
+                    AA --> EE[Add Result to History]
+                    W --> EE
+                    Q --> EE
+                    DD --> EE
+                    
+                    EE --> FF[Send Callback Message]
+                    FF --> H
+                    
+                    I -->|result| GG[Add Thought & Result to History]
+                    GG --> H
+                    
+                    H -->|Yes| C
+                    H -->|No| HH[Return Failure Message<br/>Max Iterations Reached]
+                    
+                    J --> II[End: Return AgentResponse]
+                    HH --> II
+                    
+                    style R fill:#ffeb3b,stroke:#f57f17,stroke-width:3px
+                    style S fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+                    style T fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+                    style U fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+                    style V fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+                    style X fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+                    style Y fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+                    style Z fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+                    style AA fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+                    style BB fill:#ff5722,stroke:#bf360c,stroke-width:3px
+                    style BBB fill:#ff5722,stroke:#bf360c,stroke-width:2px
+                    style ZZ fill:#2196f3,stroke:#0d47a1,stroke-width:3px
+                    style CC fill:#2196f3,stroke:#0d47a1,stroke-width:2px
+                    style DD fill:#f44336,stroke:#b71c1c,stroke-width:2px
+            </div>
+        </div>
+
+        <div class="key-features">
+            <h3>🔧 Key Features of Tool Transform Mode</h3>
+            <ul>
+                <li><strong>Intelligent Transform Decision:</strong> Uses LLM to analyze tool output and decide if transformation is needed</li>
+                <li><strong>Code Generation:</strong> Generates Python code to transform complex/bulky tool responses</li>
+                <li><strong>Function Reuse:</strong> Maintains history of transformation functions and reuses them when applicable</li>
+                <li><strong>Error Handling:</strong> Skips transformation for error responses to avoid processing invalid data</li>
+                <li><strong>🔄 Retry Loop System:</strong> Up to 3 retry attempts for failed transformations with detailed error tracking</li>
+                <li><strong>🛠️ Self-Refinement:</strong> When code fails, shows LLM the previous code + error details for intelligent fixes</li>
+                <li><strong>Context Awareness:</strong> Uses agent's reasoning and tool context to create appropriate transformations</li>
+                <li><strong>❌ Graceful Degradation:</strong> Falls back to original output if all retry attempts fail</li>
+                <li><strong>📝 Comprehensive Logging:</strong> Detailed error tracking and debugging information throughout the process</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>
