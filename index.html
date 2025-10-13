@@ -947,7 +947,8 @@
             <div class="container">
                 <h2 class="section-title">Leaderboard</h2>
                 <div class="track-tabs" role="tablist" aria-label="Leaderboard tracks">
-                    <button class="track-tab active" id="tab-llm" role="tab" aria-selected="true" aria-controls="panel-llm">LLM (w/ ReAct) Track</button>
+                    <button class="track-tab active" id="tab-overall" role="tab" aria-selected="true" aria-controls="panel-overall">Overall Track</button>
+                    <button class="track-tab" id="tab-llm" role="tab" aria-selected="false" aria-controls="panel-llm">LLM (w/ ReAct) Track</button>
                     <button class="track-tab" id="tab-function-call" role="tab" aria-selected="false" aria-controls="panel-function-call">LLM (w/ Function Calls) Track</button>
                     <button class="track-tab" id="tab-agent" role="tab" aria-selected="false" aria-controls="panel-agent">Agent Track</button>
                 </div>
@@ -973,7 +974,32 @@
                     </div>
                 </div>
                 
-                <div id="panel-llm" class="results-table" role="tabpanel" aria-labelledby="tab-llm">
+                <div id="panel-overall" class="results-table" role="tabpanel" aria-labelledby="tab-overall">
+                    <div class="track-description">
+                        <p><strong>Overall Track:</strong> Combines results from both ReAct and Function Call tracks, showing the best performance achieved by each model across both approaches. Models are ranked by their highest overall success rate from either track.</p>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;" data-column="model">Model</th>
+                                <th class="sortable" data-column="location" data-type="number">Location<br>Navigation</th>
+                                <th class="sortable" data-column="repository" data-type="number">Repository<br>Management</th>
+                                <th class="sortable" data-column="financial" data-type="number">Financial<br>Analysis</th>
+                                <th class="sortable" data-column="3d" data-type="number">3D<br>Designing</th>
+                                <th class="sortable" data-column="browser" data-type="number">Browser<br>Automation</th>
+                                <th class="sortable" data-column="web" data-type="number">Web<br>Searching</th>
+                                <th class="sortable" data-column="ae" data-type="number">Average<br>Evaluator Score</th>
+                                <th class="sortable" data-column="as" data-type="number">Average<br>Steps</th>
+                                <th class="sortable" data-column="overall" data-type="number">Overall<br>Success Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="overall-tbody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="panel-llm" class="results-table hidden" role="tabpanel" aria-labelledby="tab-llm">
                     <div class="track-description">
                         <p><strong>LLM (w/ ReAct) Track:</strong> Evaluates large language models using the ReAct (Reasoning and Acting) prompting strategy, in which models alternate between reasoning about the task and taking actions through MCP server function calls. In each step, the LLM can use only one tool.</p>
                     </div>
@@ -1042,7 +1068,7 @@
                                  <td>30.30</td>
                              </tr>
                              <tr>
-                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-opus-4-1" target="_blank" style="color: inherit; text-decoration: none;">Claude-4.1-Opus-No-Thinking<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-opus-4-1" target="_blank" style="color: inherit; text-decoration: none;">Claude-4.1-Opus<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
                                  <td>17.78</td>
                                  <td>21.21</td>
                                  <td>52.50</td>
@@ -1054,7 +1080,7 @@
                                  <td>29.44</td>
                              </tr>
                                                          <tr>
-                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-4" target="_blank" style="color: inherit; text-decoration: none;">Claude-4.0-Opus-No-Thinking<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-4" target="_blank" style="color: inherit; text-decoration: none;">Claude-4.0-Opus<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
                                  <td>15.56</td>
                                  <td>15.15</td>
                                  <td>55.00</td>
@@ -1066,7 +1092,7 @@
                                  <td>28.14</td>
                              </tr>
                              <tr>
-                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-4" target="_blank" style="color: inherit; text-decoration: none;">Claude-4.0-Sonnet-No-Thinking<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-4" target="_blank" style="color: inherit; text-decoration: none;">Claude-4.0-Sonnet<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
                                  <td>22.22</td>
                                  <td>12.12</td>
                                  <td>55.00</td>
@@ -1126,7 +1152,7 @@
                                  <td>25.97</td>
                              </tr>
                                                          <tr>
-                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank" style="color: inherit; text-decoration: none;">Claude-3.7-Sonnet-No-Thinking<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank" style="color: inherit; text-decoration: none;">Claude-3.7-Sonnet<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
                                  <td>13.33</td>
                                  <td>18.18</td>
                                  <td>40.00</td>
@@ -1354,7 +1380,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://platform.openai.com/docs/models/gpt-5" target="_blank" style="color: inherit; text-decoration: none;">GPT-5-medium<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
+                                <td class="model-name"><i class="fas fa-lock" style="color: #fbbf24; margin-right: 0.5rem;" title="Proprietary Model"></i><a href="https://platform.openai.com/docs/models/gpt-5" target="_blank" style="color: inherit; text-decoration: none;">GPT-5-Medium<i class="fas fa-external-link-alt" style="margin-left: 0.3rem; font-size: 0.8em; color: #6b7280;"></i></a></td>
                                  <td>35.56</td>
                                  <td>30.30</td>
                                  <td>60.00</td>
@@ -1610,7 +1636,7 @@
                                 <td>31.17</td>
                             </tr>
                             <tr>
-                                <td class="model-name">ReAct (Claude-4.0-Sonnet-No-Thinking)</td>
+                                <td class="model-name">ReAct (Claude-4.0-Sonnet)</td>
                                 <td>22.22</td>
                                 <td>12.12</td>
                                 <td>55.00</td>
@@ -1880,31 +1906,42 @@
             }, { passive: true });
             backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             // Track tabs switching
+            const tabOverall = document.getElementById('tab-overall');
             const tabLLM = document.getElementById('tab-llm');
             const tabFunctionCall = document.getElementById('tab-function-call');
             const tabAgent = document.getElementById('tab-agent');
+            const panelOverall = document.getElementById('panel-overall');
             const panelLLM = document.getElementById('panel-llm');
             const panelFunctionCall = document.getElementById('panel-function-call');
             const panelAgent = document.getElementById('panel-agent');
             
             function activate(tab) {
                 // Remove active class from all tabs
+                tabOverall.classList.remove('active');
                 tabLLM.classList.remove('active');
                 tabFunctionCall.classList.remove('active');
                 tabAgent.classList.remove('active');
                 
                 // Hide all panels
+                panelOverall.classList.add('hidden');
                 panelLLM.classList.add('hidden');
                 panelFunctionCall.classList.add('hidden');
                 panelAgent.classList.add('hidden');
                 
                 // Set all aria-selected to false
+                tabOverall.setAttribute('aria-selected', 'false');
                 tabLLM.setAttribute('aria-selected', 'false');
                 tabFunctionCall.setAttribute('aria-selected', 'false');
                 tabAgent.setAttribute('aria-selected', 'false');
                 
                 // Activate the selected tab
-                if (tab === 'llm') {
+                if (tab === 'overall') {
+                    tabOverall.classList.add('active');
+                    panelOverall.classList.remove('hidden');
+                    tabOverall.setAttribute('aria-selected', 'true');
+                    // Re-apply sorting and highlighting when switching to this tab
+                    setTimeout(() => autoSortAndHighlight('#panel-overall table'), 10);
+                } else if (tab === 'llm') {
                     tabLLM.classList.add('active');
                     panelLLM.classList.remove('hidden');
                     tabLLM.setAttribute('aria-selected', 'true');
@@ -1925,6 +1962,7 @@
                 }
             }
             
+            tabOverall.addEventListener('click', () => activate('overall'));
             tabLLM.addEventListener('click', () => activate('llm'));
             tabFunctionCall.addEventListener('click', () => activate('function-call'));
             tabAgent.addEventListener('click', () => activate('agent'));
@@ -1963,15 +2001,22 @@
                 });
             }
 
-            // Initialize sorting for all three tables
+            // Initialize sorting for all tables
+            initTableSorting('#panel-overall table');
             initTableSorting('#panel-llm table');
             initTableSorting('#panel-function-call table');
             initTableSorting('#panel-agent table');
             
             // Auto-sort all tables by Overall Success Rate (descending) and highlight best scores
+            // First generate overall track data
+            generateOverallTrackData();
+            autoSortAndHighlight('#panel-overall table');
             autoSortAndHighlight('#panel-llm table');
             autoSortAndHighlight('#panel-function-call table');
             autoSortAndHighlight('#panel-agent table');
+            
+            // Activate overall track by default
+            activate('overall');
         });
 
         function sortTable(table, column, direction, dataType) {
@@ -2014,10 +2059,25 @@
 
         function getColumnIndex(column, table) {
             // Check which table we're working with
+            const isOverallTable = table.closest('#panel-overall') !== null;
             const isAgentTable = table.closest('#panel-agent') !== null;
             const isFunctionCallTable = table.closest('#panel-function-call') !== null;
             
-            if (isAgentTable) {
+            if (isOverallTable) {
+                const overallColumnMap = {
+                    'model': 0,
+                    'location': 1,
+                    'repository': 2,
+                    'financial': 3,
+                    '3d': 4,
+                    'browser': 5,
+                    'web': 6,
+                    'ae': 7,
+                    'as': 8,
+                    'overall': 9
+                };
+                return overallColumnMap[column];
+            } else if (isAgentTable) {
                 const agentColumnMap = {
                     'agent': 0,
                     'location': 1,
@@ -2065,8 +2125,9 @@
             if (!table) return;
             
             // Auto-sort by Overall Success Rate (last column) in descending order
+            const isOverallTable = table.closest('#panel-overall') !== null;
             const isAgentTable = table.closest('#panel-agent') !== null;
-            const overallColumn = isAgentTable ? 'overall' : 'overall';
+            const overallColumn = (isOverallTable || isAgentTable) ? 'overall' : 'overall';
             const overallColumnIndex = getColumnIndex(overallColumn, table);
             
             // Sort the table
@@ -2136,6 +2197,153 @@
                     });
                 }
             }
+        }
+
+        function generateOverallTrackData() {
+            const llmTable = document.querySelector('#panel-llm table tbody');
+            const fcTable = document.querySelector('#panel-function-call table tbody');
+            const overallTbody = document.getElementById('overall-tbody');
+            
+            if (!llmTable || !fcTable || !overallTbody) return;
+            
+            const llmRows = Array.from(llmTable.querySelectorAll('tr'));
+            const fcRows = Array.from(fcTable.querySelectorAll('tr'));
+            
+            // Create a map to store model data from both tracks
+            const modelData = new Map();
+            
+            // Process ReAct track data
+            llmRows.forEach(row => {
+                const modelCell = row.cells[0];
+                if (!modelCell) return;
+                
+                const modelName = extractModelName(modelCell);
+                const rowData = extractRowData(row, 'ReAct');
+                modelData.set(modelName, { react: rowData, fc: null });
+            });
+            
+            // Process Function Call track data
+            fcRows.forEach(row => {
+                const modelCell = row.cells[0];
+                if (!modelCell) return;
+                
+                const modelName = extractModelName(modelCell);
+                const rowData = extractRowData(row, 'FC');
+                
+                if (modelData.has(modelName)) {
+                    modelData.get(modelName).fc = rowData;
+                } else {
+                    modelData.set(modelName, { react: null, fc: rowData });
+                }
+            });
+            
+            // Generate overall track rows
+            const overallRows = [];
+            modelData.forEach((data, modelName) => {
+                const bestData = getBestPerformance(data.react, data.fc);
+                if (bestData) {
+                    overallRows.push(createOverallRow(modelName, bestData));
+                }
+            });
+            
+            // Sort by overall success rate (descending)
+            overallRows.sort((a, b) => {
+                const aOverall = parseFloat(a.querySelector('td:last-child').textContent);
+                const bOverall = parseFloat(b.querySelector('td:last-child').textContent);
+                return bOverall - aOverall;
+            });
+            
+            // Clear and populate the overall tbody
+            overallTbody.innerHTML = '';
+            overallRows.forEach(row => overallTbody.appendChild(row));
+        }
+        
+        function extractModelName(modelCell) {
+            const link = modelCell.querySelector('a');
+            if (link) {
+                // Extract the text content and remove external link icon
+                let text = link.textContent || link.innerText;
+                // Remove external link icon and other symbols
+                text = text.replace(/[^\w\s\-\.]/g, '').trim();
+                return text;
+            }
+            // Fallback to cell text content
+            let text = modelCell.textContent || modelCell.innerText;
+            text = text.replace(/[^\w\s\-\.]/g, '').trim();
+            return text;
+        }
+        
+        function extractRowData(row, track) {
+            const cells = Array.from(row.cells);
+            return {
+                originalCell: cells[0].cloneNode(true),
+                location: parseFloat(cells[1].textContent) || 0,
+                repository: parseFloat(cells[2].textContent) || 0,
+                financial: parseFloat(cells[3].textContent) || 0,
+                design3d: parseFloat(cells[4].textContent) || 0,
+                browser: parseFloat(cells[5].textContent) || 0,
+                web: parseFloat(cells[6].textContent) || 0,
+                avgEvaluator: parseFloat(cells[7].textContent) || 0,
+                avgSteps: parseFloat(cells[8].textContent) || 0,
+                overall: parseFloat(cells[9].textContent) || 0,
+                track: track
+            };
+        }
+        
+        function getBestPerformance(reactData, fcData) {
+            if (!reactData && !fcData) return null;
+            if (!reactData) return fcData;
+            if (!fcData) return reactData;
+            
+            // Compare overall success rates and return the better one
+            if (reactData.overall >= fcData.overall) {
+                return reactData;
+            } else {
+                return fcData;
+            }
+        }
+        
+        function createOverallRow(modelName, data) {
+            const row = document.createElement('tr');
+            
+            // Clone the original model cell and add track indicator
+            const modelCell = data.originalCell.cloneNode(true);
+            
+            // Add track indicator after the existing content
+            const trackIndicator = document.createElement('span');
+            trackIndicator.style.color = '#6b7280';
+            trackIndicator.style.fontSize = '0.9em';
+            trackIndicator.style.marginLeft = '0.5em';
+            trackIndicator.textContent = `(${data.track})`;
+            
+            // Find the best place to insert the track indicator
+            const link = modelCell.querySelector('a');
+            if (link) {
+                // Insert after the link
+                link.parentNode.insertBefore(trackIndicator, link.nextSibling);
+            } else {
+                // Append to the cell
+                modelCell.appendChild(trackIndicator);
+            }
+            
+            row.appendChild(modelCell);
+            row.appendChild(createCell(data.location.toFixed(2)));
+            row.appendChild(createCell(data.repository.toFixed(2)));
+            row.appendChild(createCell(data.financial.toFixed(2)));
+            row.appendChild(createCell(data.design3d.toFixed(2)));
+            row.appendChild(createCell(data.browser.toFixed(2)));
+            row.appendChild(createCell(data.web.toFixed(2)));
+            row.appendChild(createCell(data.avgEvaluator.toFixed(2)));
+            row.appendChild(createCell(data.avgSteps.toFixed(2)));
+            row.appendChild(createCell(data.overall.toFixed(2)));
+            
+            return row;
+        }
+        
+        function createCell(content) {
+            const cell = document.createElement('td');
+            cell.textContent = content;
+            return cell;
         }
 
 
