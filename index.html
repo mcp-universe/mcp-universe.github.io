@@ -2192,13 +2192,14 @@
             
             // For each numeric column (skip the first column which is model names)
             for (let colIndex = 1; colIndex < numColumns; colIndex++) {
-                // Get the corresponding header to check if this is the "Average Steps" column
+                // Get the corresponding header to check which column this is
                 const headerRow = table.querySelector('thead tr');
                 const header = headerRow.cells[colIndex];
                 
-                // Skip highlighting for "Average Steps" columns
-                if (header && header.getAttribute('data-column') === 'as') {
-                    // Still remove any existing highlighting from this column
+                // Only highlight the "Overall Success Rate" column
+                // For all other columns, just remove any existing highlighting
+                if (!header || header.getAttribute('data-column') !== 'overall') {
+                    // Remove any existing highlighting from this column
                     rows.forEach(row => {
                         const cell = row.cells[colIndex];
                         cell.classList.remove('best-score');
@@ -2206,6 +2207,7 @@
                     continue;
                 }
                 
+                // This is the Overall Success Rate column - highlight the best score(s)
                 let maxValue = -Infinity;
                 const columnValues = [];
                 
