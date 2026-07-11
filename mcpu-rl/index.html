@@ -910,7 +910,7 @@
                     <p class="section-lede">Domains differ in their tools and evaluators, while the framework passes data—not domain logic—through the same orchestration and training path.</p>
                 </div>
                 <figure class="figure-shell">
-                    <img src="assets/overview.png" width="1373" height="493" loading="lazy" decoding="async" alt="Architecture diagram showing task specifications for software engineering, deep research, general tool use, and other domains flowing through MCP into reusable environment orchestration, rollout orchestration, and training engine layers around the policy.">
+                    <img src="assets/overview.png" width="1373" height="493" loading="lazy" decoding="async" alt="Architecture diagram showing task specifications for software engineering, deep research, and general tool use flowing through MCP into reusable environment orchestration, rollout orchestration, and training engine layers around the policy.">
                     <figcaption>Task specifications expose each domain through MCP. Environment Orchestration, Rollout Orchestration, and the Training Engine are reused while only the domain task specification changes.</figcaption>
                 </figure>
                 <div class="layer-grid">
@@ -960,7 +960,7 @@
                     </article>
                 </div>
                 <figure class="figure-shell">
-                    <img src="assets/pipeline.png" width="1593" height="408" loading="lazy" decoding="async" alt="Timeline comparison of coupled Acquire, Run, and Eval workers with idle gaps versus decoupled per-stage workers that keep four Run workers active.">
+                    <img src="assets/pipeline.png" width="1593" height="408" loading="lazy" decoding="async" alt="Timeline comparison of coupled Acquire, Run, and Eval workers with idle gaps versus decoupled per-stage concurrency that adds Run workers independently.">
                     <figcaption>Coupled concurrency makes every stage share one worker limit. Decoupled per-stage concurrency adds Run workers independently, overlapping tool waits while the Acquire stage and live-environment capacity remain bounded.</figcaption>
                 </figure>
                 <p class="pipeline-callout">Run workers are set to at least twice the Acquire workers by default because acquisition is host-resource bound while generation is GPU bound.</p>
