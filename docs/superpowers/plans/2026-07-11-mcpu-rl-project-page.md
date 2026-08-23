@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Publish a polished, responsive project page at `/mcpu-rl/` that explains the EMNLP 2026 System Demonstrations submission using the current paper's claims, figures, and results.
+**Goal:** Publish a polished, responsive project page at `/mcpu-rl/` that explains MCP-Universe RL using the current paper's claims, figures, and results.
 
 **Architecture:** Add one dependency-free static HTML page and a colocated asset directory. The page follows the existing MCP-Universe visual system but remains isolated from the benchmark homepage; paper figures are rasterized for reliable browser rendering.
 
@@ -13,7 +13,7 @@
 - The public route is exactly `/mcpu-rl/`.
 - The only primary external call to action is the MCP-Universe RL GitHub repository.
 - Do not add Paper, arXiv, PDF, or Screencast links or placeholders.
-- Label the work “EMNLP 2026 System Demonstrations Submission”; do not imply acceptance.
+- Present the work as an open-source research project without a venue-status label.
 - Derive technical claims and numbers from the current MCP-RL paper.
 - Keep the existing root homepage and its other pages unchanged.
 - Support desktop and mobile layouts, keyboard navigation, reduced motion, and descriptive image alt text.
@@ -95,7 +95,7 @@ Create `mcpu-rl/index.html` with:
 ```html
 <header>Back-to-MCP-Universe navigation and a GitHub action</header>
 <main>
-  <section id="hero">Submission badge, title, authors, one-sentence thesis, GitHub button</section>
+  <section id="hero">Title, authors, one-sentence thesis, GitHub button</section>
   <section id="problem">The environment- and rollout-orchestration bottlenecks</section>
   <section id="architecture">Overview figure and three reusable layer cards</section>
   <section id="pipeline">Acquire → Run → Eval explanation and pipeline figure</section>
@@ -131,7 +131,6 @@ from pathlib import Path
 html = Path("mcpu-rl/index.html").read_text()
 required = [
     "MCP-Universe RL",
-    "EMNLP 2026 System Demonstrations Submission",
     "Environment Orchestration",
     "Rollout Orchestration",
     "Training Engine",
